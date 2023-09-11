@@ -26,7 +26,7 @@ body {
   position: relative;
   display: block; /* Center the logo horizontally */
   margin: -70px auto; /* Adjust margin for centering */
-  padding: 2px;
+  padding: 50px;
 }
 
 
@@ -99,8 +99,7 @@ button {
 
 .container{
   max-width: 900px;
-  height: 500px;
-  background-color: #61dafb;
+  height: 550px;
   z-index: 1;
   margin-left: auto;
   margin-right: auto;
@@ -110,29 +109,44 @@ button {
 .display-text {
   margin-top: 50px;
   padding: 20px;
-  border: 20px solid #ccc;
   border-radius: 5px;
-  background-color: #f7f7f7;
+  background-color: transparent;
   overflow: auto;
   position:relative;
 }
 
 .display-text-content {
   font-size: 16px;
-  color: #555;
+  color: #ffffff;
   margin: 0;
-  overflow: auto;
+  overflow:auto;
 }
 
-.questions button {
+.questions  {
   display:block; /* Center the button */
-  margin-top: 20px; /* Adjust spacing */
   justify-content: right;
+  align-content: space-between;
+  padding-top: 20px;
+  margin-left: 210vh;
+  cursor: pointer;
+  top: 0;
+  position:absolute;
   
 }
 
-.reset-button button {
-  background: #f41708;
-  left: auto;
-  display: block; /* Center the button */
+.question-list{
+  border: 2px solid white;
+  background-color: white;
+  color: black;
+  position: absolute;
+  right: 60px;
 }
+
+.reset-button {
+  width: 50px;
+  height: 50px;
+  position:absolute;
+  padding-top: 20px;
+}
+
+
