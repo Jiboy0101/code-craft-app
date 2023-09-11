@@ -1,0 +1,138 @@
+body {
+  background-color: #7E0001;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0; /* Remove default margin to prevent horizontal scroll on small screens */
+  font-family: Arial, sans-serif; /* Choose an appropriate font for better readability */
+}
+
+/* Media query for screens smaller than 768px */
+@media (max-width: 768px) {
+  .header {
+    font-size: 20px;
+  }
+}
+
+/* Media query for screens smaller than 480px */
+@media (max-width: 480px) {
+  .header {
+    font-size: 18px;
+  }
+}
+
+.logo {
+  width: 90px; /* Make the logo responsive */
+  height: 90px; /* Maintain aspect ratio */
+  position: relative;
+  display: block; /* Center the logo horizontally */
+  margin: -70px auto; /* Adjust margin for centering */
+  padding: 2px;
+}
+
+
+.App {
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+button {
+  background-color: darkgoldenrod;
+  border-radius: 20px;
+}
+
+.start{
+  position: sticky;
+  width: 20px;
+  height: 20px;
+  background-color: darkgoldenrod;
+  padding: 20px 20px;
+  border-radius: 100px;
+}
+
+.stop{
+  position: sticky;
+  width: 20px;
+  height: 20px;
+  background-color: darkgoldenrod;
+  padding: 20px 20px;
+  border-radius: 100px;
+}
+
+.dom-page  {
+  text-align: center;
+  padding: 10px;
+  color: white;
+  z-index: -1;
+}
+
+.app-name {
+  margin-top: 50px;
+}
+
+/* App.css */
+
+.transcript-text {
+  font-size: 18px;
+  color: #ffffff;
+  margin-top: 10px; /* Adjust spacing */
+}
+
+.container{
+  max-width: 900px;
+  height: 500px;
+  background-color: #61dafb;
+  z-index: 1;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: auto;
+}
+
+.display-text {
+  margin-top: 50px;
+  padding: 20px;
+  border: 20px solid #ccc;
+  border-radius: 5px;
+  background-color: #f7f7f7;
+  overflow: auto;
+  position:relative;
+}
+
+.display-text-content {
+  font-size: 16px;
+  color: #555;
+  margin: 0;
+  overflow: auto;
+}
+
+.questions button {
+  display:block; /* Center the button */
+  margin-top: 20px; /* Adjust spacing */
+  justify-content: right;
+  
+}
+
+.reset-button button {
+  background: #f41708;
+  left: auto;
+  display: block; /* Center the button */
+}
