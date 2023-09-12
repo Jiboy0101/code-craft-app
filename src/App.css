@@ -149,15 +149,63 @@ button {
 
 .reset-button {
   position:fixed;
-  top: 3%;
-  margin-left: 20px; /* Add margin to adjust the distance from the right edge */
+  margin-left: 50px; /* Add margin to adjust the distance from the right edge */
 
 }
 
 .questions {
   position: fixed;
-  top: 5%;
+  top: 4%;
   right: 0;
   transform: translateY(-50%);
   margin-right: 20px; /* Add margin to adjust the distance from the right edge */
+}
+
+.menu{
+  position: fixed;
+  top: 4%;
+  left: 0;
+  transform: translateY(-50%);
+  margin-left: 20px; 
+}
+
+.menu-content{
+  width: 300px;
+  height: 300px;
+  background-color: #7E0001;
+  top: 50%;
+  bottom: 50%;
+  text-align: center;
+  
+}
+/* Style the modal overlay */
+.ReactModal__Overlay {
+  background: none; /* No background, fully transparent */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Ensure the modal is above everything else */
+}
+
+/* Style the modal content */
+.ReactModal__Content {
+  background-color: #7E0001;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1001; /* Ensure the modal content is above the overlay */
+}
+
+.close{
+  position: relative;
+  top: -65px;
+  right: -58%;
+  transform: translateY(-50%);
+  margin-right: 45px; /* Add margin to adjust the distance from the right edge */
+  color: white;
 }

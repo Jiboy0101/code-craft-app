@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMicrophone, faHome, faCircleQuestion } from '@fortawesome/free-solid-svg-icons';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import Menu from './components/Menu';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -88,10 +89,10 @@ export default function DOM() {
       <div className='icon-button'>
         <div className="reset-button">
           {resetButtonVisible && (
-            <FontAwesomeIcon onClick={resetDisplay} icon={faHome} size="xl" />
+            <FontAwesomeIcon onClick={resetDisplay} icon={faHome} size="xl" style={{color: "#ffc800",}}/>
           )}
           
-            <FontAwesomeIcon className='questions' icon={faCircleQuestion} size="2xl" onClick={toggleQuestions} />
+            <FontAwesomeIcon className='questions' icon={faCircleQuestion} size="2xl" style={{color: "#ffc800",}} onClick={toggleQuestions} />
           
         </div>
       </div>
@@ -129,6 +130,7 @@ export default function DOM() {
 
       
       <footer className="microphone">
+      <Menu/>
       <p className="transcript-text">{transcript}</p>
       {speechActive ? (
         <FontAwesomeIcon className='stop' onClick={stopListening} icon={faMicrophone} beat size="sm" style={{"--fa-primary-color": "#ffae00", "--fa-secondary-color": "#ffffff",}} />
