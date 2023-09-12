@@ -19,8 +19,8 @@ export default function DOM() {
   const generatePDF = () => {
     const docDefinition = {
       content: [
-        { text: 'ISKA Displayed Text', style: 'header' },
-        { text: displayTextOnScreen },
+        { text: '"ISKA" Virtual Assistant', style: 'header', alignment: 'center'},
+        { text: displayTextOnScreen, alignment: 'justify'},
       ],
       styles: {
         header: {
@@ -31,7 +31,7 @@ export default function DOM() {
       },
     };
 
-    pdfMake.createPdf(docDefinition).download('iska_displayed_text.pdf');
+    pdfMake.createPdf(docDefinition).download('iska-web-app.pdf');
   };
 
   const displayText = (text) => {
@@ -56,7 +56,7 @@ export default function DOM() {
       callback: () => {
         resetTranscript(); // Reset the transcript when a command is executed
         displayText('Here is how to enroll in P U P Lopez, Quezon');
-        setDisplayTextOnScreen('Lorem Ipsum is simply dummy text...');
+        setDisplayTextOnScreen('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.');
         setResetButtonVisible(true); // Show the reset button after a command is executed
       },
     },
@@ -85,22 +85,30 @@ export default function DOM() {
 
   return (
     <div className="dom-page">
-      <div className='top-button'>
+      <div className='icon-button'>
         <div className="reset-button">
           {resetButtonVisible && (
-            <FontAwesomeIcon onClick={resetDisplay} icon={faHome} size="2xl" />
+            <FontAwesomeIcon onClick={resetDisplay} icon={faHome} size="xl" />
           )}
-          <div>
+          
             <FontAwesomeIcon className='questions' icon={faCircleQuestion} size="2xl" onClick={toggleQuestions} />
-          </div>
+          
         </div>
       </div>
 
       {showQuestions && (
         <div className="question-list">
           {/* Add your list of questions here */}
-          <p>Question 1: How to do XYZ?</p>
-          <p>Question 2: What is ABC?</p>
+          <h6 className='note'>Try to ask these suggestions (Note: This list is not clickable)</h6>
+          <p>How to enroll?</p>
+          <p>What can you do?</p>
+          <p>Recite PUP Vision</p>
+          <p>Recite PUP Mission</p>
+          <p>Give the PUP Hymn</p>
+          <p>How to request of good moral</p>
+          <p>How to get School ID</p>
+          <p>How to process INC grades</p>
+          <p>Show programs available</p>
           {/* Add more questions as needed */}
         </div>
       )}
@@ -119,12 +127,16 @@ export default function DOM() {
         </div>
       </div>
 
+      
+      <footer className="microphone">
       <p className="transcript-text">{transcript}</p>
       {speechActive ? (
         <FontAwesomeIcon className='stop' onClick={stopListening} icon={faMicrophone} beat size="sm" style={{"--fa-primary-color": "#ffae00", "--fa-secondary-color": "#ffffff",}} />
       ) : (
         <FontAwesomeIcon className='start' onClick={startListening} icon={faMicrophone} size="sm" style={{"--fa-primary-color": "#ffffff", "--fa-secondary-color": "#ffffff",}} />
       )}
+      </footer>
+     
     </div>
   );
 }

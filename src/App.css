@@ -1,3 +1,4 @@
+
 body {
   background-color: #7E0001;
   background-size: cover;
@@ -51,17 +52,13 @@ body {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
 button {
   background-color: darkgoldenrod;
   border-radius: 20px;
 }
 
 .start{
-  position: sticky;
+  position: relative;
   width: 20px;
   height: 20px;
   background-color: darkgoldenrod;
@@ -70,12 +67,19 @@ button {
 }
 
 .stop{
-  position: sticky;
+  position: relative;
   width: 20px;
   height: 20px;
   background-color: darkgoldenrod;
   padding: 20px 20px;
   border-radius: 100px;
+}
+
+.microphone{
+  position: sticky;
+  padding: auto;
+  bottom: 0;
+  background-color: transparent;
 }
 
 .dom-page  {
@@ -86,7 +90,7 @@ button {
 }
 
 .app-name {
-  margin-top: 50px;
+  margin-top: 10px;
 }
 
 /* App.css */
@@ -95,22 +99,23 @@ button {
   font-size: 18px;
   color: #ffffff;
   margin-top: 10px; /* Adjust spacing */
+  position: inherit;
 }
 
 .container{
-  max-width: 900px;
-  height: 550px;
+  max-width: 800px;
+  height: 590px;
   z-index: 1;
   margin-left: auto;
   margin-right: auto;
   overflow: auto;
+  background-color: transparent;
 }
 
 .display-text {
   margin-top: 50px;
   padding: 20px;
   border-radius: 5px;
-  background-color: transparent;
   overflow: auto;
   position:relative;
 }
@@ -122,31 +127,37 @@ button {
   overflow:auto;
 }
 
-.questions  {
-  display:block; /* Center the button */
-  justify-content: right;
-  align-content: space-between;
-  padding-top: 20px;
-  margin-left: 210vh;
-  cursor: pointer;
-  top: 0;
-  position:absolute;
-  
+
+.question-list {
+  border: 5px solid darkgoldenrod;
+  background-color: white;
+  color: rgb(236, 166, 4);
+  position: absolute;
+  width: 190px;
+  height: 400px;
+  right: 5%;
+  margin-top: 10px;
+  top: 60px;
+  overflow: auto;
+  font-size: 15px;
 }
 
-.question-list{
-  border: 2px solid white;
-  background-color: white;
-  color: black;
-  position: absolute;
-  right: 60px;
+.note {
+  color: #7E0001;
 }
+
 
 .reset-button {
-  width: 50px;
-  height: 50px;
-  position:absolute;
-  padding-top: 20px;
+  position:fixed;
+  top: 3%;
+  margin-left: 20px; /* Add margin to adjust the distance from the right edge */
+
 }
 
-
+.questions {
+  position: fixed;
+  top: 5%;
+  right: 0;
+  transform: translateY(-50%);
+  margin-right: 20px; /* Add margin to adjust the distance from the right edge */
+}
