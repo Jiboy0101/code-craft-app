@@ -30,7 +30,6 @@ body {
   padding: 50px;
 }
 
-
 .App {
   text-align: center;
 }
@@ -59,8 +58,8 @@ button {
 
 .start{
   position: relative;
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
   background-color: darkgoldenrod;
   padding: 20px 20px;
   border-radius: 100px;
@@ -68,8 +67,8 @@ button {
 
 .stop{
   position: relative;
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
   background-color: darkgoldenrod;
   padding: 20px 20px;
   border-radius: 100px;
@@ -99,13 +98,16 @@ button {
   font-size: 18px;
   color: #ffffff;
   margin-top: 10px; /* Adjust spacing */
-  position: inherit;
+  position:relative;
+}
+
+.transcript{
+  background-color: aquamarine;
 }
 
 .container{
   max-width: 800px;
   height: 590px;
-  z-index: 1;
   margin-left: auto;
   margin-right: auto;
   overflow: auto;
@@ -113,10 +115,9 @@ button {
 }
 
 .display-text {
-  margin-top: 50px;
+  margin-top: 10px;
   padding: 20px;
   border-radius: 5px;
-  overflow: auto;
   position:relative;
 }
 
@@ -125,6 +126,20 @@ button {
   color: #ffffff;
   margin: 0;
   overflow:auto;
+  white-space: pre-line;
+  text-align:justify;
+  line-height: 1.5; /* Adjust this value to control the line spacing */
+}
+
+.download-button{
+  position: relative;
+  padding: 10px;
+}
+.download-button2 button{
+  position: relative;
+  padding: 5px;
+  color: white;
+
 }
 
 

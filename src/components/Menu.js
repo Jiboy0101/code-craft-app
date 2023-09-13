@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faXmark, faMapLocationDot, faBell, faCircleQuestion, faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 
 Modal.setAppElement('#root');
 
@@ -39,10 +39,10 @@ function Menu() {
         <h2 className='title-menu'>Menu</h2>
         <FontAwesomeIcon className='close' onClick={closeModal} icon={faXmark} size='2xl' />
         <div>
-          <button>Map</button>
-          <button>Reminders</button>
-          <button>Help</button>
-          <button>Information</button>
+        <FontAwesomeIcon className='map' icon={faMapLocationDot} size="2xl" style={{color: "#ffffff",}} />
+        <FontAwesomeIcon className='bell' icon={faBell} size="2xl" style={{color: "#ffffff",}} />      
+        <FontAwesomeIcon icon={faCircleQuestion} size="2xl" style={{color: "#ffffff",}} />
+        <FontAwesomeIcon className='info-icon' icon={faCircleInfo} size="2xl" style={{color: "#ffffff",}} />
         </div>
       </Modal>
     </div>

@@ -3,7 +3,7 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 import './App.css';
 import iska from './pictures/iska-logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMicrophone, faHome, faCircleQuestion } from '@fortawesome/free-solid-svg-icons';
+import { faMicrophone, faHome, faCircleQuestion, faFileArrowDown } from '@fortawesome/free-solid-svg-icons';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import Menu from './components/Menu';
@@ -56,13 +56,31 @@ export default function DOM() {
       command: 'how to enroll',
       callback: () => {
         resetTranscript(); // Reset the transcript when a command is executed
-        displayText('Here is how to enroll in P U P Lopez, Quezon');
-        setDisplayTextOnScreen('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.');
+        const text = `
+          1. FRESHMAN ADMISSION
+              The OAS processes and facilitates the enrollment applications of those who passed the PUPCET. The Office evaluates the authenticity of the applicant's application documents and the applicant's qualifications for admission, adhering to the University admission requirements/criteria.
+        
+          Steps to follow
+              1. Visit the PUP website. Apply for PUP College Entrance Test through the iApply, read the information provided and click the iApplyNow button.https://iapply.pup.edu.ph
+              2. Click proceed to begin your on-line registration and select your intended campus and program, then submit the on-line application.
+              3. Upon successful submission of your on-line application, go to Display Voucher to print your Payment Voucher.
+              4. Go to the nearest LandBank Branch to remit payment via online collection or pay directly to the Cashier Office of the Branch.
+              5. Claim ePermit on-line. Allow five (5) working days after payment to LandBank before claiming your Test Permit online.
+              6. Go to PUP Testing Center 30 minutes before your time schedule as printed in your PUPCET Test Permit.
+              Visit the PUP website to check your score and online confirmation of the schedule date of processing of admission credentials, interview and enrolment.
+              8. Fill out the Student ww.pup.edu.ph Admission Records Form 1 (SAR Form1).
+              9. Click the PRINT button to print the SAR Form 1 with Route and Approval Slip.
+              10. On the scheduled date of processing your credentials, follow the steps in enrolment as indicated in you SAR Form.
+              11. For ALS qualities and those high school graduates whose final grade in English is 80 or lower.
+          `;
+        displayText('Here is how to enroll in P U P LQ');
+        setDisplayTextOnScreen(text);
         setResetButtonVisible(true); // Show the reset button after a command is executed
       },
     },
+    
     {
-      command: 'What can you do',
+      command: 'what can you do',
       callback: () => {
         resetTranscript();
         displayText('I can do various things.');
@@ -70,7 +88,8 @@ export default function DOM() {
         setResetButtonVisible(true);
       },
     },
-  ];
+  
+];
 
   const { transcript, resetTranscript } = useSpeechRecognition({ commands });
 
@@ -117,9 +136,7 @@ export default function DOM() {
       <img src={iska} alt="PUP Logo" className="logo" />
       <h1 className='app-name'>ISKA</h1>
       <p className='desc'>Hi! I'm ISKA, PUP Virtual Assistant, how can I help you?</p>
-      {downloadButtonVisible && (
-        <button onClick={generatePDF}>Download as PDF</button>
-      )}
+
       <div className='container'>
         <div className="display-text">
           {displayTextOnScreen && (
@@ -127,11 +144,22 @@ export default function DOM() {
           )}
         </div>
       </div>
+      <div className='download-button'>
+      <div className='download-button2'>
+      {downloadButtonVisible && (
+        <button> 
+<FontAwesomeIcon onClick={generatePDF} icon={faFileArrowDown}  size="xl" style={{"--fa-primary-color": "#fab005", "--fa-secondary-color": "#ffffff",}} />  Download</button>
+      )}
+      </div>
+        
+      </div>
 
       
       <footer className="microphone">
       <Menu/>
+      <div className='transcript'>
       <p className="transcript-text">{transcript}</p>
+      </div>
       {speechActive ? (
         <FontAwesomeIcon className='stop' onClick={stopListening} icon={faMicrophone} beat size="sm" style={{"--fa-primary-color": "#ffae00", "--fa-secondary-color": "#ffffff",}} />
       ) : (
