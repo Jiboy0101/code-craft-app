@@ -1,18 +1,36 @@
+
 [
+
     {
-      "id": 1,
-      "name": "Item 1",
-      "description": "This is the description of item 1."
+        "id": 1,
+        "title": "Vision",
+        "name": "P U P Vision",
+        "content": "P U P: The National Polytechnic University "
     },
     {
-      "id": 2,
-      "name": "Item 2",
-      "description": "This is the description of item 2."
+        "id": 2,
+        "title": "What can you do?",
+        "name": "",
+        "content": "There are various thing that I can do. Below is the detailed list."
+        
     },
     {
-      "id": 3,
-      "name": "Item 3",
-      "description": "This is the description of item 3."
+        "id": 3,
+        "title":"what are you?",
+        "name": "",
+        "content": "Hi, I'm 'iska' P U P Virtual Assistant, how can I help you?"
+    },
+    {
+        "id": 4,
+        "title": "Mission",
+        "name": "P U P Mission",
+        "content": "To provide a platform for students to interact with each other and share their knowledge in an easy way through online platforms."
+    },
+    {
+        "id": 5,
+        "title": "PUP Hymn",
+        "name": "P U P Hymn",
+        "content": "Click the link:",
+        "link": "https://youtu.be/Yib_s5UeGvc"
     }
-  ]
-  
+]

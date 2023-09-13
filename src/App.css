@@ -141,6 +141,7 @@ margin-bottom: 5px;
   position: relative;
   padding: 5px;
   color: white;
+  background:#4CAF50 ;
 
 }
 
@@ -174,6 +175,22 @@ margin-bottom: 5px;
 .questions {
   position: fixed;
   margin-top: 13px;
+  right: 0;
+  transform: translateY(-50%);
+  margin-right: 20px; /* Add margin to adjust the distance from the right edge */
+}
+
+.search-input{
+  position:relative;
+}
+
+.inputt{
+  position:relative;
+}
+
+.text-input{
+  position: fixed;
+  margin-top: 65px;
   right: 0;
   transform: translateY(-50%);
   margin-right: 20px; /* Add margin to adjust the distance from the right edge */

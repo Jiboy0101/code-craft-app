@@ -1,0 +1,40 @@
+import React, { useState } from 'react';
+import {faMagnifyingGlass,faPaperPlane} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+function TextInputApp({ onSendText }) {
+  const [showInput, setShowInput] = useState(false);
+  const [inputText, setInputText] = useState('');
+
+  const toggleInput = () => {
+    setShowInput(!showInput);
+  };
+
+  const handleInputChange = (e) => {
+    setInputText(e.target.value);
+  };
+
+  const handleSendText = () => {
+    onSendText(inputText); // Call the callback function with the input text
+    setInputText('');
+  };
+
+  return (
+    <div className='search-input'>
+      <FontAwesomeIcon onClick={toggleInput} icon={faMagnifyingGlass} size="xl" style={{color: "#ffc800",}} />
+      {showInput && (
+        <div className='inputt'>
+          <input
+            type="text"
+            placeholder="Enter text..."
+            value={inputText}
+            onChange={handleInputChange}
+          />
+          <FontAwesomeIcon onClick={handleSendText} icon={faPaperPlane} size="xl" style={{color: "#ffc800",}} />
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default TextInputApp;

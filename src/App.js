@@ -7,6 +7,7 @@ import { faMicrophone, faHome, faCircleQuestion, faFileArrowDown } from '@fortaw
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import Menu from './components/Menu';
+import TextInputApp from './components/textInput';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -35,6 +36,7 @@ export default function DOM() {
     pdfMake.createPdf(docDefinition).download('iska-web-app.pdf');
   };
 
+
   const displayText = (text) => {
     let message = new SpeechSynthesisUtterance(text);
     window.speechSynthesis.speak(message);
@@ -57,40 +59,61 @@ export default function DOM() {
       callback: () => {
         resetTranscript(); // Reset the transcript when a command is executed
         const text = `
-          1. FRESHMAN ADMISSION
+          FRESHMAN ADMISSION
               The OAS processes and facilitates the enrollment applications of those who passed the PUPCET. The Office evaluates the authenticity of the applicant's application documents and the applicant's qualifications for admission, adhering to the University admission requirements/criteria.
         
-          Steps to follow
+          HOW TO AVAIL OF THE SERVICE 
+            Steps to follow 
+            
+              WHERE: (Ground Floor), Admission Office 
+
               1. Visit the PUP website. Apply for PUP College Entrance Test through the iApply, read the information provided and click the iApplyNow button.https://iapply.pup.edu.ph
               2. Click proceed to begin your on-line registration and select your intended campus and program, then submit the on-line application.
               3. Upon successful submission of your on-line application, go to Display Voucher to print your Payment Voucher.
               4. Go to the nearest LandBank Branch to remit payment via online collection or pay directly to the Cashier Office of the Branch.
               5. Claim ePermit on-line. Allow five (5) working days after payment to LandBank before claiming your Test Permit online.
               6. Go to PUP Testing Center 30 minutes before your time schedule as printed in your PUPCET Test Permit.
-              Visit the PUP website to check your score and online confirmation of the schedule date of processing of admission credentials, interview and enrolment.
+              7. Visit the PUP website to check your score and online confirmation of the schedule date of processing of admission credentials, interview and enrolment.
               8. Fill out the Student ww.pup.edu.ph Admission Records Form 1 (SAR Form1).
               9. Click the PRINT button to print the SAR Form 1 with Route and Approval Slip.
               10. On the scheduled date of processing your credentials, follow the steps in enrolment as indicated in you SAR Form.
               11. For ALS qualities and those high school graduates whose final grade in English is 80 or lower.
-              
-              REGULAR STUDENT ADMISSION 
+          
+          RE-ADMISSION (for Returning Student)
+            The OAS processes and facilitates the applications for re-admission of students.
+          
+          HOW TO AVAIL OF THE SERVICE 
+            Steps to follow
 
-          3.ADMISSION OF TRANSFEEREES FROM ANOTHER SCHOOL
+            WHERE: (Ground Floor) Registrar Office, (2nd Floor) Office of the Student Affairs and Services (OSAS)
+
+              1. Request Informative Copy of Grades and have it evaluated by the Curriculum Adviser.
+              2. Secure Student Clearance and have it sign by the different offices.
+              3. Go to the Registrar’s Office for Evaluation of requirements and fill out an application form for re-admission.
+              4. Proceed to the Office of the Head of Academic Program for Approval of re-admission.
+              5. Proceed to the Registrar Office and secure R-Zero.
+              6. Send to OVPBC the accomplished R-Zero for tagging of subjects in the AMS Registration.
+
+          ADMISSION OF TRANSFEEREES FROM ANOTHER SCHOOL
               The OAS processes and facilities transfer of students, preferably incoming 2nd Year, from another school or University to PUP, subject to the availability of slots and upon the approval of the Branch/Campus Director. PUP accepts transfer students from another school every first semester only.
 
               Fees: P300.00 (from State Colleges and Universities)
                     P500.00 (from Private School)
                     
-          Steps to follow
-          1. Submit transfer credentials for evaluation 
-          2. Upon approval of Office of evaluated credentials, proceed to Office of the Student Affairs and Services for schedule of Psychological Examination.
-          3. Proceed to the Cashier Office for Payment of Psychological Exam.
-          4. Take the Psychological Exam.
-          5. Proceed to Registrar Office and submit admission credentials for evaluation.
-          6. Proceed to the Office of the Academic Programs/College of choice and copy the subjects.
-          7. Send R-zero to OVPBC for tagging of subjects.
-          8. Proceed to Cashier’s Office for Payment of tuition fee.
-          9. Proceed to the Admission Office for printing of Registration Certificate and ID processing.
+          HOW TO AVAIL OF THE SERVICE 
+            Steps to follow
+
+            WHERE: (Ground Floor) Registrar Office, (2nd Floor) Office of the Student Affairs and Services (OSAS)
+
+              1. Submit transfer credentials for evaluation 
+              2. Upon approval of Office of evaluated credentials, proceed to Office of the Student Affairs and Services for schedule of Psychological Examination.
+              3. Proceed to the Cashier Office for Payment of Psychological Exam.
+              4. Take the Psychological Exam.
+              5. Proceed to Registrar Office and submit admission credentials for evaluation.
+              6. Proceed to the Office of the Academic Programs/College of choice and copy the subjects.
+              7. Send R-zero to OVPBC for tagging of subjects.
+              8. Proceed to Cashier’s Office for Payment of tuition fee.
+              9. Proceed to the Admission Office for printing of Registration Certificate and ID processing.
            `;
         displayText('Here is how to enroll in P U P LQ');
         setDisplayTextOnScreen(text);
@@ -105,10 +128,131 @@ export default function DOM() {
         displayText('I can do various things.');
         setDisplayTextOnScreen('I can help you in every related Questions about PUP.');
         setResetButtonVisible(true);
+        setDownloadButtonVisible(false);
       },
     },
-  
+    {
+      command: 'history of pup',
+      callback: () => {
+        resetTranscript(); // Reset the transcript when a command is executed
+        const text = `
+        History
+
+The Polytechnic University of the Philippines (PUP) started as the Manila Business School (MBS) on October 1, 1904. It was founded in response to the demand to train individuals for government and private service employment. The MBS operated as part of the City School System under the superintendence of G.A. O'Reilly.
+
+The school's first offerings included vocational-technical courses mostly for working students from the provinces. Four years later, the school became a national school and was renamed the Philippine School of Commerce (PSC). PSC offered four-year secondary courses in Commerce in addition to vocational-technical courses like bookkeeping, stenography, typewriting and telegraphy. In 1917, PSC under the leadership of its Acting Principal Luis F. Reyes, started to offer night classes to enable the young people with daytime employment acquire further training. However, due to the retrenchment policy of the government in 1932, the night school had to be discontinued, and the PSC operations had to be merged with that of the Philippine Normal School and the Philippine School of Arts and Trades in 1933.
+
+In 1940, President Manuel L. Quezon, in his graduation address, vowed to seek appropriations from the National Assembly to build a separate School of Commerce while Congressman Manuel A. Alazarte and PSC Superintendent Luis F. Reyes presented a bill to Congress for the said purpose. These efforts though, were thwarted when World War II broke out. After the war, PSC continued to offer one- and two-year courses in retailing, merchandising, and four-year course in distributive arts education while still merged with PNS, until PSC Superintendent Luis Reyes applied for the acquisition of its own place to the Philippine Alien Property Administrator through AMalacañang and the Department of Foreign Affairs. Two old government buildings at Lepanto and S.H. Loyola Streets in Sampaloc District of Manila were turned over for the exclusive use of the PSC.
+           `;
+        displayText('Here is the history of P U P');
+        setDisplayTextOnScreen(text);
+        setResetButtonVisible(true); // Show the reset button after a command is executed
+      },
+    },
+    {
+      command: 'PUP Hymn',
+      callback: () => {
+        resetTranscript(); // Reset the transcript when a command is executed
+        const text = `
+        PUP Hymn
+        Imno ng PUP
+        S. Calabig, S. Roldan, and R. Amaranto
+
+        Sintang Paaralan
+        Tanglaw ka ng bayan
+        Pandayan ng isip ng kabataan
+        Kami ay dumating nang salat sa yaman
+        Hanap na dunong ay iyong alay
+        Ang layunin mong makatao
+        Dinarangal ang Pilipino
+        Ang iyong aral, diwa, adhikang taglay
+        PUP, aming gabay
+        Paaralang dakila
+        PUP, pinagpala
+        Gagamitin ang karunungan
+        Mula sa iyo, para sa bayan
+        Ang iyong aral, diwa, adhikang taglay
+        PUP, aming gabay
+        Paaralang dakila
+        PUP, pinagpala
+           `;
+        displayText('P U P hymn ');
+        setDisplayTextOnScreen(text);
+        setResetButtonVisible(true); // Show the reset button after a command is executed
+      },
+    },
+    {
+      command: 'Available Programs',
+      callback: () => {
+        resetTranscript(); // Reset the transcript when a command is executed
+        const text = `
+        Bachelor of Elementery Education (BEED)
+        Bachelor in Public Administration (BPA)
+        Bachelor in Public Adminsitration Major in Fiscal Adminstration (BPA -FA)
+        Bachelor of Science in Accountancy (BSA)
+        Bachelor of Science in Agri-Business Management (BSAM)
+        Bachelor of Science in Business Administration Major in Financial Management (BSBS-FM)
+        Bachelor of Science in Business Administration Major in Marketing Management (BSBA-MM)
+        Bachelor of Science in Biology (BSBIO)
+        Bachelor of Science in Civil Engineering (BSCE)
+        Bachelor of Science in Electrical Engineering (BSEE) 
+        Bachelor of Secondary Education (BSEDMT)
+        Bachelor of Science in Hospitality Management (BSHM)
+        Bachelor of Science in Information Technology (BSIT)
+        Bachelor of Science in Nutrition and Dietics (BSND)
+        Bachelor of Science in Office Administration Major in Legal Office Administration (BSOA- LOA)
+           `;
+        displayText('P U P LQ Available programs ');
+        setDisplayTextOnScreen(text);
+        setResetButtonVisible(true); // Show the reset button after a command is executed
+      },
+    },
+    {
+      command: 'Recite pup vision',
+      callback: () => {
+        resetTranscript();
+        displayText('The P U P vision is ');
+        setDisplayTextOnScreen('P U P: The National Polytechnic University');
+        setResetButtonVisible(true);
+        setDownloadButtonVisible(false);
+      },
+    },
+    {
+      command: 'Recite pup mission',
+      callback: () => {
+        resetTranscript(); // Reset the transcript when a command is executed
+        const text = `
+        Ensuring inclusive and equitable quality education and promoting lifelong learning opportunities through a re-engineered polytechnic university by committing to:
+        Provide democratized access to educational opportunities for the holistic development of individuals with global perspective
+        Offer industry-oriented curricula that produce highly-skilled professionals with managerial and technical capabilities and a strong sense of public service for nation building
+        Embed a culture of research and innovation
+        Continuously develop faculty and employees with the highest level of professionalism
+        Engage public and private institutions and other stakeholders for the attainment of social development goal
+        Establish a strong presence and impact in the international academic community
+           `;
+        displayText('Here is the P U P mission');
+        setDisplayTextOnScreen(text);
+        setResetButtonVisible(true); // Show the reset button after a command is executed
+      },
+    },
+     
+   
+
+    
 ];
+
+const sendTextToCommands = (text) => {
+  const command = commands.find((cmd) => cmd.command.toLowerCase() === text.toLowerCase());
+
+  if (command) {
+    command.callback();
+  } else {
+    displayText('Command not recognized');
+    setDownloadButtonVisible(false); // Display a message for unrecognized commands
+  }
+};
+
+
 
   const { transcript, resetTranscript } = useSpeechRecognition({ commands });
 
@@ -122,8 +266,13 @@ export default function DOM() {
     setSpeechActive(false);
   };
 
+
+
   return (
     <div className="dom-page">
+      <div className='text-input'>
+      <TextInputApp onSendText={sendTextToCommands} />
+      </div>
       <div className='icon-button'>
         <div className="reset-button">
           {resetButtonVisible && (
@@ -140,14 +289,15 @@ export default function DOM() {
           {/* Add your list of questions here */}
           <h6 className='note'>Try to ask these suggestions (Note: This list is not clickable)</h6>
           <p>How to enroll?</p>
+          <p>Available Programs</p>
           <p>What can you do?</p>
           <p>Recite PUP Vision</p>
           <p>Recite PUP Mission</p>
-          <p>Give the PUP Hymn</p>
+          <p>History of PUP</p>
+          <p>PUP Hymn</p>
           <p>How to request of good moral</p>
           <p>How to get School ID</p>
           <p>How to process INC grades</p>
-          <p>Show programs available</p>
           {/* Add more questions as needed */}
         </div>
       )}
@@ -166,8 +316,8 @@ export default function DOM() {
       <div className='download-button'>
       <div className='download-button2'>
       {downloadButtonVisible && (
-        <button> 
-<FontAwesomeIcon onClick={generatePDF} icon={faFileArrowDown}  size="xl" style={{"--fa-primary-color": "#fab005", "--fa-secondary-color": "#ffffff",}} />  Download</button>
+        <button onClick={generatePDF}> 
+<FontAwesomeIcon  icon={faFileArrowDown}  size="xl" style={{"--fa-primary-color": "#fab005", "--fa-secondary-color": "#ffffff",}} />  Download</button>
       )}
       </div>
         
