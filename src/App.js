@@ -72,7 +72,26 @@ export default function DOM() {
               9. Click the PRINT button to print the SAR Form 1 with Route and Approval Slip.
               10. On the scheduled date of processing your credentials, follow the steps in enrolment as indicated in you SAR Form.
               11. For ALS qualities and those high school graduates whose final grade in English is 80 or lower.
-          `;
+              
+              REGULAR STUDENT ADMISSION 
+
+          3.ADMISSION OF TRANSFEEREES FROM ANOTHER SCHOOL
+              The OAS processes and facilities transfer of students, preferably incoming 2nd Year, from another school or University to PUP, subject to the availability of slots and upon the approval of the Branch/Campus Director. PUP accepts transfer students from another school every first semester only.
+
+              Fees: P300.00 (from State Colleges and Universities)
+                    P500.00 (from Private School)
+                    
+          Steps to follow
+          1. Submit transfer credentials for evaluation 
+          2. Upon approval of Office of evaluated credentials, proceed to Office of the Student Affairs and Services for schedule of Psychological Examination.
+          3. Proceed to the Cashier Office for Payment of Psychological Exam.
+          4. Take the Psychological Exam.
+          5. Proceed to Registrar Office and submit admission credentials for evaluation.
+          6. Proceed to the Office of the Academic Programs/College of choice and copy the subjects.
+          7. Send R-zero to OVPBC for tagging of subjects.
+          8. Proceed to Cashier’s Office for Payment of tuition fee.
+          9. Proceed to the Admission Office for printing of Registration Certificate and ID processing.
+           `;
         displayText('Here is how to enroll in P U P LQ');
         setDisplayTextOnScreen(text);
         setResetButtonVisible(true); // Show the reset button after a command is executed
