@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {faMagnifyingGlass,faPaperPlane} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import '../App.css';
 
 function TextInputApp({ onSendText }) {
   const [showInput, setShowInput] = useState(false);
@@ -20,17 +21,19 @@ function TextInputApp({ onSendText }) {
   };
 
   return (
-    <div className='search-input'>
+    <div>
       <FontAwesomeIcon onClick={toggleInput} icon={faMagnifyingGlass} size="xl" style={{color: "#ffc800",}} />
       {showInput && (
-        <div className='inputt'>
+        <div>
           <input
             type="text"
             placeholder="Enter text..."
             value={inputText}
             onChange={handleInputChange}
           />
-          <FontAwesomeIcon onClick={handleSendText} icon={faPaperPlane} size="xl" style={{color: "#ffc800",}} />
+          <div>
+          <FontAwesomeIcon onClick={handleSendText} icon={faPaperPlane} size="xl" />
+          </div>
         </div>
       )}
     </div>

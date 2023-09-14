@@ -183,7 +183,7 @@ export default function DOM() {
         `;
         setDisplayTextOnScreen(text);
         setResetButtonVisible(true);
-        setDownloadButtonVisible(false);
+        setDownloadButtonVisible(true);
       }
     },
 
