@@ -1,0 +1,133 @@
+
+
+/* CSS styles for your menu component */
+.menu {
+    /* Styles for the menu button */
+    cursor: pointer;
+}
+
+.menu-content {
+    /* Styles for the modal content */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 450px;
+    max-width: 300px;
+    margin: 0 auto;
+    background-color: #7E0001;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.title-menu {
+    /* Styles for the menu title */
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding-top: 20px;
+    color: #ffffff;
+    font-size: 35px;
+    font-family:Geneva, Tahoma, sans-serif sans-serif;
+    text-align: center;
+    
+}
+
+.close {
+    /* Styles for the close button */
+    cursor: pointer;
+    color: #c59595;
+    margin-top: 70px;
+    left: 345px;
+}
+
+button {
+    /* Styles for the menu buttons */
+    background: transparent;
+    color: #ffffff;
+    border: none;
+    flex-direction: column;
+    align-items: center;
+    width: 120px;
+    font-size: 13px;
+    text-align: center;
+    padding: 10px 20px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button .icon {
+    font-size: 70px;
+    margin-bottom: 10px;
+    transition: color 1s;
+}
+
+button:hover .icon {
+    /* Hover effect for buttons */
+    color: #000000;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.grid-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    gap: 15px;
+}
+
+.text {
+    color:aliceblue;
+    font-size: 10px;
+    font-family:Geneva, Tahoma, sans-serif sans-serif;
+    bottom: 0;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.close {
+    position: absolute;
+    top: 150px;
+    right: 35px;
+}
+
+.popup-modal {
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 450px;
+    max-width: 300px;
+    margin: 0 auto;
+    background-color: #7E0001;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.popup-title {
+    /* Styles for the title of the pop-up frames */
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 20px;
+    color: #ffffff;
+    font-size: 24px; /* Adjust the font size as needed */
+    font-family: Geneva, Tahoma, sans-serif sans-serif;
+    text-align: center;
+}
+
+.popup-content {
+    color: #ffffff;
+    font-size: 16px; /* Adjust the font size as needed */
+    font-family: Geneva, Tahoma, sans-serif sans-serif;
+    text-align: center;
+    margin-bottom: 1px;
+    position: absolute; /* Add fixed positioning */
+}
