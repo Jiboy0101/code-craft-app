@@ -1,0 +1,23 @@
+{
+    "how_to_enroll": {
+      "displayText": "Here is the process on how you can enroll in P U P Lopez. Follow the steps below...",
+      "downloadButtonVisible": true
+    },
+    "how_to_enroll_freshman": {
+      "displayText": "Here is the process how to enroll a freshmen student in P U P Lopez. Follow the steps below...",
+      "downloadButtonVisible": true
+    },
+    "how_to_enroll_transferee": {
+      "displayText": "Here is the process how to enroll a transferee student in P U P Lopez. Follow the steps below...",
+      "downloadButtonVisible": true
+    },
+    "how_to_enroll_returning": {
+      "displayText": "Here is the process how to enroll a returning student in P U P Lopez. Follow the steps below...",
+      "downloadButtonVisible": true
+    },
+    "how_to_enroll_regular": {
+      "displayText": "Here is the process how to enroll a regular student in P U P Lopez. Follow the steps below...",
+      "downloadButtonVisible": true
+    }
+  }
+  

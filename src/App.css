@@ -109,7 +109,7 @@ margin-bottom: 5px;
 
 .container{
   max-width: 800px;
-  height: 530px;
+  height: 510px;
   margin-left: auto;
   margin-right: auto;
   overflow: auto;
@@ -134,14 +134,31 @@ margin-bottom: 5px;
 }
 
 .download-button{
-  position: relative;
-  margin: 20px 20px 20px 20px;
+  position: static;
+  margin: 30px 20px 20px 20px;
 }
 .download-button2 button{
   position: relative;
   padding: 5px;
   color: white;
   background:#4CAF50 ;
+  
+
+}
+.desc{
+  color: rgb(236, 166, 4);
+}
+
+.otherText{
+  white-space: pre-line;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.displayResponse{
+  white-space:  pre-line;
+  justify-content: justify;
 
 }
 
@@ -182,6 +199,12 @@ margin-bottom: 5px;
 
 .search-input{
   position:relative;
+}
+
+.year-button button{
+  background-color: darkgoldenrod;
+  display: inline;
+  margin-left: 20px;
 }
 
 .text-input{

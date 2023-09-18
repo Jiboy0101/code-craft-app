@@ -9,21 +9,39 @@ import pdfFonts from 'pdfmake/build/vfs_fonts';
 import Menu from './components/Menu';
 import TextInputApp from './components/textInput';
 import pupWebsite from './components/pupwebsite';
+import Responses from './components/dataResponse.json';
+import YearButtons from './components/displayEnroll';
+import Program from './components/displayProgram';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 export default function DOM() {
   const [speechActive, setSpeechActive] = useState(false);
+
   const [displayTextOnScreen, setDisplayTextOnScreen] = useState('');
+
   const [resetButtonVisible, setResetButtonVisible] = useState(false);
+
   const [downloadButtonVisible, setDownloadButtonVisible] = useState(false);
+
   const [showQuestions, setShowQuestions] = useState(false); // State to control question list visibility
+
+  const [yearbutton, setYearButtonVisible] = useState(false);
+  const [selectedYearResponse, setSelectedYearResponse] = useState('');
+
+  const [otherText, displayOtherText] = useState('');
+
+  const [showAdditionalButtons, setShowAdditionalButtons] = useState(false);
+
+  const [programsButton, setProgramsButton] = useState(false);
+  const [programsResponse, setSelectedProgram] = useState('');
+  
 
   const generatePDF = () => {
     const docDefinition = {
       content: [
         { text: '"ISKA" Virtual Assistant', style: 'header', alignment: 'center'},
-        { text: displayTextOnScreen, alignment: 'justify'},
+        { text: displayTextOnScreen || selectedYearResponse || programsResponse, alignment: 'justify'},
       ],
       styles: {
         header: {
@@ -37,17 +55,38 @@ export default function DOM() {
     pdfMake.createPdf(docDefinition).download('iska-web-app.pdf');
   };
 
+  const handleYearButtonClick = (year) => {
+    const response = Responses[year];
+    setSelectedYearResponse(response);
+  };
+
+  const handleProgramButtonClick = (programs) => {
+    const program = Responses[programs];
+    setSelectedProgram(program);
+  };
+
+
+  const toggleAdditionalButtons = () => {
+    setShowAdditionalButtons(!showAdditionalButtons);
+  };
+
 
   const displayText = (text) => {
     let message = new SpeechSynthesisUtterance(text);
     window.speechSynthesis.speak(message);
-    setDownloadButtonVisible(true); // Show the download button
+    setDownloadButtonVisible(true); // HIde the download button
+
   };
 
   const resetDisplay = () => {
     setDisplayTextOnScreen('');
     setResetButtonVisible(false); // Hide the reset button
     setDownloadButtonVisible(false); // Hide the download button
+    setYearButtonVisible(false);
+    setSelectedYearResponse(false);
+    displayOtherText(false);
+    setSelectedProgram(false);
+    setProgramsButton(false);
   };
 
   const toggleQuestions = () => {
@@ -59,186 +98,19 @@ export default function DOM() {
       command: ['how to enroll', 'enrollment', 'enrollment procedures', 'enrollment process' ],
       callback: () => {
         resetTranscript(); // Reset the transcript when a command is executed
-          displayText('Here is the process on how you can enroll in P U P Lopez. Follow the steps below and you can definitely be one of us! Please take your time to be guided with steps. Good luck, congrats and welcome in advance.');
-          const text = `
-          FRESHMAN ADMISSION
-              The OAS processes and facilitates the enrollment applications of those who passed the PUPCET. The Office evaluates the authenticity of the applicant's application documents and the applicant's qualifications for admission, adhering to the University admission requirements/criteria.
-        
-          HOW TO AVAIL OF THE SERVICE 
-            Steps to follow 
-            
-              WHERE: (Ground Floor), Admission Office 
-
-              1. Visit the PUP website. Apply for PUP College Entrance Test through the iApply, read the information provided and click the iApplyNow button.https://iapply.pup.edu.ph
-              2. Click proceed to begin your on-line registration and select your intended campus and program, then submit the on-line application.
-              3. Upon successful submission of your on-line application, go to Display Voucher to print your Payment Voucher.
-              4. Go to the nearest LandBank Branch to remit payment via online collection or pay directly to the Cashier Office of the Branch.
-              5. Claim ePermit on-line. Allow five (5) working days after payment to LandBank before claiming your Test Permit online.
-              6. Go to PUP Testing Center 30 minutes before your time schedule as printed in your PUPCET Test Permit.
-              7. Visit the PUP website to check your score and online confirmation of the schedule date of processing of admission credentials, interview and enrolment.
-              8. Fill out the Student ww.pup.edu.ph Admission Records Form 1 (SAR Form1).
-              9. Click the PRINT button to print the SAR Form 1 with Route and Approval Slip.
-              10. On the scheduled date of processing your credentials, follow the steps in enrolment as indicated in you SAR Form.
-              11. For ALS qualities and those high school graduates whose final grade in English is 80 or lower.
-          
-          RE-ADMISSION (for Returning Student)
-            The OAS processes and facilitates the applications for re-admission of students.
-          
-          HOW TO AVAIL OF THE SERVICE 
-            Steps to follow
-
-            WHERE: (Ground Floor) Registrar Office, (2nd Floor) Office of the Student Affairs and Services (OSAS)
-
-              1. Request Informative Copy of Grades and have it evaluated by the Curriculum Adviser.
-              2. Secure Student Clearance and have it sign by the different offices.
-              3. Go to the Registrar Office for Evaluation of requirements and fill out an application form for re-admission.
-              4. Proceed to the Office of the Head of Academic Program for Approval of re-admission.
-              5. Proceed to the Registrar Office and secure R-Zero.
-              6. Send to OVPBC the accomplished R-Zero for tagging of subjects in the AMS Registration.
-
-          ADMISSION OF TRANSFEEREES FROM ANOTHER SCHOOL
-              The OAS processes and facilities transfer of students, preferably incoming 2nd Year, from another school or University to PUP, subject to the availability of slots and upon the approval of the Branch/Campus Director. PUP accepts transfer students from another school every first semester only.
-
-              Fees: P300.00 (from State Colleges and Universities)
-                    P500.00 (from Private School)
-                    
-          HOW TO AVAIL OF THE SERVICE 
-            Steps to follow
-
-            WHERE: (Ground Floor) Registrar Office, (2nd Floor) Office of the Student Affairs and Services (OSAS)
-
-              1. Submit transfer credentials for evaluation 
-              2. Upon approval of Office of evaluated credentials, proceed to Office of the Student Affairs and Services for schedule of Psychological Examination.
-              3. Proceed to the Cashier Office for Payment of Psychological Exam.
-              4. Take the Psychological Exam.
-              5. Proceed to Registrar Office and submit admission credentials for evaluation.
-              6. Proceed to the Office of the Academic Programs/College of choice and copy the subjects.
-              7. Send R-zero to OVPBC for tagging of subjects.
-              8. Proceed to Cashiers Office for Payment of tuition fee.
-              9. Proceed to the Admission Office for printing of Registration Certificate and ID processing.
-           `;
-        setDisplayTextOnScreen(text);
+        setYearButtonVisible(true);
+          displayText('Please select below which level do you want to enroll')
+          const textDisplay = `
+          Please select below which level do you want to enroll.
+          `;
+          displayOtherText(textDisplay);
         setResetButtonVisible(true);
         setDownloadButtonVisible(true);
+        setSelectedYearResponse(false);
+        
       },
     },
-    {
-      command: ['how to enroll freshman', 'how to enroll freshmen student','freshmen', 'freshman', 'how to enroll freshman student'],
-      callback: () => {
-        resetTranscript();
-        displayText('Here is the process how to enroll a freshmen student in P U P Lopez. Follow the steps below and you can definitely be one of us! Please take your time to be guided with steps. Good luck, congrats and welcome in advance.');
-        const text = `
-        FRESHMAN ADMISSION
-              The OAS processes and facilitates the enrollment applications of those who passed the PUPCET. The Office evaluates the authenticity of the applicant's application documents and the applicant's qualifications for admission, adhering to the University admission requirements/criteria.
-        
-          HOW TO AVAIL OF THE SERVICE 
-            Steps to follow 
-            
-              WHERE: (Ground Floor), Admission Office 
-
-              1. Visit the PUP website. Apply for PUP College Entrance Test through the iApply, read the information provided and click the iApplyNow button.https://iapply.pup.edu.ph
-              2. Click proceed to begin your on-line registration and select your intended campus and program, then submit the on-line application.
-              3. Upon successful submission of your on-line application, go to Display Voucher to print your Payment Voucher.
-              4. Go to the nearest LandBank Branch to remit payment via online collection or pay directly to the Cashier Office of the Branch.
-              5. Claim ePermit on-line. Allow five (5) working days after payment to LandBank before claiming your Test Permit online.
-              6. Go to PUP Testing Center 30 minutes before your time schedule as printed in your PUPCET Test Permit.
-              7. Visit the PUP website to check your score and online confirmation of the schedule date of processing of admission credentials, interview and enrolment.
-              8. Fill out the Student ww.pup.edu.ph Admission Records Form 1 (SAR Form1).
-              9. Click the PRINT button to print the SAR Form 1 with Route and Approval Slip.
-              10. On the scheduled date of processing your credentials, follow the steps in enrolment as indicated in you SAR Form.
-              11. For ALS qualities and those high school graduates whose final grade in English is 80 or lower.
-        `;
-        setDisplayTextOnScreen(text);
-        setResetButtonVisible(true);
-        setDownloadButtonVisible(true);
-      }
-    },
-
-    {
-      command: ['how to enroll transferee student', 'how to enroll transferee', 'transferee', 'transferee student', 'enrollment of transferee', 'enrollment of transferee'],
-      callback: () => {
-        resetTranscript();
-        displayText("Here is the process how to enroll a transferee student in P U P Lopez. Follow the steps below and you can definitely be one of us! Please take your time to be guided with steps. Good luck, congrats and welcome in advance.");
-        const text = `
-        ADMISSION OF TRANSFEEREES FROM ANOTHER SCHOOL
-              The OAS processes and facilities transfer of students, preferably incoming 2nd Year, from another school or University to PUP, subject to the availability of slots and upon the approval of the Branch/Campus Director. PUP accepts transfer students from another school every first semester only.
-
-              Fees: P300.00 (from State Colleges and Universities)
-                    P500.00 (from Private School)
-                    
-          HOW TO AVAIL OF THE SERVICE 
-            Steps to follow
-
-            WHERE: (Ground Floor) Registrar Office, (2nd Floor) Office of the Student Affairs and Services (OSAS)
-
-              1. Submit transfer credentials for evaluation 
-              2. Upon approval of Office of evaluated credentials, proceed to Office of the Student Affairs and Services for schedule of Psychological Examination.
-              3. Proceed to the Cashier Office for Payment of Psychological Exam.
-              4. Take the Psychological Exam.
-              5. Proceed to Registrar Office and submit admission credentials for evaluation.
-              6. Proceed to the Office of the Academic Programs/College of choice and copy the subjects.
-              7. Send R-zero to OVPBC for tagging of subjects.
-              8. Proceed to Cashiers Office for Payment of tuition fee.
-              9. Proceed to the Admission Office for printing of Registration Certificate and ID processing.
-        `;
-        setDisplayTextOnScreen(text);
-        setResetButtonVisible(true);
-        setDownloadButtonVisible(true);
-      }
-    },
-
-    {
-      command: ['how to enroll returning student', 'returning student','returning', 'returning of irregular'],
-      callback: () => {
-        resetTranscript();
-        displayText('Here is the process how to enroll a returning student in P U P Lopez. Follow the steps below and you can definitely be one of us! Please take your time to be guided with steps. Good luck.');
-        const text= `
-        RE-ADMISSION (for Returning Student)
-            The OAS processes and facilitates the applications for re-admission of students.
-          
-          HOW TO AVAIL OF THE SERVICE 
-            Steps to follow
-
-            WHERE: (Ground Floor) Registrar Office, (2nd Floor) Office of the Student Affairs and Services (OSAS)
-
-              1. Request Informative Copy of Grades and have it evaluated by the Curriculum Adviser.
-              2. Secure Student Clearance and have it sign by the different offices.
-              3. Go to the Registrar Office for Evaluation of requirements and fill out an application form for re-admission.
-              4. Proceed to the Office of the Head of Academic Program for Approval of re-admission.
-              5. Proceed to the Registrar Office and secure R-Zero.
-              6. Send to OVPBC the accomplished R-Zero for tagging of subjects in the AMS Registration.
-        `;
-        setDisplayTextOnScreen(text);
-        setResetButtonVisible(true);
-        setDownloadButtonVisible(true);
-      }
-    },
-    {
-      command: ['how to enroll regular student', 'regular student','regular', 'enrollment of regular student'],
-      callback: () => {
-        resetTranscript();
-        displayText('Here is the process how to enroll a regular student in P U P Lopez. Follow the steps below! Please take your time to be guided with steps. Good luck.');
-        const text= `
-        REGULAR STUDENT
-        
-            STEPS TO FOLLOW:
-
-            WHERE: PUP SIS
-
-              1. Log in to your SIS Account.
-              2. Check if your grades is complete. (Grades Section.)
-              3. Go to Enrollment Section.
-              4. Check all the subjects and schedule to enroll.
-              5. Click Save and Assess.
-              6. Review and click Okay to confirm.
-              7. Review the assessment.
-              8. Print Confirmation Slip.
-        `;
-        setDisplayTextOnScreen(text);
-        setResetButtonVisible(true);
-        setDownloadButtonVisible(true);
-      }
-    },
+    
     {
       command: 'website',
       callback: () => {
@@ -247,6 +119,8 @@ export default function DOM() {
         setDisplayTextOnScreen(pupWebsite);
         setDownloadButtonVisible(false);
         setResetButtonVisible(true);
+        setYearButtonVisible(false);
+
       }
     },
 
@@ -254,7 +128,11 @@ export default function DOM() {
       command: 'what can you do',
       callback: () => {
         resetTranscript();
+        setYearButtonVisible(false);
         displayText('There are various things that i can do. Below are the detailed list.');
+        const textDisplay = `
+        There are various things that i can do. Below are the detailed list.
+          `;
         const text = `
         What I Can Do?
         - Answer Questions.
@@ -267,8 +145,8 @@ export default function DOM() {
         - Open PUP Website.
         - Open PUP SIS.
         - I can provide anything about PUP Lopez. 
-
         `;
+        displayOtherText(textDisplay);
         setDisplayTextOnScreen(text);
         setResetButtonVisible(true);
         setDownloadButtonVisible(false);
@@ -328,25 +206,12 @@ In 1940, President Manuel L. Quezon, in his graduation address, vowed to seek ap
       command: ['Available Programs', 'Programs Available'],
       callback: () => {
         resetTranscript(); // Reset the transcript when a command is executed
-        const text = `
-        Bachelor of Elementery Education (BEED)
-        Bachelor in Public Administration (BPA)
-        Bachelor in Public Adminsitration Major in Fiscal Adminstration (BPA -FA)
-        Bachelor of Science in Accountancy (BSA)
-        Bachelor of Science in Agri-Business Management (BSAM)
-        Bachelor of Science in Business Administration Major in Financial Management (BSBS-FM)
-        Bachelor of Science in Business Administration Major in Marketing Management (BSBA-MM)
-        Bachelor of Science in Biology (BSBIO)
-        Bachelor of Science in Civil Engineering (BSCE)
-        Bachelor of Science in Electrical Engineering (BSEE) 
-        Bachelor of Secondary Education (BSEDMT)
-        Bachelor of Science in Hospitality Management (BSHM)
-        Bachelor of Science in Information Technology (BSIT)
-        Bachelor of Science in Nutrition and Dietics (BSND)
-        Bachelor of Science in Office Administration Major in Legal Office Administration (BSOA- LOA)
-           `;
-        displayText('Here are the following programs available in P U P Lopez.');
-        setDisplayTextOnScreen(text);
+        setProgramsButton(true);
+        displayText('The P U P Lopez offers a lots of programs its either Diploma or Bachelors Degree.');
+        const textDisplay = `
+        The PUP Lopez offers a lots of programs its either Diploma or Bachelors Degree.
+        `;
+        displayOtherText(textDisplay);
         setResetButtonVisible(true); // Show the reset button after a command is executed
       },
     },
@@ -397,7 +262,6 @@ const sendTextToCommands = (text) => {
 };
 
 
-
   const { transcript, resetTranscript } = useSpeechRecognition({ commands });
 
   const startListening = () => {
@@ -409,7 +273,6 @@ const sendTextToCommands = (text) => {
     SpeechRecognition.stopListening();
     setSpeechActive(false);
   };
-
 
 
   return (
@@ -448,8 +311,39 @@ const sendTextToCommands = (text) => {
       <img src={iska} alt="PUP Logo" className="logo" />
       <h1 className='app-name'>ISKA</h1>
       <p className='desc'>Hi! I'm ISKA, PUP Virtual Assistant, how can I help you?</p>
+      <div className='textOther'>
+      <div classname='otherText'>{otherText}</div>
+
+      </div>
 
       <div className='container'>
+        <div className='buttons'>
+          {yearbutton && (
+            <YearButtons onYearButtonClick={handleYearButtonClick} showAdditionalButtons={toggleAdditionalButtons}  />
+                  )}
+          {programsButton && (
+            <Program onProgramClick={handleProgramButtonClick} />
+          ) }
+        </div>
+
+        <div>
+        <pre className="otherResponse">
+        {selectedYearResponse && (
+          <p className="displayResponse">{selectedYearResponse}</p>
+        )}
+        {programsResponse && (
+          <p className='p-response'>{programsResponse}</p>
+        )}
+      </pre>
+      {showAdditionalButtons && (
+        <div className='additional-buttons'>
+          {/* Additional buttons go here */}
+          <button onClick={() => console.log('Additional Button 1 Clicked')}>Additional Button 1</button>
+          <button onClick={() => console.log('Additional Button 2 Clicked')}>Additional Button 2</button>
+        </div>
+      )}
+        </div>
+        
         <div className="display-text">
           {displayTextOnScreen && (
             <p className="display-text-content">{displayTextOnScreen}</p>
@@ -465,6 +359,7 @@ const sendTextToCommands = (text) => {
       </div>
         
       </div>
+
 
       
       <footer className="microphone">
@@ -482,3 +377,5 @@ const sendTextToCommands = (text) => {
     </div>
   );
 }
+
+
