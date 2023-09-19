@@ -99,7 +99,7 @@ export default function DOM() {
 
   const commands = [
     {
-      command: ['how to enroll', 'enrollment', 'enrollment procedures', 'enrollment process' ],
+      command: ['* enroll *', '* enroll', 'enroll *', 'enroll'],
       callback: () => {
         resetTranscript(); // Reset the transcript when a command is executed
         setYearButtonVisible(true);
@@ -117,10 +117,10 @@ export default function DOM() {
     },
     
     {
-      command: 'website',
+      command: ['* website', 'website *', 'websites', '* websites', 'websites *', '* websites *'],
       callback: () => {
         resetTranscript();
-        displayText('P U P Website and Pages')
+        displayText('Here is the website you can visit for more info about P U P')
         setDisplayTextOnScreen(pupWebsite);
         setDownloadButtonVisible(false);
         setResetButtonVisible(true);
@@ -130,7 +130,7 @@ export default function DOM() {
     },
 
     {
-      command: 'what can you do',
+      command: '* do *',
       callback: () => {
         resetTranscript();
         setYearButtonVisible(false);
@@ -179,7 +179,7 @@ export default function DOM() {
     },
       
     {
-      command: ['Available Programs', 'Programs Available'],
+      command: '* programs *',
       callback: () => {
         resetTranscript(); // Reset the transcript when a command is executed
         setProgramsButton(true);
@@ -192,43 +192,11 @@ export default function DOM() {
         setYearButtonVisible(false);
         setSelectedYearResponse(false);
         setDisplayTextOnScreen(false);
-
-
       },
     },
-    {
-      command: ['vision', 'pup vision'],
-      callback: () => {
-        resetTranscript();
-        displayText('Here is the P U P Vision.P U P The National Polytechnic University');
-        const text = ' P U P: The National Polytechnic University';
-        setDisplayTextOnScreen(text);
-        setResetButtonVisible(true);
-        setDownloadButtonVisible(false);
-      },
-    },
-    {
-      command: ['mission', 'pup mission'],
-      callback: () => {
-        resetTranscript(); // Reset the transcript when a command is executed
-        displayText('Here is the P U P Mission. Ensuring inclusive and equitable quality education and promoting lifelong learning opportunities through a re-engineered polytechnic university by committing to:');
-        const text = `
-        Ensuring inclusive and equitable quality education and promoting lifelong learning opportunities through a re-engineered polytechnic university by committing to:
-        Provide democratized access to educational opportunities for the holistic development of individuals with global perspective
-        Offer industry-oriented curricula that produce highly-skilled professionals with managerial and technical capabilities and a strong sense of public service for nation building
-        Embed a culture of research and innovation
-        Continuously develop faculty and employees with the highest level of professionalism
-        Engage public and private institutions and other stakeholders for the attainment of social development goal
-        Establish a strong presence and impact in the international academic community
-           `;
-        setDisplayTextOnScreen(text);
-        setResetButtonVisible(true); // Show the reset button after a command is executed
-      },
-    },
-     
-   
 
     
+  
 ];
 
 const sendTextToCommands = (text) => {
@@ -237,10 +205,12 @@ const sendTextToCommands = (text) => {
   if (command) {
     command.callback();
   } else {
+    // Handle unrecognized command here
     displayText('Command not recognized');
     setDownloadButtonVisible(false); // Display a message for unrecognized commands
   }
 };
+
 
 
   const { transcript, resetTranscript } = useSpeechRecognition({ commands });
@@ -277,13 +247,8 @@ const sendTextToCommands = (text) => {
           {/* Add your list of questions here */}
           <h6 className='note'>Try to ask these suggestions (Note: This list is not clickable)</h6>
           <p>Available Programs</p>
-          <p>History of PUP</p>
+          <p>About the PUP</p>
           <p>How to enroll</p>
-          <p>How to request of good moral</p>
-          <p>How to get School ID</p>
-          <p>PUP Vision</p>
-          <p>PUP Mission</p>
-          <p>PUP Hymn</p>
           <p>What can you do?</p>
           {/* Add more questions as needed */}
         </div>
