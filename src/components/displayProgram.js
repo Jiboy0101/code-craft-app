@@ -1,5 +1,5 @@
 import React from 'react';
-import './displayEnroll.css';
+import './displayDesign.css';
 
 function Programs({ onProgramClick }) {
 

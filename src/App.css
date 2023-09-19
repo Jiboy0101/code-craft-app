@@ -162,6 +162,11 @@ margin-bottom: 5px;
 
 }
 
+.otherResponse{
+  text-align: left;
+  font-size:20px;
+}
+
 
 .question-list {
   border: 5px solid darkgoldenrod;

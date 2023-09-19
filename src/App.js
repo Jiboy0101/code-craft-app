@@ -12,6 +12,7 @@ import pupWebsite from './components/pupwebsite';
 import Responses from './components/dataResponse.json';
 import YearButtons from './components/displayEnroll';
 import Program from './components/displayProgram';
+import About from './components/displayAbout';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -31,17 +32,18 @@ export default function DOM() {
 
   const [otherText, displayOtherText] = useState('');
 
-  const [showAdditionalButtons, setShowAdditionalButtons] = useState(false);
-
   const [programsButton, setProgramsButton] = useState(false);
   const [programsResponse, setSelectedProgram] = useState('');
+
+  const [aboutButtons, setAboutVisible]= useState(false);
+  const [aboutResponse, setAboutResponse] = useState('');
   
 
   const generatePDF = () => {
     const docDefinition = {
       content: [
         { text: '"ISKA" Virtual Assistant', style: 'header', alignment: 'center'},
-        { text: displayTextOnScreen || selectedYearResponse || programsResponse, alignment: 'justify'},
+        { text: displayTextOnScreen || selectedYearResponse || programsResponse || aboutResponse, alignment: 'justify'},
       ],
       styles: {
         header: {
@@ -65,9 +67,9 @@ export default function DOM() {
     setSelectedProgram(program);
   };
 
-
-  const toggleAdditionalButtons = () => {
-    setShowAdditionalButtons(!showAdditionalButtons);
+  const handleAboutButtonClick = (about) => {
+    const abouts = Responses[about];
+    setAboutResponse(abouts);
   };
 
 
@@ -87,6 +89,8 @@ export default function DOM() {
     displayOtherText(false);
     setSelectedProgram(false);
     setProgramsButton(false);
+    setAboutResponse(false);
+    setAboutVisible(false);
   };
 
   const toggleQuestions = () => {
@@ -107,6 +111,7 @@ export default function DOM() {
         setResetButtonVisible(true);
         setDownloadButtonVisible(true);
         setSelectedYearResponse(false);
+        setDisplayTextOnScreen(false);
         
       },
     },
@@ -150,58 +155,29 @@ export default function DOM() {
         setDisplayTextOnScreen(text);
         setResetButtonVisible(true);
         setDownloadButtonVisible(false);
+        setProgramsButton(false);
+
       },
     },
     {
-      command: ['history of pup', 'history', 'pup history'],
+      command: ['About PUP', 'about'],
       callback: () => {
         resetTranscript(); // Reset the transcript when a command is executed
-        const text = `
-        History
-
-The Polytechnic University of the Philippines (PUP) started as the Manila Business School (MBS) on October 1, 1904. It was founded in response to the demand to train individuals for government and private service employment. The MBS operated as part of the City School System under the superintendence of G.A. O'Reilly.
-
-The school's first offerings included vocational-technical courses mostly for working students from the provinces. Four years later, the school became a national school and was renamed the Philippine School of Commerce (PSC). PSC offered four-year secondary courses in Commerce in addition to vocational-technical courses like bookkeeping, stenography, typewriting and telegraphy. In 1917, PSC under the leadership of its Acting Principal Luis F. Reyes, started to offer night classes to enable the young people with daytime employment acquire further training. However, due to the retrenchment policy of the government in 1932, the night school had to be discontinued, and the PSC operations had to be merged with that of the Philippine Normal School and the Philippine School of Arts and Trades in 1933.
-
-In 1940, President Manuel L. Quezon, in his graduation address, vowed to seek appropriations from the National Assembly to build a separate School of Commerce while Congressman Manuel A. Alazarte and PSC Superintendent Luis F. Reyes presented a bill to Congress for the said purpose. These efforts though, were thwarted when World War II broke out. After the war, PSC continued to offer one- and two-year courses in retailing, merchandising, and four-year course in distributive arts education while still merged with PNS, until PSC Superintendent Luis Reyes applied for the acquisition of its own place to the Philippine Alien Property Administrator through AMalacañang and the Department of Foreign Affairs. Two old government buildings at Lepanto and S.H. Loyola Streets in Sampaloc District of Manila were turned over for the exclusive use of the PSC.
-           `;
-        displayText('Here is the history of P U P');
-        setDisplayTextOnScreen(text);
+        displayText('Here is all you want to know about P U P Lopez');
+        const textDisplay = `
+        Here is all you want to know about P U P Lopez.
+        `;
+        displayOtherText(textDisplay);
         setResetButtonVisible(true); // Show the reset button after a command is executed
+        setAboutVisible(true);
+        setResetButtonVisible(true); // Show the reset button after a command is executed
+        setYearButtonVisible(false);
+        setSelectedYearResponse(false);
+        setDisplayTextOnScreen(false);
+        setProgramsButton(false);
       },
     },
-    {
-      command: ['PUP Hymn', 'Hymn'],
-      callback: () => {
-        resetTranscript(); // Reset the transcript when a command is executed
-        const text = `
-        PUP Hymn
-        Imno ng PUP
-        S. Calabig, S. Roldan, and R. Amaranto
-
-        Sintang Paaralan
-        Tanglaw ka ng bayan
-        Pandayan ng isip ng kabataan
-        Kami ay dumating nang salat sa yaman
-        Hanap na dunong ay iyong alay
-        Ang layunin mong makatao
-        Dinarangal ang Pilipino
-        Ang iyong aral, diwa, adhikang taglay
-        PUP, aming gabay
-        Paaralang dakila
-        PUP, pinagpala
-        Gagamitin ang karunungan
-        Mula sa iyo, para sa bayan
-        Ang iyong aral, diwa, adhikang taglay
-        PUP, aming gabay
-        Paaralang dakila
-        PUP, pinagpala
-           `;
-        displayText('P U P hymn ');
-        setDisplayTextOnScreen(text);
-        setResetButtonVisible(true); // Show the reset button after a command is executed
-      },
-    },
+      
     {
       command: ['Available Programs', 'Programs Available'],
       callback: () => {
@@ -213,6 +189,11 @@ In 1940, President Manuel L. Quezon, in his graduation address, vowed to seek ap
         `;
         displayOtherText(textDisplay);
         setResetButtonVisible(true); // Show the reset button after a command is executed
+        setYearButtonVisible(false);
+        setSelectedYearResponse(false);
+        setDisplayTextOnScreen(false);
+
+
       },
     },
     {
@@ -319,29 +300,22 @@ const sendTextToCommands = (text) => {
       <div className='container'>
         <div className='buttons'>
           {yearbutton && (
-            <YearButtons onYearButtonClick={handleYearButtonClick} showAdditionalButtons={toggleAdditionalButtons}  />
+            <YearButtons onYearButtonClick={handleYearButtonClick}  />
                   )}
           {programsButton && (
             <Program onProgramClick={handleProgramButtonClick} />
           ) }
+          { aboutButtons && (
+            <About onAboutClick={handleAboutButtonClick} />
+          )}
         </div>
 
         <div>
         <pre className="otherResponse">
-        {selectedYearResponse && (
-          <p className="displayResponse">{selectedYearResponse}</p>
+        {(selectedYearResponse || programsResponse || aboutResponse) && (
+          <p className="displayResponse">{selectedYearResponse}{programsResponse}{aboutResponse}</p>         
         )}
-        {programsResponse && (
-          <p className='p-response'>{programsResponse}</p>
-        )}
-      </pre>
-      {showAdditionalButtons && (
-        <div className='additional-buttons'>
-          {/* Additional buttons go here */}
-          <button onClick={() => console.log('Additional Button 1 Clicked')}>Additional Button 1</button>
-          <button onClick={() => console.log('Additional Button 2 Clicked')}>Additional Button 2</button>
-        </div>
-      )}
+      </pre>  
         </div>
         
         <div className="display-text">
