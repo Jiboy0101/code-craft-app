@@ -57,6 +57,8 @@ export default function DOM() {
     pdfMake.createPdf(docDefinition).download('iska-web-app.pdf');
   };
 
+
+
   const handleYearButtonClick = (year) => {
     const response = Responses[year];
     setSelectedYearResponse(response);
@@ -112,6 +114,8 @@ export default function DOM() {
         setDownloadButtonVisible(true);
         setSelectedYearResponse(false);
         setDisplayTextOnScreen(false);
+        setProgramsButton(false);
+        setSelectedProgram(false);
         
       },
     },
@@ -130,7 +134,7 @@ export default function DOM() {
     },
 
     {
-      command: '* do *',
+      command: ['* do *', '* do', 'do *', 'do'],
       callback: () => {
         resetTranscript();
         setYearButtonVisible(false);
@@ -253,14 +257,16 @@ const sendTextToCommands = (text) => {
           {/* Add more questions as needed */}
         </div>
       )}
-
-      <img src={iska} alt="PUP Logo" className="logo" />
+    <header className='head'>
+    <img src={iska} alt="PUP Logo" className="logo" />
       <h1 className='app-name'>ISKA</h1>
       <p className='desc'>Hi! I'm ISKA, PUP Virtual Assistant, how can I help you?</p>
       <div className='textOther'>
       <div classname='otherText'>{otherText}</div>
 
       </div>
+    </header>
+      
 
       <div className='container'>
         <div className='buttons'>

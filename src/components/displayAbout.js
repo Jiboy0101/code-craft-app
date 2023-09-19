@@ -1,25 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './displayDesign.css';
 
 function About({ onAboutClick }) {
+  const [activeTab, setActiveTab] = useState(null);
 
- 
-
-  const speakText = (text) => {
+  const speakText = (text, tab) => {
     if ('speechSynthesis' in window) {
       const speech = new SpeechSynthesisUtterance(text);
       speechSynthesis.speak(speech);
     } else {
       console.error('Speech synthesis is not supported in this browser.');
     }
+    
+    setActiveTab(tab); // Set the active tab when a button is clicked
   };
 
   return (
-    <div className='year-button'>
-       <button onClick={() => { onAboutClick('history'); speakText('These is the history of P U P');}}>History</button>
-      <button onClick={() => { onAboutClick('mission'); speakText('Here is the mission of P U P');}}>PUP Mission</button>
-      <button onClick={() => { onAboutClick('vision'); speakText('Here is the vision of P U P, P U P The National Polytechnic University ');}}>PUP Vision</button>
-      <button onClick={() => { onAboutClick('hymn'); speakText('Here is the P U P Hymn by S. Calabig, S. Roldan, and R. Amaranto');}}>PUP Hymn</button>
+    <div className='choices-button'>
+      <button
+        onClick={() => { onAboutClick('history'); speakText('These is the history of P U P', 'history'); }}
+        className={activeTab === 'history' ? 'active' : ''}
+      >
+        History
+      </button>
+      <button
+        onClick={() => { onAboutClick('mission'); speakText('Here is the mission of P U P', 'mission'); }}
+        className={activeTab === 'mission' ? 'active' : ''}
+      >
+        PUP Mission
+      </button>
+      <button
+        onClick={() => { onAboutClick('vision'); speakText('Here is the vision of P U P, P U P The National Polytechnic University', 'vision'); }}
+        className={activeTab === 'vision' ? 'active' : ''}
+      >
+        PUP Vision
+      </button>
+      <button
+        onClick={() => { onAboutClick('hymn'); speakText('Here is the P U P Hymn by S. Calabig, S. Roldan, and R. Amaranto', 'hymn'); }}
+        className={activeTab === 'hymn' ? 'active' : ''}
+      >
+        PUP Hymn
+      </button>
     </div>
   );
 }

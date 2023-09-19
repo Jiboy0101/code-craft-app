@@ -15,12 +15,34 @@
     padding: 20px;
 }
 
-.year-button{
+.choices-button{
     justify-content: center;
     display: flex;
+    margin-top: 10px;
 }
-.year-button button{
-    border-radius: 10%;
-    padding: 5px;
-    margin-right: -10px;
+.choices-button button{
+    border-radius: 10px;
+    padding: 7px;
+    margin-right: 5px;
+    background: linear-gradient(to bottom, #c40606, #f1c500); /* Gradient color */
+  color: white; /* Text color */
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
 }
+
+.choices-button button:hover{
+    background: linear-gradient(to bottom, #f1c500, #c40606); /* Gradient color */
+}
+
+.choices-button button.active {
+    background: linear-gradient(to bottom, #ea9800, #ea9800); /* Active button gradient color */
+    color: #c40606;
+  }
+
+  
+  
+  
+  
+  
+  

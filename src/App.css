@@ -5,7 +5,12 @@ body {
   background-repeat: no-repeat;
   margin: 0; /* Remove default margin to prevent horizontal scroll on small screens */
   font-family: Arial, sans-serif; /* Choose an appropriate font for better readability */
-  overflow: auto;
+  position: sticky;
+}
+
+.head{
+  top: -60px;
+  position: sticky;
 }
 
 /* Media query for screens smaller than 768px */
@@ -41,16 +46,6 @@ body {
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
 button {
   background-color: darkgoldenrod;
@@ -61,7 +56,7 @@ button {
   position: relative;
   width: 40px;
   height: 40px;
-  background-color: darkgoldenrod;
+  background: linear-gradient(to bottom, #c40606, #f1c500); /* Gradient color */
   padding: 20px 20px;
   border-radius: 100px;
 }
@@ -70,7 +65,7 @@ button {
   position: relative;
   width: 40px;
   height: 40px;
-  background-color: darkgoldenrod;
+  background: linear-gradient(to bottom, #c40606, #f1c500); /* Gradient color */
   padding: 20px 20px;
   border-radius: 100px;
 }
@@ -134,14 +129,15 @@ margin-bottom: 5px;
 }
 
 .download-button{
-  position: static;
   margin: 30px 20px 20px 20px;
+  position: sticky;
+  bottom: 0;
 }
 .download-button2 button{
   position: relative;
   padding: 5px;
-  color: white;
-  background:#4CAF50 ;
+  color: rgb(85, 3, 3);
+  background: linear-gradient(to bottom, #4e7c12, #b7e0a4); /* Gradient color */
   
 
 }
@@ -149,11 +145,12 @@ margin-bottom: 5px;
   color: rgb(236, 166, 4);
 }
 
-.otherText{
-  white-space: pre-line;
+.textOther{
   justify-content: center;
   text-align: center;
   align-items: center;
+  padding: 5px;
+  background-color: #7E0001;
 }
 
 .displayResponse{
@@ -164,7 +161,9 @@ margin-bottom: 5px;
 
 .otherResponse{
   text-align: left;
-  font-size:20px;
+  font-size:15px;
+  margin-top: 20px;
+  z-index: -1;
 }
 
 
@@ -180,6 +179,7 @@ margin-bottom: 5px;
   top: 60px;
   overflow: auto;
   font-size: 15px;
+  z-index: 1;
 }
 
 .note {
@@ -191,6 +191,7 @@ margin-bottom: 5px;
   position:fixed;
   margin-left: 50px; /* Add margin to adjust the distance from the right edge */
   margin-top: 13px;
+  z-index: 1;
 
 }
 
