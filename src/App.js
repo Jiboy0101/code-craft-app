@@ -101,7 +101,7 @@ export default function DOM() {
 
   const commands = [
     {
-      command: ['* enroll *', '* enroll', 'enroll *', 'enroll'],
+      command: ['* enroll *', '* enroll', 'enroll *', 'enroll', 'enrollment', '* enrollment', 'enrollment *', '* enrollment *'],
       callback: () => {
         resetTranscript(); // Reset the transcript when a command is executed
         setYearButtonVisible(true);
@@ -110,9 +110,11 @@ export default function DOM() {
           Please select below which level do you want to enroll.
           `;
           displayOtherText(textDisplay);
+
         setResetButtonVisible(true);
         setDownloadButtonVisible(true);
-        setSelectedYearResponse(false);
+
+        
         setDisplayTextOnScreen(false);
 
         setProgramsButton(false);
@@ -120,6 +122,8 @@ export default function DOM() {
 
         setAboutResponse(false);
         setAboutVisible(false);
+
+        setSelectedYearResponse(false);
 
 
         
@@ -143,7 +147,6 @@ export default function DOM() {
       command: ['* do *', '* do', 'do *', 'do'],
       callback: () => {
         resetTranscript();
-        setYearButtonVisible(false);
         displayText('There are various things that i can do. Below are the detailed list.');
         const textDisplay = `
         There are various things that i can do. Below are the detailed list.
@@ -166,6 +169,13 @@ export default function DOM() {
         setResetButtonVisible(true);
         setDownloadButtonVisible(false);
         setProgramsButton(false);
+
+        setAboutResponse(false);
+        setAboutVisible(false);
+
+        setSelectedYearResponse(false);
+        setYearButtonVisible(false);
+
 
       },
     },
@@ -190,6 +200,8 @@ export default function DOM() {
         setProgramsButton(false);
         setSelectedProgram(false);
 
+        setAboutResponse(false);
+
         
       },
     },
@@ -213,9 +225,9 @@ export default function DOM() {
 
         setAboutVisible(false);
         setAboutResponse(false);
-        
-        setProgramsButton(false);
+
         setSelectedProgram(false);
+       
         
       },
     },
@@ -308,11 +320,11 @@ const sendTextToCommands = (text) => {
         </div>
 
         <div>
-        <p className="otherResponse">
+        <div className="otherResponse">
         {(selectedYearResponse || programsResponse || aboutResponse) && (
           <p className="displayResponse">{selectedYearResponse}{programsResponse}{aboutResponse}</p>         
         )}
-      </p>  
+      </div>  
         </div>
         
         <div className="display-text">
