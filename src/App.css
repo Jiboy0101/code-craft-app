@@ -11,6 +11,8 @@ body {
 .head{
   top: -60px;
   position: sticky;
+  z-index: 0;
+  background-color: #7E0001;
 }
 
 /* Media query for screens smaller than 768px */
@@ -151,11 +153,13 @@ margin-bottom: 5px;
   align-items: center;
   padding: 5px;
   background-color: #7E0001;
+  
 }
 
 .displayResponse{
   white-space:  pre-line;
   justify-content: justify;
+  font-family:Geneva, Tahoma, sans-serif sans-serif;
 
 }
 
@@ -164,6 +168,8 @@ margin-bottom: 5px;
   font-size:15px;
   margin-top: 20px;
   z-index: -1;
+  font-family:Geneva, Tahoma, sans-serif sans-serif;
+
 }
 
 
@@ -190,17 +196,17 @@ margin-bottom: 5px;
 .reset-button {
   position:fixed;
   margin-left: 50px; /* Add margin to adjust the distance from the right edge */
-  margin-top: 13px;
-  z-index: 1;
+  margin-top: 8px;
+  z-index: 9;
 
 }
 
 .questions {
   position: fixed;
-  margin-top: 13px;
+  margin-top: 50px;
   right: 0;
   transform: translateY(-50%);
-  margin-right: 20px; /* Add margin to adjust the distance from the right edge */
+  margin-right: 13px; /* Add margin to adjust the distance from the right edge */
 }
 
 .search-input{
@@ -215,10 +221,10 @@ margin-bottom: 5px;
 
 .text-input{
   position: fixed;
-  margin-top: 65px;
+  margin-top: 15px;
   right: 0;
   transform: translateY(-50%);
-  margin-right: 20px; /* Add margin to adjust the distance from the right edge */
+  margin-right: 25px; /* Add margin to adjust the distance from the right edge */
   z-index: 999999;
 }
 
@@ -228,6 +234,8 @@ margin-bottom: 5px;
   left: 0;
   transform: translateY(-50%);
   margin-left: 20px; 
+  z-index: 9;
+
 }
 
 .menu-content{
@@ -282,4 +290,17 @@ margin-bottom: 5px;
   transform: translateY(-50%);
   margin-right: 45px; /* Add margin to adjust the distance from the right edge */
   color: white;
+}
+
+.left-icon{
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  margin-left: 85%;
+}
+
+.search{
+  margin-top: 20%;
+  margin-left:35%;
+  position: sticky;
 }

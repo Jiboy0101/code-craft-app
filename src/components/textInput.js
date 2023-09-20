@@ -21,7 +21,7 @@ function TextInputApp({ onSendText }) {
   };
 
   return (
-    <div>
+    <div className='search'>
       <FontAwesomeIcon onClick={toggleInput} icon={faMagnifyingGlass} size="xl" style={{color: "#ffc800",}} />
       {showInput && (
         <div>

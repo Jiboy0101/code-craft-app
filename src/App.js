@@ -164,7 +164,7 @@ export default function DOM() {
       },
     },
     {
-      command: ['About PUP', 'about'],
+      command: ['About pup', '* about *', '* about', 'about *', '* about pup *', 'about pup *', '* about pup', 'about'],
       callback: () => {
         resetTranscript(); // Reset the transcript when a command is executed
         displayText('Here is all you want to know about P U P Lopez');
@@ -183,7 +183,7 @@ export default function DOM() {
     },
       
     {
-      command: '* programs *',
+      command: ['* programs', 'programs *', '* program', 'program *', 'program', 'programs', 'course *', '* course ', '* course *', '* programs *'],
       callback: () => {
         resetTranscript(); // Reset the transcript when a command is executed
         setProgramsButton(true);
@@ -232,8 +232,13 @@ const sendTextToCommands = (text) => {
 
   return (
     <div className="dom-page">
+      <div className='left-icon'>
+      <Menu/>
+      </div>
+
       <div className='text-input'>
       <TextInputApp onSendText={sendTextToCommands} />
+
       </div>
       <div className='icon-button'>
         <div className="reset-button">
@@ -282,11 +287,11 @@ const sendTextToCommands = (text) => {
         </div>
 
         <div>
-        <pre className="otherResponse">
+        <p className="otherResponse">
         {(selectedYearResponse || programsResponse || aboutResponse) && (
           <p className="displayResponse">{selectedYearResponse}{programsResponse}{aboutResponse}</p>         
         )}
-      </pre>  
+      </p>  
         </div>
         
         <div className="display-text">
@@ -308,7 +313,7 @@ const sendTextToCommands = (text) => {
 
       
       <footer className="microphone">
-      <Menu/>
+
       <div className='transcript'>
       <p className="transcript-text" autoCorrect="off" spellCheck="true">{transcript}</p>
       </div>
