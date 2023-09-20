@@ -114,8 +114,14 @@ export default function DOM() {
         setDownloadButtonVisible(true);
         setSelectedYearResponse(false);
         setDisplayTextOnScreen(false);
+
         setProgramsButton(false);
         setSelectedProgram(false);
+
+        setAboutResponse(false);
+        setAboutVisible(false);
+
+
         
       },
     },
@@ -175,10 +181,16 @@ export default function DOM() {
         setResetButtonVisible(true); // Show the reset button after a command is executed
         setAboutVisible(true);
         setResetButtonVisible(true); // Show the reset button after a command is executed
+
         setYearButtonVisible(false);
         setSelectedYearResponse(false);
+
         setDisplayTextOnScreen(false);
+
         setProgramsButton(false);
+        setSelectedProgram(false);
+
+        
       },
     },
       
@@ -193,9 +205,18 @@ export default function DOM() {
         `;
         displayOtherText(textDisplay);
         setResetButtonVisible(true); // Show the reset button after a command is executed
+
         setYearButtonVisible(false);
         setSelectedYearResponse(false);
+
         setDisplayTextOnScreen(false);
+
+        setAboutVisible(false);
+        setAboutResponse(false);
+        
+        setProgramsButton(false);
+        setSelectedProgram(false);
+        
       },
     },
 
