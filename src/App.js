@@ -237,16 +237,25 @@ export default function DOM() {
 ];
 
 const sendTextToCommands = (text) => {
-  const command = commands.find((cmd) => cmd.command.toLowerCase() === text.toLowerCase());
+  const command = commands.find((cmd) => {
+    if (typeof cmd.command === 'string') {
+      return text.toLowerCase().includes(cmd.command.toLowerCase());
+    } else if (Array.isArray(cmd.command)) {
+      return cmd.command.some((phrase) =>
+        text.toLowerCase().includes(phrase.toLowerCase())
+      );
+    }
+    return false;
+  });
 
   if (command) {
     command.callback();
   } else {
-    // Handle unrecognized command here
     displayText('Command not recognized');
     setDownloadButtonVisible(false); // Display a message for unrecognized commands
   }
 };
+
 
 
 

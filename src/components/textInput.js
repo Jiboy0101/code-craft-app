@@ -21,10 +21,11 @@ function TextInputApp({ onSendText }) {
   };
 
   return (
-    <div className='search'>
+    <div>
+      <div className='searchbar'>
       <FontAwesomeIcon onClick={toggleInput} icon={faMagnifyingGlass} size="xl" style={{color: "#ffc800",}} />
       {showInput && (
-        <div>
+        <div >
           <input
             type="text"
             placeholder="Enter text..."
@@ -35,7 +36,10 @@ function TextInputApp({ onSendText }) {
           <FontAwesomeIcon onClick={handleSendText} icon={faPaperPlane} size="xl" />
           </div>
         </div>
-      )}
+          )}
+      </div>
+     
+    
     </div>
   );
 }
