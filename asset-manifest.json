@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/code-craft-app/static/css/main.bf7a6004.css",
-    "main.js": "/code-craft-app/static/js/main.eb3fdb28.js",
+    "main.css": "/code-craft-app/static/css/main.f8b8a6a2.css",
+    "main.js": "/code-craft-app/static/js/main.e43187f9.js",
     "static/media/iska-logo.png": "/code-craft-app/static/media/iska-logo.0b23486e2144e26ea815.png",
     "index.html": "/code-craft-app/index.html",
-    "main.bf7a6004.css.map": "/code-craft-app/static/css/main.bf7a6004.css.map",
-    "main.eb3fdb28.js.map": "/code-craft-app/static/js/main.eb3fdb28.js.map"
+    "main.f8b8a6a2.css.map": "/code-craft-app/static/css/main.f8b8a6a2.css.map",
+    "main.e43187f9.js.map": "/code-craft-app/static/js/main.e43187f9.js.map"
   },
   "entrypoints": [
-    "static/css/main.bf7a6004.css",
-    "static/js/main.eb3fdb28.js"
+    "static/css/main.f8b8a6a2.css",
+    "static/js/main.e43187f9.js"
   ]
 }
