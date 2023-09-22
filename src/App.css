@@ -136,11 +136,11 @@ margin-bottom: 5px;
 
 .download-button{
   position: sticky;
-  bottom: 0;
 }
 .download-button2 button{
   position: relative;
   padding: 5px;
+  bottom: 70px;
   color: rgb(85, 3, 3);
   background: linear-gradient(to bottom, #4e7c12, #b7e0a4); /* Gradient color */
   
@@ -181,7 +181,7 @@ margin-bottom: 5px;
   color: rgb(236, 166, 4);
   position: absolute;
   width: 190px;
-  height: 400px;
+  height: max-content;
   right: 5%;
   margin-top: 10px;
   top: 60px;
@@ -241,7 +241,7 @@ margin-bottom: 5px;
 }
 
 .box{
-top: 10px;
+bottom: -10px;
 
 }
 
@@ -325,4 +325,14 @@ top: 10px;
   z-index: 10;
   display: flex;
   margin-left: 85%;
+}
+
+.center-input {
+  position: fixed;
+  bottom: -30px;
+  right: 400px;
+  transform: translateX(-50%);
+  text-align: center;
+  padding: 50px 10px;
+  z-index: 11;
 }

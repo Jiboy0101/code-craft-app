@@ -8,7 +8,6 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import Menu from './components/Menu';
 import TextInputApp from './components/textInput';
-import pupWebsite from './components/pupwebsite';
 import Responses from './components/dataResponse.json';
 import YearButtons from './components/displayEnroll';
 import Program from './components/displayProgram';
@@ -39,6 +38,8 @@ export default function DOM() {
   const [aboutButtons, setAboutVisible]= useState(false);
   const [aboutResponse, setAboutResponse] = useState('');
 
+  const [displaySuggest, setSuggestResponse] = useState('');
+
 
   
 
@@ -60,7 +61,9 @@ export default function DOM() {
     pdfMake.createPdf(docDefinition).download('iska-web-app.pdf');
   };
 
-
+  const handleSuggestButtonClick = (suggest) => {
+    setSuggestResponse(suggest);
+  };
 
   const handleYearButtonClick = (year) => {
     const response = Responses[year];
@@ -102,6 +105,19 @@ export default function DOM() {
     setShowQuestions(!showQuestions); // Toggle the visibility of question list
   };
 
+  const displayImage = (imageFilename) => {
+    const imageElement = (
+      <img
+      src={iska}
+      alt="ISKA Logo"
+        style={{ maxWidth: '100%', height: 'auto' }}
+      />
+    );
+  
+    setDisplayTextOnScreen(imageElement);
+  };
+  
+
   const commands = [
     {
       command: ['* enroll *', '* enroll', 'enroll *', 'enroll', 'enrollment', '* enrollment', 'enrollment *', '* enrollment *'],
@@ -131,19 +147,6 @@ export default function DOM() {
 
         
       },
-    },
-    
-    {
-      command: ['* website', 'website *', 'websites', '* websites', 'websites *', '* websites *'],
-      callback: () => {
-        resetTranscript();
-        displayText('Here is the website you can visit for more info about P U P')
-        setDisplayTextOnScreen(pupWebsite);
-        setDownloadButtonVisible(false);
-        setResetButtonVisible(true);
-        setYearButtonVisible(false);
-
-      }
     },
 
     {
@@ -234,6 +237,23 @@ export default function DOM() {
         
       },
     },
+    {
+      command: ['show * map *', '* display image', 'show picture *', 'display picture *', 'show * image *'],
+      callback: () => {
+        resetTranscript(); // Reset the transcript when a command is executed
+        displayImage('iska-logo.png'); // Function to display the image with the specified filename
+        const textDisplay = 'Here is an image:';
+        displayOtherText(textDisplay);
+        setResetButtonVisible(true); // Show the reset button after a command is executed
+        setYearButtonVisible(false);
+        setSelectedYearResponse(false);
+        setDisplayTextOnScreen(false);
+        setProgramsButton(false);
+        setSelectedProgram(false);
+        setAboutResponse(false);
+      },
+    }
+    
 
     
   
@@ -309,7 +329,7 @@ const sendTextToCommands = (text) => {
       <h1 className='app-name'>ISKA</h1>
       <p className='desc'>Hi! I'm ISKA, PUP Virtual Assistant, how can I help you?</p>
       <div className='textOther'>
-      <div classname='otherText'>{otherText}</div>
+      <div className='otherText'>{otherText}</div>
 
       </div>
     </header>
@@ -331,7 +351,7 @@ const sendTextToCommands = (text) => {
         <div>
         <div className="otherResponse">
         {(selectedYearResponse || programsResponse || aboutResponse) && (
-          <p className="displayResponse">{selectedYearResponse}{programsResponse}{aboutResponse}</p>         
+          <p className="displayResponse">{selectedYearResponse}{programsResponse}{aboutResponse}{displaySuggest}{displayImage}</p>         
         )}
       </div>  
         </div>
@@ -355,7 +375,7 @@ const sendTextToCommands = (text) => {
       </div>
 
       <div className='suggest-button'>
-            <Suggest />
+      <Suggest onButtonClick={handleSuggestButtonClick} />
       </div>
 
 
