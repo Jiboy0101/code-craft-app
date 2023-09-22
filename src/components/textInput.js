@@ -22,32 +22,36 @@ function TextInputApp({ onSendText }) {
 
   return (
     <div className='box'>
-      <div className='searchbar'>
-        <div className='back'>
-        <FontAwesomeIcon
-          onClick={toggleInput}
-          icon={faMagnifyingGlass}
-          size="xl"
-          style={{ color: "#ffc800" }}
-        />
-        </div>
-        {showInput && (
-          <div className='bar'>
-            <input
-              type="text"
-              placeholder="Enter text..."
-              value={inputText}
-              onChange={handleInputChange}
-            />
+        <div className='searchbar'>
+          <div className='back'>
             <FontAwesomeIcon
-              onClick={handleSendText}
-              icon={faPaperPlane}
+              onClick={toggleInput}
+              icon={faMagnifyingGlass}
               size="xl"
-            />
+              style={{ color: "#ffc800" }} />
           </div>
-        )}
+          {showInput && (
+            <div className='suggestion'>
+            <button>Get ACE Form</button>
+            <button>Get ACE Form</button>
+            <button>Get ACE Form</button>
+
+            <div className='bar'>
+              <input
+                type="text"
+                placeholder="Enter text..."
+                value={inputText}
+                onChange={handleInputChange} />
+              <FontAwesomeIcon
+                onClick={handleSendText}
+                icon={faPaperPlane}
+                size="xl" />
+            </div>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+      
   );
 }
 

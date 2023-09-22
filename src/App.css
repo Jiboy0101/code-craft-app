@@ -140,7 +140,7 @@ margin-bottom: 5px;
 .download-button2 button{
   position: relative;
   padding: 5px;
-  bottom: 70px;
+  bottom: 10px;
   color: rgb(85, 3, 3);
   background: linear-gradient(to bottom, #4e7c12, #b7e0a4); /* Gradient color */
   
@@ -335,4 +335,19 @@ bottom: -10px;
   text-align: center;
   padding: 50px 10px;
   z-index: 11;
+}
+
+.suggestion{
+display: inline-block;
+flex-direction: row;
+}
+
+.suggestion button{
+  background: linear-gradient(to bottom, #c40606, #f1c500); /* Gradient color */
+  display:flex;
+  flex-direction: row;
+  margin-left: 10px;
+  padding: 10px;
+  width: 100%;
+
 }

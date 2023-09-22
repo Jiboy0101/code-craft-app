@@ -12,7 +12,6 @@ import Responses from './components/dataResponse.json';
 import YearButtons from './components/displayEnroll';
 import Program from './components/displayProgram';
 import About from './components/displayAbout';
-import Suggest from './components/suggestButton';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -38,8 +37,6 @@ export default function DOM() {
   const [aboutButtons, setAboutVisible]= useState(false);
   const [aboutResponse, setAboutResponse] = useState('');
 
-  const [displaySuggest, setSuggestResponse] = useState('');
-
 
   
 
@@ -61,9 +58,6 @@ export default function DOM() {
     pdfMake.createPdf(docDefinition).download('iska-web-app.pdf');
   };
 
-  const handleSuggestButtonClick = (suggest) => {
-    setSuggestResponse(suggest);
-  };
 
   const handleYearButtonClick = (year) => {
     const response = Responses[year];
@@ -351,7 +345,7 @@ const sendTextToCommands = (text) => {
         <div>
         <div className="otherResponse">
         {(selectedYearResponse || programsResponse || aboutResponse) && (
-          <p className="displayResponse">{selectedYearResponse}{programsResponse}{aboutResponse}{displaySuggest}{displayImage}</p>         
+          <p className="displayResponse">{selectedYearResponse}{programsResponse}{aboutResponse}{displayImage}</p>         
         )}
       </div>  
         </div>
@@ -372,10 +366,6 @@ const sendTextToCommands = (text) => {
       </div>
 
         
-      </div>
-
-      <div className='suggest-button'>
-      <Suggest onButtonClick={handleSuggestButtonClick} />
       </div>
 
 
