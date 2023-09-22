@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {faMagnifyingGlass,faPaperPlane} from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../App.css';
 
@@ -21,25 +21,32 @@ function TextInputApp({ onSendText }) {
   };
 
   return (
-    <div>
+    <div className='box'>
       <div className='searchbar'>
-      <FontAwesomeIcon onClick={toggleInput} icon={faMagnifyingGlass} size="xl" style={{color: "#ffc800",}} />
-      {showInput && (
-        <div >
-          <input
-            type="text"
-            placeholder="Enter text..."
-            value={inputText}
-            onChange={handleInputChange}
-          />
-          <div>
-          <FontAwesomeIcon onClick={handleSendText} icon={faPaperPlane} size="xl" />
-          </div>
+        <div className='back'>
+        <FontAwesomeIcon
+          onClick={toggleInput}
+          icon={faMagnifyingGlass}
+          size="xl"
+          style={{ color: "#ffc800" }}
+        />
         </div>
-          )}
+        {showInput && (
+          <div className='bar'>
+            <input
+              type="text"
+              placeholder="Enter text..."
+              value={inputText}
+              onChange={handleInputChange}
+            />
+            <FontAwesomeIcon
+              onClick={handleSendText}
+              icon={faPaperPlane}
+              size="xl"
+            />
+          </div>
+        )}
       </div>
-     
-    
     </div>
   );
 }

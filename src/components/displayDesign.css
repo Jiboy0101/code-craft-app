@@ -41,6 +41,20 @@
     color: #c40606;
   }
 
+.suggestButton{
+    position:relative;
+}
+
+  .suggestButton button{
+    justify-content: space-around;
+    background-color: #ea9800;
+    margin: 2px;
+    padding: 10px;
+    border-radius: 20px;
+    background: linear-gradient(to bottom, #f1c500, #c40606); /* Gradient color */
+
+  }
+
   
   
   

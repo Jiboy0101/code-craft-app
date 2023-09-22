@@ -13,6 +13,7 @@ import Responses from './components/dataResponse.json';
 import YearButtons from './components/displayEnroll';
 import Program from './components/displayProgram';
 import About from './components/displayAbout';
+import Suggest from './components/suggestButton';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -37,6 +38,8 @@ export default function DOM() {
 
   const [aboutButtons, setAboutVisible]= useState(false);
   const [aboutResponse, setAboutResponse] = useState('');
+
+
   
 
   const generatePDF = () => {
@@ -278,10 +281,7 @@ const sendTextToCommands = (text) => {
       <Menu/>
       </div>
 
-      <div className='text-input'>
-      <TextInputApp onSendText={sendTextToCommands} />
-
-      </div>
+      
       <div className='icon-button'>
         <div className="reset-button">
           {resetButtonVisible && (
@@ -342,6 +342,7 @@ const sendTextToCommands = (text) => {
           )}
         </div>
       </div>
+      
       <div className='download-button'>
       <div className='download-button2'>
       {downloadButtonVisible && (
@@ -349,11 +350,16 @@ const sendTextToCommands = (text) => {
 <FontAwesomeIcon  icon={faFileArrowDown}  size="xl" style={{"--fa-primary-color": "#fab005", "--fa-secondary-color": "#ffffff",}} />  Download</button>
       )}
       </div>
+
         
       </div>
 
+      <div className='suggest-button'>
+            <Suggest />
+      </div>
 
-      
+
+
       <footer className="microphone">
 
       <div className='transcript'>
@@ -364,6 +370,10 @@ const sendTextToCommands = (text) => {
       ) : (
         <FontAwesomeIcon className='start' onClick={startListening} icon={faMicrophone} size="sm" style={{"--fa-primary-color": "#ffffff", "--fa-secondary-color": "#ffffff",}} />
       )}
+      <div className='text-input'>
+      <TextInputApp onSendText={sendTextToCommands} />
+
+      </div>
       </footer>
      
     </div>
