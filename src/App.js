@@ -62,23 +62,28 @@ export default function DOM() {
   const handleYearButtonClick = (year) => {
     const response = Responses[year];
     setSelectedYearResponse(response);
+    setDownloadButtonVisible(true); // HIde the download button
+
   };
 
   const handleProgramButtonClick = (programs) => {
     const program = Responses[programs];
     setSelectedProgram(program);
+    setDownloadButtonVisible(true); // HIde the download button
+
   };
 
   const handleAboutButtonClick = (about) => {
     const abouts = Responses[about];
     setAboutResponse(abouts);
+    setDownloadButtonVisible(true); // HIde the download button
+
   };
 
 
   const displayText = (text) => {
     let message = new SpeechSynthesisUtterance(text);
     window.speechSynthesis.speak(message);
-    setDownloadButtonVisible(true); // HIde the download button
 
   };
 
@@ -125,7 +130,6 @@ export default function DOM() {
           displayOtherText(textDisplay);
 
         setResetButtonVisible(true);
-        setDownloadButtonVisible(true);
 
         
         setDisplayTextOnScreen(false);
