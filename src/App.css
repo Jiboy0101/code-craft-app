@@ -140,7 +140,7 @@ margin-bottom: 5px;
 .download-button2 button{
   position: relative;
   padding: 5px;
-  bottom: 55px;
+  bottom: 40px;
   color: rgb(85, 3, 3);
   background: linear-gradient(to bottom, #4e7c12, #b7e0a4); /* Gradient color */
   
@@ -229,7 +229,7 @@ margin-bottom: 5px;
 }
 
  input{
-  width :295px;
+  width :300px;
   height: 50px;
   align-items: center;
   justify-content: center;
@@ -328,7 +328,7 @@ margin-bottom: 5px;
 
 .find{
   position: relative;
-  margin-right: 5px;
+  margin-right: 10px;
   width: 30px;
   height: 30px;
 }
