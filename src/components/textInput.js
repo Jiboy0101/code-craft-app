@@ -31,10 +31,7 @@ function TextInputApp({ onSendText }) {
               style={{ color: "#ffc800" }} />
           </div>
           {showInput && (
-            <div className='suggestion'>
-            <button>Get ACE Form</button>
-            <button>Get ACE Form</button>
-            <button>Get ACE Form</button>
+
 
             <div className='bar'>
               <input
@@ -47,7 +44,7 @@ function TextInputApp({ onSendText }) {
                 icon={faPaperPlane}
                 size="xl" />
             </div>
-            </div>
+            
           )}
         </div>
       </div>

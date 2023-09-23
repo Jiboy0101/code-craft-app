@@ -28,7 +28,7 @@ function YearButtons({ onYearButtonClick }) {
         className={activeYear === 'irregular' ? 'active' : ''}
       >
         IRREGULAR
-      </button>
+      </button> 
       <button
         onClick={() => { onYearButtonClick('transferee'); speakText('Here is how to enroll as a transferee student', 'transferee'); }}
         className={activeYear === 'transferee' ? 'active' : ''}
