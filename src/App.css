@@ -205,15 +205,12 @@ margin-bottom: 5px;
 
 .questions {
   position: fixed;
-  margin-top: 50px;
+  margin-top: 15px;
   right: 0;
   transform: translateY(-50%);
   margin-right: 13px; /* Add margin to adjust the distance from the right edge */
 }
 
-.search-input{
-  position:relative;
-}
 
 .year-button button{
   background-color: darkgoldenrod;
@@ -222,12 +219,13 @@ margin-bottom: 5px;
 }
 
 .text-input{
-  position: absolute;
-  bottom: 20px; /* Adjust the distance from the bottom */
-  right: 20px; /* Adjust the distance from the right */
+  position: fixed;
+  bottom: 60px; /* Adjust the distance from the bottom */
+  right: 15px; /* Adjust the distance from the right */
   transform: translateY(-50%);
-  margin-right: 25px; /* Add margin to adjust the distance from the right edge */
+  margin-right: 5px; /* Add margin to adjust the distance from the right edge */
   z-index: 10;
+  float: right;
 }
 
  input{
@@ -241,8 +239,9 @@ margin-bottom: 5px;
 }
 
 .box{
-bottom: -10px;
-
+  position: relative;
+  justify-content: center;
+  top: 150px;
 }
 
 .bar{
@@ -253,6 +252,7 @@ bottom: -10px;
   background-color: #7E0001;
   display:inline-flex;
   align-items: center;
+  margin-top: 200px;
 
 }
 
@@ -327,27 +327,19 @@ bottom: -10px;
   margin-left: 85%;
 }
 
-.center-input {
-  position: fixed;
-  bottom: -30px;
-  right: 400px;
-  transform: translateX(-50%);
-  text-align: center;
-  padding: 50px 10px;
-  z-index: 11;
-}
 
 .suggestion{
 display: inline-block;
 flex-direction: row;
+position: relative;
+height: 90px;
 }
 
 .suggestion button{
   background: linear-gradient(to bottom, #c40606, #f1c500); /* Gradient color */
-  display:flex;
-  flex-direction: row;
   margin-left: 10px;
   padding: 10px;
-  width: 100%;
+  width: 100px;
+  height: 50px;
 
 }
