@@ -343,3 +343,8 @@ height: 90px;
   height: 50px;
 
 }
+
+.speak{
+  position: relative;
+  margin-top: 5px;
+}

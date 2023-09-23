@@ -375,11 +375,14 @@ const sendTextToCommands = (text) => {
       <div className='transcript'>
       <p className="transcript-text" autoCorrect="off" spellCheck="true">{transcript}</p>
       </div>
+      <div className='speak'>
       {speechActive ? (
         <FontAwesomeIcon className='stop' onClick={stopListening} icon={faMicrophone} beat size="sm" style={{"--fa-primary-color": "#ffae00", "--fa-secondary-color": "#ffffff",}} />
       ) : (
         <FontAwesomeIcon className='start' onClick={startListening} icon={faMicrophone} size="sm" style={{"--fa-primary-color": "#ffffff", "--fa-secondary-color": "#ffffff",}} />
       )}
+      </div>
+      
       <div className='text-input'>
       <TextInputApp onSendText={sendTextToCommands} />
 
