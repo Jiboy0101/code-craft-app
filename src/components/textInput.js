@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { faMagnifyingGlass, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faKeyboard, faArrowLeft, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import '../App.css';
 
@@ -16,39 +16,42 @@ function TextInputApp({ onSendText }) {
   };
 
   const handleSendText = () => {
-    onSendText(inputText); // Call the callback function with the input text
+    onSendText(inputText);
     setInputText('');
   };
 
   return (
     <div className='box'>
-        <div className='searchbar'>
-          <div className='back'>
-            <FontAwesomeIcon
-              onClick={toggleInput}
-              icon={faMagnifyingGlass}
-              size="xl"
-              style={{ color: "#ffc800" }} />
-          </div>
-          {showInput && (
-
-
-            <div className='bar'>
-              <input
-                type="text"
-                placeholder="Enter text..."
-                value={inputText}
-                onChange={handleInputChange} />
-              <FontAwesomeIcon
-                onClick={handleSendText}
-                icon={faPaperPlane}
-                size="xl" />
-            </div>
-            
-          )}
+      <div className='searchbar'>
+        <div className='back'>
+          <FontAwesomeIcon
+            className='find'
+            onClick={toggleInput}
+            icon={showInput ? faArrowLeft : faKeyboard}
+            size="xl"
+            style={{ color: "#ffc800" }}
+          />
         </div>
+        {showInput && (
+          <div className='bar'>
+            <input
+              type="text"
+              placeholder="Type a keyword..."
+              value={inputText}
+              onChange={handleInputChange}
+              className="placeholder-color" // Add this class for styling
+            />
+            <FontAwesomeIcon
+              className='plane'
+              onClick={handleSendText}
+              icon={faPaperPlane}
+              size="xl"
+              style={{ color: "#ffc800" }}
+            />
+          </div>
+        )}
       </div>
-      
+    </div>
   );
 }
 

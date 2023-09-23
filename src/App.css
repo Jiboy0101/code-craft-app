@@ -140,7 +140,7 @@ margin-bottom: 5px;
 .download-button2 button{
   position: relative;
   padding: 5px;
-  bottom: 10px;
+  bottom: 33px;
   color: rgb(85, 3, 3);
   background: linear-gradient(to bottom, #4e7c12, #b7e0a4); /* Gradient color */
   
@@ -229,13 +229,22 @@ margin-bottom: 5px;
 }
 
  input{
-  width :310px;
+  width :295px;
   height: 50px;
   align-items: center;
   justify-content: center;
   display: inline-block;
   position: relative;
+  background-color: #ffffffb1;
+  border-radius: 10px;
+  border-color:#f1c500;
+  color: white;
+  font-size: large;
   
+}
+
+.placeholder-color::placeholder{
+  color: white;
 }
 
 .box{
@@ -308,9 +317,20 @@ margin-bottom: 5px;
 }
 
 .plane{
-  width: 100px !important ;
-  height :auto! important;
+  width: 30px;
+  height :30px;
+  margin-left: 5px;
+  justify-content: center;
+  align-items: center;
 
+
+}
+
+.find{
+  position: relative;
+  margin-right: 5px;
+  width: 30px;
+  height: 30px;
 }
 
 .close{
