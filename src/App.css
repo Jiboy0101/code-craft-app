@@ -143,6 +143,7 @@ margin-bottom: 5px;
   bottom: 35px;
   color: rgb(85, 3, 3);
   background: linear-gradient(to bottom, #4e7c12, #b7e0a4); /* Gradient color */
+  z-index: 200;
   
 
 }
