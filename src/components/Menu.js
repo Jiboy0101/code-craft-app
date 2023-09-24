@@ -15,7 +15,7 @@ const customModalStyles = {
     border: 'none',
     padding: '0',
     width: '350px',
-    height: '500px',
+    height: '520px',
     position: 'relative',
   },
 };
@@ -27,8 +27,8 @@ const customMapModalStyles = {
   content: {
     border: 'none',
     padding: '0',
-    width: '470px',
-    height: '720px',
+    width: '350px',
+    height: '520px',
     position: 'relative',
   },
 };

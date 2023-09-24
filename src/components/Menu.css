@@ -106,7 +106,6 @@ button:hover .icon {
 
 .popup-title {
     margin-top: 10px;
-    margin-bottom: 10px;
     padding-top: 20px;
     color: #ffffff;
     font-size: 24px;
@@ -135,12 +134,15 @@ button:hover .icon {
 
 .image-container {
     position: relative;
-    height: 600px;
-    width: 430px;
+    height: 500px;
+    width: 300px;
     overflow: scroll;
-    cursor: grab;
+    cursor:grab;
     scrollbar-width: thin;
     scrollbar-color: transparent transparent;
+    margin-left: auto;
+    margin-right: auto;
+    bottom: 5px;
 
     &::-webkit-scrollbar {
         width: 0;

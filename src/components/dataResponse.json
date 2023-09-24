@@ -42,7 +42,7 @@
 
             "WHERE: (Ground Floor) Registrar Office, (2nd Floor) Office of the Student Affairs and Services (OSAS)\n\n",
 
-              "1. Submit transfer credentials for evaluation\n", 
+              "1. Submit transfer credentials for evaluation.\n", 
               "2. Upon approval of Office of evaluated credentials, proceed to Office of the Student Affairs and Services for schedule of Psychological Examination.\n",
               "3. Proceed to the Cashier Office for Payment of Psychological Exam.\n",
               "4. Take the Psychological Exam.",
@@ -63,7 +63,7 @@
 
       "1. Visit the PUP website. Apply for PUP College Entrance Test through the iApply, read the information provided and click the iApplyNow button.\n https://iapply.pup.edu.ph\n",
       "2. Click proceed to begin your on-line registration and select your intended campus and program, then submit the on-line application.\n",
-      "3. Upon successful submission of your on-line application, go to Display Voucher to print your Payment Voucher\n.",
+      "3. Upon successful submission of your on-line application, go to Display Voucher to print your Payment Voucher.\n",
       "4. Go to the nearest LandBank Branch to remit payment via online collection or pay directly to the Cashier Office of the Branch.\n",
       "5. Claim ePermit on-line. Allow five (5) working days after payment to LandBank before claiming your Test Permit online.\n",
       "6. Go to PUP Testing Center 30 minutes before your time schedule as printed in your PUPCET Test Permit.",
@@ -109,12 +109,12 @@
     ],
     "mission": [
       "Ensuring inclusive and equitable quality education and promoting lifelong learning opportunities through a re-engineered polytechnic university by committing to:\n\n",
-      "-provide democratized access to educational opportunities for the holistic development of individuals with global perspective\n",
-      "-offer industry-oriented curricula that produce highly-skilled professionals with managerial and technical capabilities and a strong sense of public service for nation building\n",
-      "-embed a culture of research and innovation\n",
-      "-continuously develop faculty and employees with the highest level of professionalism\n",
-      "-engage public and private institutions and other stakeholders for the attainment of social development goal\n",
-      "-establish a strong presence and impact in the international academic community\n"
+      "- provide democratized access to educational opportunities for the holistic development of individuals with global perspective\n",
+      "- offer industry-oriented curricula that produce highly-skilled professionals with managerial and technical capabilities and a strong sense of public service for nation building\n",
+      "- embed a culture of research and innovation\n",
+      "- continuously develop faculty and employees with the highest level of professionalism\n",
+      "- engage public and private institutions and other stakeholders for the attainment of social development goal\n",
+      "- establish a strong presence and impact in the international academic community\n"
     ],
     "vision": [
       "PUP: National Polytechnic University"

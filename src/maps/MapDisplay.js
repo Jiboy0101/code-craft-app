@@ -14,8 +14,8 @@ const customMapModalStyles = {
   content: {
     border: 'none',
     padding: '0',
-    width: '470px',
-    height: '720px',
+    width: '390px',
+    height: '600px',
     position: 'relative',
   },
 };
