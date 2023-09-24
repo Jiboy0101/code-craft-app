@@ -12,6 +12,7 @@ import Responses from './components/dataResponse.json';
 import YearButtons from './components/displayEnroll';
 import Program from './components/displayProgram';
 import About from './components/displayAbout';
+import MapDisplay from './maps/MapDisplay';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -38,7 +39,11 @@ export default function DOM() {
   const [aboutResponse, setAboutResponse] = useState('');
 
 
-  
+  const [mapPopupOpen, setMapPopupOpen] = useState(false);
+
+  const openMap = () => {
+    setMapPopupOpen(true);
+  };
 
   const generatePDF = () => {
     const docDefinition = {
@@ -115,6 +120,134 @@ export default function DOM() {
   
     setDisplayTextOnScreen(imageElement);
   };
+
+  const locations = [
+    {
+      name: 'gym',
+      directions: 'The gym is located in front of the accounting building. From the gate, just walk to the quadrangle and cross the bridge near the canteen and just follow the road to get to the gym.',
+    },
+    {
+      name: 'gymnasium',
+      directions: 'The gym is located in front of the accounting building. From the gate, just walk to the quadrangle and cross the bridge near the canteen and just follow the road to get to the gym.',
+    },
+    {
+      name: 'canteen',
+      directions: 'The canteen is located near the bridge and creek.',
+    },
+    {
+      name: 'kitchen lab',
+      directions: 'To reach the kitchen laboratory, just walk to the quadrangle and cross the bridge near the canteen and you will see the kitchen laboratory, which is the first room near the gymnasium.',
+    },
+    {
+      name: 'beverage lab',
+      directions: 'To reach the beverage laboratory, just walk to the quadrangle and cross the bridge near the canteen and you will see the beverage laboratory, which is the second or middle room near the gymnasium.',
+    },
+    {
+      name: 'tissue lab',
+      directions: 'The tissue laboratory is loacted near the creek, just walk to the quadrangle and cross the bridge near the canteen and you will see the tissue laboratory, which is the third room near the creek.',
+    },
+    {
+      name: 'grandstand',
+      directions: 'The granstand can already be seen from the gate, it is located in the campus field at the back of the accounting building.',
+    },
+    {
+      name: 'accounting office',
+      directions: 'The accounting office is on the ground floor of the administrative building. Enter the main building, and you will find it in the first room on your right.',
+    },
+    {
+      name: 'cashier office',
+      directions: 'The cashier office is on the ground floor of the administrative building. Enter the main building, and you will find it in the second room on your right.',
+    },
+    {
+      name: 'registrar office',
+      directions: 'The registrar office is on the ground floor of the administrative building. Enter the main building, and you will find it in the third room on your right.',
+    },
+    {
+      name: 'admission office',
+      directions: 'The admission office is on the ground floor of the administrative building. Enter the main building, and you will find it in the fourth room on your right.',
+    },
+    {
+      name: 'osas',
+      directions: 'The osas is on the second floor of the administrative building. Enter the main building and take the stairs, and you will find it in the first room on your right.',
+    },
+    {
+      name: 'directors office',
+      directions: 'The directors office is on the second floor of the administrative building. Enter the main building and take the stairs, and you will find it in the second room on your right.',
+    },
+    {
+      name: 'academic office',
+      directions: 'The academic office is on the second floor of the administrative building. Enter the main building and take the stairs, and you will find it in the third room on your right.',
+    },
+    {
+      name: 'ICT lab 1',
+      directions: 'The ICT laboratory 1 is located near the main gate on your left.',
+    },
+    {
+      name: 'ICT lab 2',
+      directions: 'The ICT laboratory 2 is located infront of the main gate.',
+    },
+    {
+      name: 'health building',
+      directions: 'To reach the health and science building, just cross the bridge near ICT laboratory 2 and you will see a orange colored building which is the health and science building.',
+    },
+    {
+      name: 'science building',
+      directions: 'To reach the health and science building, just cross the bridge near ICT laboratory 2 and you will see a orange colored building which is the health and science building.',
+    },
+    {
+      name: 'health and science building',
+      directions: 'To reach the health and science building, just cross the bridge near ICT laboratory 2 and you will see a orange colored building which is the health and science building.',
+    },
+    {
+      name: 'engineering building',
+      directions: 'To reach the engineering building, just cross the bridge near ICT laboratory 2 and you will see a long building with green roof near the health and science building. That will be the architecture, engineering and technology building.',
+    },
+    {
+      name: 'archi building',
+      directions: 'To reach the engineering building, just cross the bridge near ICT laboratory 2 and you will see a long building with green roof near the health and science building. That will be the architecture, engineering and technology building.',
+    },
+    {
+      name: 'architecture building',
+      directions: 'To reach the engineering building, just cross the bridge near ICT laboratory 2 and you will see a long building with green roof near the health and science building. That will be the architecture, engineering and technology building.',
+    },
+    {
+      name: 'architecture, engineering and technology building',
+      directions: 'To reach the engineering building, just cross the bridge near ICT laboratory 2 and you will see a long building with green roof near the health and science building. That will be the architecture, engineering and technology building.',
+    },
+    {
+      name: 'agri-business farm',
+      directions: 'The agri-business farm is located at the end of the engineering building, just cross the bridge near ICT laboratory 2 and walk a few meters to the end of the engineering building and you will see the farm. Tt can also be accessed by another way, just go past the nantes building and gymnasium to the end of the education building and you will see the farm.',
+    },
+    {
+      name: 'farm',
+      directions: 'The agri-business farm is located at the end of the engineering building, just cross the bridge near ICT laboratory 2 and walk a few meters to the end of the engineering building and you will see the farm. Tt can also be accessed by another way, just go past the nantes building and gymnasium to the end of the education building and you will see the farm.',
+    },
+    {
+      name: 'educ building',
+      directions: 'To reach the education building, cross the bridge near the canteen and walk through the hallway of the nantes building and at the end of the nantes building you will see an orange building. That will be the education building.',
+    },
+    {
+      name: 'education building',
+      directions: 'To reach the education building, cross the bridge near the canteen and walk through the hallway of the nantes building and at the end of the nantes building you will see an orange building. That will be the education building.',
+    },
+    {
+      name: 'accounting building',
+      directions: 'To reach the accounting building, cross the bridge near the canteen and you will see a nantes building at the back of the grandstand, that will be the accounting building.',
+    },
+  ];
+  
+  const locationCommands = locations.map((location) => ({
+    command: [`where is the ${location.name}`, `locate the ${location.name}`, `find the ${location.name}`, `room number ${location.name}`, `room ${location.name}`],
+    callback: () => {
+      resetTranscript();
+      displayText(`Showing map for the ${location.name}. The get to the ${location.name}, here are the directions to follow. All the directions that I will give will start from the main gate. ${location.directions}`);
+      openMap();
+
+      setResetButtonVisible(true);
+      setDownloadButtonVisible(false);
+    },
+  }));
+
   
 
   const commands = [
@@ -250,7 +383,8 @@ export default function DOM() {
         setSelectedProgram(false);
         setAboutResponse(false);
       },
-    }
+    },
+    ...locationCommands,
     
 
     
@@ -299,6 +433,7 @@ const sendTextToCommands = (text) => {
       <Menu/>
       </div>
 
+<MapDisplay  isOpen={mapPopupOpen} onClose={() => setMapPopupOpen(false)} />
       
       <div className='icon-button'>
         <div className="reset-button">

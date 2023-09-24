@@ -225,7 +225,6 @@ margin-bottom: 5px;
   transform: translateY(-50%);
   margin-right: 5px; /* Add margin to adjust the distance from the right edge */
   z-index: 10;
-  float: right;
 }
 
  input{
