@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, } from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import './App.css';
 import iska from './pictures/iska-logo.png';
@@ -15,9 +15,9 @@ import locationsData from './fileJSON/locations.json'; // Import the JSON data
 import pupMap from './pictures/map.jpg';
 
 
-function TextInputApp({ onSendText }) {
+function TextInputApp({ onSendText, microphoneHidden}) {
   const [showInput, setShowInput] = useState(false);
-  const [inputText, setInputText] = useState('');
+  const [inputText, setInputText] = useState(''); 
 
   const toggleInput = () => {
     setShowInput(!showInput);
@@ -34,7 +34,7 @@ function TextInputApp({ onSendText }) {
   
 
   return (
-    <div>
+    <div className='searchB'>
       <FontAwesomeIcon
       className="faMagnifyingGlass" // Add this class
         onClick={toggleInput}
@@ -57,6 +57,7 @@ function TextInputApp({ onSendText }) {
               size="xl"
               style={{ color: '#ffc800' }}
             />
+            
           </div>
         </div>
       )}
@@ -655,10 +656,10 @@ const sendTextToCommands = (text) => {
       ) : (
       <FontAwesomeIcon className='start' onClick={startListening} icon={faMicrophone} size="sm" style={{"--fa-primary-color": "#ffffff", "--fa-secondary-color": "#ffffff",}} />
       )
-      ) : null}
+      ) :null}
 
 <div className="text-input" onClick={handleTextInputClick}>
-  <TextInputApp  onSendText={handleTextInput}/> {/* Pass microphoneHidden as a prop */}
+  <TextInputApp  onSendText={handleTextInput} microphoneHidden={microphoneHidden}/> {/* Pass microphoneHidden as a prop */}
 </div>
       </footer>
      
