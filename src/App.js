@@ -3,19 +3,74 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 import './App.css';
 import iska from './pictures/iska-logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMicrophone, faHome, faCircleQuestion, faFileArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { faMicrophone, faHome, faCircleQuestion, faFileArrowDown, faKeyboard, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import Menu from './components/Menu';
-import TextInputApp from './components/textInput';
-import Responses from './components/dataResponse.json';
+import Responses from './fileJSON/dataResponse.json';
 import YearButtons from './components/displayEnroll';
 import Program from './components/displayProgram';
 import About from './components/displayAbout';
-import MapDisplay from './maps/MapDisplay';
 import locationsData from './fileJSON/locations.json'; // Import the JSON data
+import pupMap from './pictures/map.jpg';
+
+
+function TextInputApp({ onSendText }) {
+  const [showInput, setShowInput] = useState(false);
+  const [inputText, setInputText] = useState('');
+
+  const toggleInput = () => {
+    setShowInput(!showInput);
+  };
+
+  const handleInputChange = (e) => {
+    setInputText(e.target.value);
+  };
+
+  const handleSendText = () => {
+    onSendText(inputText); // Call the callback function with the input text
+    setInputText('');
+  };
+  
+
+  return (
+    <div>
+      <FontAwesomeIcon
+      className="faMagnifyingGlass" // Add this class
+        onClick={toggleInput}
+        icon={faKeyboard}
+            size="xl"
+            style={{ color: "#ffc800" }}
+      />
+      {showInput && (
+        <div className="center-input">
+          <input
+            type="text"
+            placeholder="Enter text..."
+            value={inputText}
+            onChange={handleInputChange}
+          />
+          <div className="center-icon">
+            <FontAwesomeIcon
+              onClick={handleSendText}
+              icon={faPaperPlane}
+              size="xl"
+              style={{ color: '#ffc800' }}
+            />
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+const defaultMapURL = pupMap;
+
+
 
 export default function DOM() {
   const [speechActive, setSpeechActive] = useState(false);
@@ -39,13 +94,178 @@ export default function DOM() {
   const [aboutButtons, setAboutVisible]= useState(false);
   const [aboutResponse, setAboutResponse] = useState('');
 
+  const [responseDisplayed, setResponseDisplayed] = useState(false);
 
-  const [mapPopupOpen, setMapPopupOpen] = useState(false);
+  const [microphoneHidden, setMicrophoneHidden] = useState(false);
+
+  
 
 
-  const openMap = () => {
-    setMapPopupOpen(true);
+  const displayImage = (imageURL, width, height) => {
+    let zoomLevel = 1;
+    let initialDistance = 0;
+    let initialScale = 1;
+    let lastScale = 1;
+    let panning = false;
+    let lastX = 0;
+    let lastY = 0; 
+    const imgElement = document.createElement('img');
+    imgElement.src = imageURL;
+    imgElement.alt = 'Locations Map';
+    imgElement.style.maxWidth = '100%';
+    if (width) {
+      imgElement.style.width = `${width}px`;
+    }
+    if (height) {
+      imgElement.style.height = `${height}px`;
+    }
+    const applyZoom = () => {
+      const scale = Math.max(0.1, Math.min(3, initialScale * zoomLevel));
+      imgElement.style.transform = `scale(${scale}) translate(${lastX}px, ${lastY}px)`;
+    };
+  
+    const handleZoom = (event) => {
+      if (event.touches && event.touches.length === 2) {
+        const touch1 = event.touches[0];
+        const touch2 = event.touches[1];
+        const distance = Math.hypot(touch1.clientX - touch2.clientX, touch1.clientY - touch2.clientY);
+  
+        const scaleFactor = distance / initialDistance;
+        zoomLevel = lastScale * scaleFactor;
+        applyZoom();
+      }
+    };
+  
+    const handlePanMove = (event) => {
+      if (panning && event.touches.length === 2) {
+        const currentX = (event.touches[0].clientX + event.touches[1].clientX) / 2 - imgElement.getBoundingClientRect().left;
+        const currentY = (event.touches[0].clientY + event.touches[1].clientY) / 2 - imgElement.getBoundingClientRect().top;
+        lastX += currentX - lastX;
+        lastY += currentY - lastY;
+        applyZoom();
+      }
+    };
+  
+    const handlePanEnd = () => {
+      panning = false;
+      lastScale = zoomLevel;
+    };
+  
+    imgElement.addEventListener('gesturestart', (event) => {
+      event.preventDefault();
+    });
+  
+    imgElement.addEventListener('touchstart', (event) => {
+      if (event.touches.length === 2) {
+        initialDistance = Math.hypot(
+          event.touches[0].clientX - event.touches[1].clientX,
+          event.touches[0].clientY - event.touches[1].clientY
+        );
+        initialScale = lastScale;
+      }
+    });
+  
+    imgElement.addEventListener('touchmove', (event) => {
+      if (event.touches.length === 2) {
+        handleZoom(event);
+      } else if (panning) {
+        handlePanMove(event);
+      }
+    });
+  
+    imgElement.addEventListener('touchend', handlePanEnd);
+    imgElement.addEventListener('touchcancel', handlePanEnd);
+  
+    const textDisplayContainer = document.querySelector('.textOther');
+    while (textDisplayContainer.firstChild) {
+      textDisplayContainer.removeChild(textDisplayContainer.firstChild);
+    }
+    textDisplayContainer.appendChild(imgElement);
   };
+
+  const displayDefaultMap = (defaultMapURL, width, height) => {
+    let zoomLevel = 1;
+    let initialDistance = 0;
+    let initialScale = 1;
+    let lastScale = 1;
+    let panning = false;
+    let lastX = 0;
+    let lastY = 0; 
+    const imgElement = document.createElement('img');
+    imgElement.src = defaultMapURL;
+    imgElement.alt = 'Default Map';
+    imgElement.style.maxWidth = '100%';
+    if (width) {
+      imgElement.style.width = `${width}px`;
+    }
+    if (height) {
+      imgElement.style.height = `${height}px`;
+    }
+    const applyZoom = () => {
+      const scale = Math.max(0.1, Math.min(3, initialScale * zoomLevel));
+      imgElement.style.transform = `scale(${scale}) translate(${lastX}px, ${lastY}px)`;
+    };
+  
+    const handleZoom = (event) => {
+      if (event.touches && event.touches.length === 2) {
+        const touch1 = event.touches[0];
+        const touch2 = event.touches[1];
+        const distance = Math.hypot(touch1.clientX - touch2.clientX, touch1.clientY - touch2.clientY);
+  
+        const scaleFactor = distance / initialDistance;
+        zoomLevel = lastScale * scaleFactor;
+        applyZoom();
+      }
+    };
+  
+    const handlePanMove = (event) => {
+      if (panning && event.touches.length === 2) {
+        const currentX = (event.touches[0].clientX + event.touches[1].clientX) / 2 - imgElement.getBoundingClientRect().left;
+        const currentY = (event.touches[0].clientY + event.touches[1].clientY) / 2 - imgElement.getBoundingClientRect().top;
+        lastX += currentX - lastX;
+        lastY += currentY - lastY;
+        applyZoom();
+      }
+    };
+  
+    const handlePanEnd = () => {
+      panning = false;
+      lastScale = zoomLevel;
+    };
+  
+    imgElement.addEventListener('gesturestart', (event) => {
+      event.preventDefault();
+    });
+  
+    imgElement.addEventListener('touchstart', (event) => {
+      if (event.touches.length === 2) {
+        initialDistance = Math.hypot(
+          event.touches[0].clientX - event.touches[1].clientX,
+          event.touches[0].clientY - event.touches[1].clientY
+        );
+        initialScale = lastScale;
+      }
+    });
+  
+    imgElement.addEventListener('touchmove', (event) => {
+      if (event.touches.length === 2) {
+        handleZoom(event);
+      } else if (panning) {
+        handlePanMove(event);
+      }
+    });
+  
+    imgElement.addEventListener('touchend', handlePanEnd);
+    imgElement.addEventListener('touchcancel', handlePanEnd);
+  
+    const textDisplayContainer = document.querySelector('.textOther');
+    while (textDisplayContainer.firstChild) {
+      textDisplayContainer.removeChild(textDisplayContainer.firstChild);
+    }
+    textDisplayContainer.appendChild(imgElement);
+  };
+
+
 
   const generatePDF = () => {
     const docDefinition = {
@@ -66,6 +286,10 @@ export default function DOM() {
   };
 
   const locations = locationsData;
+
+  const handleTextInput = (text) => {
+    sendTextToCommands(text);
+  };
 
   const handleYearButtonClick = (year) => {
     const response = Responses[year];
@@ -106,38 +330,47 @@ export default function DOM() {
     setProgramsButton(false);
     setAboutResponse(false);
     setAboutVisible(false);
+    setResponseDisplayed(false);
+
+    const textDisplayContainer = document.querySelector('.textOther');
+    while (textDisplayContainer.firstChild) {
+      textDisplayContainer.removeChild(textDisplayContainer.firstChild);
+    }
   };
 
   const toggleQuestions = () => {
     setShowQuestions(!showQuestions); // Toggle the visibility of question list
   };
 
-  const displayImage = (imageFilename) => {
-    const imageElement = (
-      <img
-      src={iska}
-      alt="ISKA Logo"
-        style={{ maxWidth: '100%', height: 'auto' }}
-      />
-    );
-  
-    setDisplayTextOnScreen(imageElement);
-  };
 
   
   const locationCommands = locations.map((location) => ({
-    command: [`where is the ${location.name}`, `where is ${location.name}`, `locate ${location.name}`, `locate the ${location.name}`, `find the ${location.name}`,  `find ${location.name}`, `room number ${location.name}`, `find room number ${location.name}`,`find the room number ${location.name}`, `where is room number ${location.name}`, `where is the room number ${location.name}`, `locate the room number ${location.name}`, `locate room number ${location.name}`, `where is the room ${location.name}`, `where is room ${location.name}`, `room ${location.name}`],
+    command: [`where is the ${location.name}`, `where is ${location.name}`,  `where's the ${location.name}`, `locate ${location.name}`, `locate the ${location.name}`, `find the ${location.name}`,  `find ${location.name}`, `room number ${location.name}`, `find room number ${location.name}`,`find the room number ${location.name}`, `where is room number ${location.name}`, `where is the room number ${location.name}`, `locate the room number ${location.name}`, `locate room number ${location.name}`, `where is the room ${location.name}`, `where is room ${location.name}`, `room ${location.name}`],
     callback: () => {
       resetTranscript();
       displayText(`Showing map for the ${location.name}. The get to the ${location.name}, here are the directions to follow. All the directions that I will give will start from the main gate. ${location.directions}`);
-      openMap();
-
+      displayImage(pupMap, 320, 470);
+      setResetButtonVisible(true);
+      setDownloadButtonVisible(false);
     },
   }));
 
   
 
   const commands = [
+    {
+      command: ['* map *', 'map *', '* map', 'map', 'university map', 'map of the university', 'show university map'],
+      callback: () => {
+        resetTranscript();
+        displayDefaultMap(defaultMapURL, 320, 470);
+        displayText('These is the map of P U P lopez quezon branch')
+        setResetButtonVisible(true);
+        setDownloadButtonVisible(false);
+
+        setResponseDisplayed(true); // Set responseDisplayed to true
+
+      },
+    },
     {
       command: ['* enroll *', '* enroll', 'enroll *', 'enroll', 'enrollment', '* enrollment', 'enrollment *', '* enrollment *'],
       callback: () => {
@@ -161,6 +394,9 @@ export default function DOM() {
         setAboutVisible(false);
 
         setSelectedYearResponse(false);
+
+        setResponseDisplayed(true); // Set responseDisplayed to true
+
 
 
         
@@ -200,6 +436,7 @@ export default function DOM() {
         setSelectedYearResponse(false);
         setYearButtonVisible(false);
 
+        setResponseDisplayed(true); // Set responseDisplayed to true
 
       },
     },
@@ -226,6 +463,9 @@ export default function DOM() {
 
         setAboutResponse(false);
 
+        setResponseDisplayed(true); // Set responseDisplayed to true
+
+
         
       },
     },
@@ -251,7 +491,8 @@ export default function DOM() {
         setAboutResponse(false);
 
         setSelectedProgram(false);
-       
+
+        setResponseDisplayed(true); // Set responseDisplayed to true       
         
       },
     },
@@ -272,9 +513,6 @@ export default function DOM() {
       },
     },
     ...locationCommands,
-    
-
-    
   
 ];
 
@@ -313,6 +551,15 @@ const sendTextToCommands = (text) => {
     setSpeechActive(false);
   };
 
+  const handleTextInputClick = (e) => {
+    const targetClassName = e.target.classList;
+  
+    // Check if the magnifying glass icon was clicked
+    if (targetClassName.contains('faMagnifyingGlass')) {
+      setMicrophoneHidden(!microphoneHidden); // Toggle the value of microphoneHidden
+    }
+  };
+
 
   return (
     <div className="dom-page">
@@ -320,7 +567,6 @@ const sendTextToCommands = (text) => {
       <Menu/>
       </div>
 
-<MapDisplay  isOpen={mapPopupOpen} onClose={() => setMapPopupOpen(false)} />
       
       <div className='icon-button'>
         <div className="reset-button">
@@ -347,7 +593,9 @@ const sendTextToCommands = (text) => {
     <header className='head'>
     <img src={iska} alt="PUP Logo" className="logo" />
       <h1 className='app-name'>ISKA</h1>
-      <p className='desc'>Hi! I'm ISKA, PUP Virtual Assistant, how can I help you?</p>
+      <p className={responseDisplayed ? 'desc-hidden' : 'desc'}>
+  Hi! I'm ISKA, PUP Virtual Assistant, how can I help you?
+</p>
       <div className='textOther'>
       <div className='otherText'>{otherText}</div>
 
@@ -397,22 +645,21 @@ const sendTextToCommands = (text) => {
 
 
       <footer className="microphone">
-
+      <Menu/>
       <div className='transcript'>
       <p className="transcript-text" autoCorrect="off" spellCheck="true">{transcript}</p>
       </div>
-      <div className='speak'>
-      {speechActive ? (
-        <FontAwesomeIcon className='stop' onClick={stopListening} icon={faMicrophone} beat size="sm" style={{"--fa-primary-color": "#ffae00", "--fa-secondary-color": "#ffffff",}} />
+      {!microphoneHidden ? (
+      speechActive ? (
+      <FontAwesomeIcon className='stop' onClick={stopListening} icon={faMicrophone} beat size="sm" style={{"--fa-primary-color": "#ffae00", "--fa-secondary-color": "#ffffff",}} />
       ) : (
-        <FontAwesomeIcon className='start' onClick={startListening} icon={faMicrophone} size="sm" style={{"--fa-primary-color": "#ffffff", "--fa-secondary-color": "#ffffff",}} />
-      )}
-      </div>
-      
-      <div className='text-input'>
-      <TextInputApp onSendText={sendTextToCommands} />
+      <FontAwesomeIcon className='start' onClick={startListening} icon={faMicrophone} size="sm" style={{"--fa-primary-color": "#ffffff", "--fa-secondary-color": "#ffffff",}} />
+      )
+      ) : null}
 
-      </div>
+<div className="text-input" onClick={handleTextInputClick}>
+  <TextInputApp  onSendText={handleTextInput}/> {/* Pass microphoneHidden as a prop */}
+</div>
       </footer>
      
     </div>

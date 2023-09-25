@@ -25,7 +25,7 @@
     height:fit-content;
     width: 350px;
     overflow: scroll;
-    cursor: grab;
+    cursor:grabbing;
     scrollbar-width: thin;
     scrollbar-color: transparent transparent;
 

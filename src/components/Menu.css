@@ -119,6 +119,7 @@ button:hover .icon {
     padding: 20px;
     height: 550px;
     width: 290px;
+    justify-content: justify ;
 
     scrollbar-width: thin;
     scrollbar-color: transparent transparent;
@@ -131,6 +132,7 @@ button:hover .icon {
         background-color: transparent;
     }
 }
+
 
 .image-container {
     position: relative;

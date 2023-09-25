@@ -110,7 +110,7 @@ margin-bottom: 5px;
 
 .container{
   max-width: 800px;
-  height: 510px;
+  height: 500px;
   margin-left: auto;
   margin-right: auto;
   overflow: auto;
@@ -150,6 +150,16 @@ margin-bottom: 5px;
 }
 .desc{
   color: rgb(236, 166, 4);
+  display: block;
+  
+}
+
+.desc-hidden {
+  display: none;
+}
+
+.otherText{
+  padding: 30px;
 }
 
 .textOther{
@@ -229,13 +239,26 @@ margin-bottom: 5px;
   z-index: 1;
 }
 
+.center-input{
+  position: f;
+  bottom: -30px;
+  transform: translateX(-50%);
+  text-align: center;
+  justify-content: center;
+
+}
+
+.center-icon {
+  margin-top: -20px;
+  margin-left: 230px;
+}
+
+
  input{
   width :300px;
   height: 50px;
   align-items: center;
   justify-content: center;
-  display: inline-block;
-  position: relative;
   background-color: #ffffffb1;
   border-radius: 10px;
   border-color:#f1c500;
@@ -251,7 +274,7 @@ margin-bottom: 5px;
 .box{
   position: relative;
   justify-content: center;
-  top: 150px;
+  top: 160px;
 }
 
 .bar{
@@ -264,7 +287,7 @@ margin-bottom: 5px;
   align-items: center;
   margin-top: 10px;
   width: 100%;
-  height: 165px;
+  height: 135px;
   z-index: 5;
 
 }
@@ -367,4 +390,5 @@ height: 90px;
   height: 50px;
 
 }
+
 
