@@ -1,15 +1,19 @@
 {
   "files": {
-    "main.css": "/code-craft-app/static/css/main.4b0f7e7d.css",
-    "main.js": "/code-craft-app/static/js/main.de1075c0.js",
+    "main.css": "/code-craft-app/static/css/main.9afac0a6.css",
+    "main.js": "/code-craft-app/static/js/main.1297de57.js",
     "static/media/map.jpg": "/code-craft-app/static/media/map.3a569680ea5bdf9a2322.jpg",
     "static/media/iska-logo.png": "/code-craft-app/static/media/iska-logo.0b23486e2144e26ea815.png",
+    "static/media/krona-one-latin-400-normal.woff": "/code-craft-app/static/media/krona-one-latin-400-normal.fd47e8be9d5868e2354f.woff",
+    "static/media/krona-one-latin-400-normal.woff2": "/code-craft-app/static/media/krona-one-latin-400-normal.2f0d0d32161acbb479ff.woff2",
+    "static/media/krona-one-latin-ext-400-normal.woff": "/code-craft-app/static/media/krona-one-latin-ext-400-normal.fb9cd5f06d66cdcda94f.woff",
+    "static/media/krona-one-latin-ext-400-normal.woff2": "/code-craft-app/static/media/krona-one-latin-ext-400-normal.01120cafa274a6b13dba.woff2",
     "index.html": "/code-craft-app/index.html",
-    "main.4b0f7e7d.css.map": "/code-craft-app/static/css/main.4b0f7e7d.css.map",
-    "main.de1075c0.js.map": "/code-craft-app/static/js/main.de1075c0.js.map"
+    "main.9afac0a6.css.map": "/code-craft-app/static/css/main.9afac0a6.css.map",
+    "main.1297de57.js.map": "/code-craft-app/static/js/main.1297de57.js.map"
   },
   "entrypoints": [
-    "static/css/main.4b0f7e7d.css",
-    "static/js/main.de1075c0.js"
+    "static/css/main.9afac0a6.css",
+    "static/js/main.1297de57.js"
   ]
 }
