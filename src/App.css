@@ -86,7 +86,7 @@ button {
   font-size: 40px;
 }
 
-span{
+.app-name span{
   color: rgb(236, 166, 4);
   font-size: 40px;
   font-family: 'Krona One';

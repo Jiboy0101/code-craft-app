@@ -77,6 +77,8 @@ button:hover .icon {
     justify-content: center;
     gap: 20px;
     margin: 20px;
+    font-size: 35px;
+
 }
 
 .text {
@@ -88,6 +90,7 @@ button:hover .icon {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    
 }
 
 .popup-modal {
