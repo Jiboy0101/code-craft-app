@@ -114,7 +114,7 @@ margin-bottom: 5px;
   margin-right: auto;
   overflow: auto;
   background-color: transparent;
-  scrollbar-width: thin;
+  scrollbar-width:none;
   scrollbar-color: transparent transparent;
 
   &::-webkit-scrollbar {
@@ -144,16 +144,18 @@ margin-bottom: 5px;
 }
 
 .download-button{
-  position: sticky;
   z-index: 50;
+  background-color: #7E0001;
 }
 .download-button2 button{
-  position: relative;
-  padding: 5px;
-  bottom: 40px;
-  color: rgb(85, 3, 3);
-  background: linear-gradient(to bottom, #4e7c12, #b7e0a4); /* Gradient color */
+  position: fixed;
+  top: 10%;
+  width: fit-content;
+  background: linear-gradient(to bottom, #c40606, #f1c500); /* Gradient color */
   z-index: 150;
+  transform: translateY(-50%);
+  right: 10px;
+
   
 
 }
@@ -248,21 +250,26 @@ font-size: 20px;
 }
 .center-input {
   position: fixed;
-  bottom: 10px;
+  bottom: 5px;
   transform: translateX(-106%);
   padding-bottom:10px;
   display: inline-flex;
   flex-direction: row;
   align-items: stretch;
   z-index: 200;
+  background-color: #7E0001;
+  left: 25px;
+  padding-top: 10px;
 
 }
 
 .keyBoard{
   position: relative;
-  width: 90px;
   bottom: 10px;
   z-index: 200;
+  transform: translateY(-50%);
+  left: 0;
+
 }
 
 .send{
@@ -277,11 +284,12 @@ font-size: 20px;
   top: 10px;
   position: relative;
   margin-right: 10px;
+  
 }
 
 
  input{
-  width :260px;
+  width :285px;
   height: 50px;
   background-color: #ffffffdd;
   border-radius: 10px;

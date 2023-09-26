@@ -3,6 +3,7 @@ import './displayDesign.css';
 
 function About({ onAboutClick }) {
   const [activeTab, setActiveTab] = useState(null);
+  
 
   const speakText = (text, tab) => {
     if ('speechSynthesis' in window) {

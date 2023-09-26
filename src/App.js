@@ -1,49 +1,72 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+
 import './App.css';
+
 import iska from './pictures/iska-logo.png';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMicrophone, faHome, faCircleQuestion, faFileArrowDown, faKeyboard, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+
+
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
-import Menu from './components/Menu';
-import Responses from './fileJSON/dataResponse.json';
-import YearButtons from './components/displayEnroll';
-import Program from './components/displayProgram';
-import About from './components/displayAbout';
-import locationsData from './fileJSON/locations.json'; // Import the JSON data
+
+// Get and call the Menu.js 
+import Menu from './Menu/Menu'; 
+
+// Get the response to a command
+import Responses from './fileJSON/dataResponse.json'; 
+import locationsData from './fileJSON/locations.json'; 
+
+// calling the button when commanding 
+import YearButtons from './display/displayEnroll';
+import Program from './display/displayProgram';
+import About from './display/displayAbout';
+
+// insert the Map of PUP Lopez
 import pupMap from './pictures/map.jpg';
+
+// Install a font for ISKA name
 import "@fontsource/krona-one"; 
 
+// Function for the searchInput 
 function TextInputApp({ onSendText, microphoneHidden, toggleMicrophone, setMicrophoneHidden }) {
   const [showInput, setShowInput] = useState(false);
   const [inputText, setInputText] = useState('');
 
+  // Handle of showing the searchInput
   const handleShowInput = () => {
     setShowInput(true);
     setMicrophoneHidden(true); // Hide the microphone button when input is shown
   };
 
+  // Handle the close button 
   const handleCloseButtonClick = () => {
     setShowInput(false);
     setMicrophoneHidden(false); // Show the microphone button
   };
 
+  // handle the input change in searchInput
   const handleInputChange = (e) => {
     setInputText(e.target.value);
   };
 
+  // Handle the text when sending trigger
   const handleSendText = () => {
     onSendText(inputText);
     setInputText('');
   };
 
+
+  // Returning and displaying the searchInput 
   return (
     <div>
       {!showInput && ( // Conditionally render the faKeyboard icon when showInput is false
         <FontAwesomeIcon
           className="keyBoard"
-          onClick={handleShowInput}
+          onClick={handleShowInput} // Showing searchInput
           icon={faKeyboard}
           size="2xl"
           style={{ color: '#ffc800' }}
@@ -53,7 +76,7 @@ function TextInputApp({ onSendText, microphoneHidden, toggleMicrophone, setMicro
         <div className="center-input">
           <div className='closed-back'>
             <FontAwesomeIcon
-              onClick={handleCloseButtonClick}
+              onClick={handleCloseButtonClick} // Close button or back to show microphone
               icon={faMicrophone}
               size="2xl"
               style={{ color: '#ffc800' }}
@@ -63,12 +86,12 @@ function TextInputApp({ onSendText, microphoneHidden, toggleMicrophone, setMicro
             type="text"
             placeholder="Type a keyword..."
             value={inputText}
-            onChange={handleInputChange}
+            onChange={handleInputChange} // input when change and typing in searchInput
           />
           <div className="center-icon">
             <div className='send'>
               <FontAwesomeIcon
-                onClick={handleSendText}
+                onClick={handleSendText} // Sending the input of user
                 icon={faPaperPlane}
                 size="2xl"
                 style={{ color: '#ffc800' }}
@@ -77,7 +100,7 @@ function TextInputApp({ onSendText, microphoneHidden, toggleMicrophone, setMicro
           </div>
         </div>
       )}
-      {microphoneHidden && !showInput && (
+      {microphoneHidden && !showInput && ( // hide the microphone and show the searchInput
         <FontAwesomeIcon
           onClick={() => toggleMicrophone(false)}
           icon={faMicrophone}
@@ -92,58 +115,63 @@ function TextInputApp({ onSendText, microphoneHidden, toggleMicrophone, setMicro
   );
 }
 
-
+// Set the virtual file system for pdfMake
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
+// Set the default map URL to pupMap
 const defaultMapURL = pupMap;
 
 
 
 export default function DOM() {
-  const [speechActive, setSpeechActive] = useState(false);
+ // State for controlling speech activation
+const [speechActive, setSpeechActive] = useState(false);
 
-  const [displayTextOnScreen, setDisplayTextOnScreen] = useState('');
+// State for displaying text on the screen
+const [displayTextOnScreen, setDisplayTextOnScreen] = useState('');
 
-  const [resetButtonVisible, setResetButtonVisible] = useState(false);
+// State for controlling the visibility of the reset button
+const [resetButtonVisible, setResetButtonVisible] = useState(false);
 
-  const [downloadButtonVisible, setDownloadButtonVisible] = useState(false);
+// State for controlling the visibility of the download button
+const [downloadButtonVisible, setDownloadButtonVisible] = useState(false);
 
-  const [showQuestions, setShowQuestions] = useState(false); // State to control question list visibility
+// State to control the visibility of the question list
+const [showQuestions, setShowQuestions] = useState(false);
 
-  const [yearbutton, setYearButtonVisible] = useState(false);
-  const [selectedYearResponse, setSelectedYearResponse] = useState('');
+// State for controlling the visibility of the year button
+const [yearbutton, setYearButtonVisible] = useState(false);
 
-  const [otherText, displayOtherText] = useState('');
+// State for holding the selected year response
+const [selectedYearResponse, setSelectedYearResponse] = useState('');
 
-  const [programsButton, setProgramsButton] = useState(false);
-  const [programsResponse, setSelectedProgram] = useState('');
+// State for displaying other text
+const [otherText, displayOtherText] = useState('');
 
-  const [aboutButtons, setAboutVisible]= useState(false);
-  const [aboutResponse, setAboutResponse] = useState('');
+// State for controlling the visibility of programs button
+const [programsButton, setProgramsButton] = useState(false);
 
-  const [responseDisplayed, setResponseDisplayed] = useState(false);
+// State for holding the selected program response
+const [programsResponse, setSelectedProgram] = useState('');
 
-  const [microphoneHidden, setMicrophoneHidden] = useState(false);
+// State for controlling the visibility of about buttons
+const [aboutButtons, setAboutVisible]= useState(false);
 
-  const [errorMessage, setErrorMessage] = useState('');
+// State for holding the about response
+const [aboutResponse, setAboutResponse] = useState('');
 
-  const [commandRecognized, setCommandRecognized] = useState(false);
+// State for tracking if a response is displayed
+const [responseDisplayed, setResponseDisplayed] = useState(false);
 
+// State for controlling the visibility of the microphone
+const [microphoneHidden, setMicrophoneHidden] = useState(false);
 
-  useEffect(() => {
-    if (errorMessage) {
-      speakErrorMessage(errorMessage);
-    }
-  }, [errorMessage]);
-  
-  const speakErrorMessage = (error) => {
-    const errorMessageUtterance = new SpeechSynthesisUtterance(error);
-    window.speechSynthesis.speak(errorMessageUtterance);
-  };
-
-  
+// State for tracking if a command is recognized
+const [commandRecognized, setCommandRecognized] = useState(false);
 
 
+
+  // desgning and make to zoom and pich  the image map of PUP Lopez
   const displayImage = (imageURL, width, height) => {
     let zoomLevel = 1;
     let initialDistance = 0;
@@ -166,7 +194,8 @@ export default function DOM() {
       const scale = Math.max(0.1, Math.min(3, initialScale * zoomLevel));
       imgElement.style.transform = `scale(${scale}) translate(${lastX}px, ${lastY}px)`;
     };
-  
+
+    // Set the zoom of the image  
     const handleZoom = (event) => {
       if (event.touches && event.touches.length === 2) {
         const touch1 = event.touches[0];
@@ -178,7 +207,7 @@ export default function DOM() {
         applyZoom();
       }
     };
-  
+    // Set the pan move of the image
     const handlePanMove = (event) => {
       if (panning && event.touches.length === 2) {
         const currentX = (event.touches[0].clientX + event.touches[1].clientX) / 2 - imgElement.getBoundingClientRect().left;
@@ -226,6 +255,7 @@ export default function DOM() {
     textDisplayContainer.appendChild(imgElement);
   };
 
+  // Set and displaying the Map in the screen
   const displayDefaultMap = (defaultMapURL, width, height) => {
     let zoomLevel = 1;
     let initialDistance = 0;
@@ -308,7 +338,7 @@ export default function DOM() {
   };
 
 
-
+  // function for generating the pdf file when download button is click
   const generatePDF = () => {
     const docDefinition = {
       content: [
@@ -327,26 +357,33 @@ export default function DOM() {
     pdfMake.createPdf(docDefinition).download('iska-web-app.pdf');
   };
 
+  // calling the response data from json file 
   const locations = locationsData;
+
 
   const handleTextInput = (text) => {
     sendTextToCommands(text);
   };
 
-  const handleYearButtonClick = (year) => {
-    const response = Responses[year];
+// Function to handle a year button click event
+const handleYearButtonClick = (year) => {
+  const response = Responses[year];  // Retrieve the response associated with the selected year
+
     setSelectedYearResponse(response);
     setDownloadButtonVisible(true); // HIde the download button
 
   };
 
+  // Function to handle a program button click event
   const handleProgramButtonClick = (programs) => {
-    const program = Responses[programs];
+    const program = Responses[programs];  // Retrieve the response associated with the selected year
+
     setSelectedProgram(program);
     setDownloadButtonVisible(true); // HIde the download button
 
   };
 
+  // Function to handle a about button click event
   const handleAboutButtonClick = (about) => {
     const abouts = Responses[about];
     setAboutResponse(abouts);
@@ -354,13 +391,14 @@ export default function DOM() {
 
   };
 
-
+  // Function to display the text and speak it
   const displayText = (text) => {
     let message = new SpeechSynthesisUtterance(text);
     window.speechSynthesis.speak(message);
 
   };
 
+  // Function for reset button event
   const resetDisplay = () => {
     setDisplayTextOnScreen('');
     setResetButtonVisible(false); // Hide the reset button
@@ -380,14 +418,15 @@ export default function DOM() {
     }
   };
 
+    // Function for toggleQuestions button event
   const toggleQuestions = () => {
     setShowQuestions(!showQuestions); // Toggle the visibility of question list
   };
 
 
-  
+    // Function for command location in map event
   const locationCommands = locations.map((location) => ({
-    command: [`where is the ${location.name}`, `where is ${location.name}`,  `where's the ${location.name}`, `locate ${location.name}`, `locate the ${location.name}`, `find the ${location.name}`,  `find ${location.name}`, `room number ${location.name}`, `find room number ${location.name}`,`find the room number ${location.name}`, `where is room number ${location.name}`, `where is the room number ${location.name}`, `locate the room number ${location.name}`, `locate room number ${location.name}`, `where is the room ${location.name}`, `where is room ${location.name}`, `room ${location.name}`],
+    command: [`* ${location.name}`],
     callback: () => {
       resetTranscript();
       displayText(`Showing map for the ${location.name}. The get to the ${location.name}, here are the directions to follow. All the directions that I will give will start from the main gate. ${location.directions}`);
@@ -398,14 +437,14 @@ export default function DOM() {
   }));
 
   
-
+  // All the command user can ask for ISKA 
   const commands = [
     {
       command: ['hi', 'hello'],
       callback:() => {
         resetTranscript();
         displayText("Hello, I'm iska, how can I help you?")
-        const textDisplay = `Hi, I'm ISKA, how can I help you?`;
+        const textDisplay = `Hello, I'm ISKA, how can I help you?`;
         displayOtherText(textDisplay);
         setResetButtonVisible(true);
         setDownloadButtonVisible(false);
@@ -420,6 +459,7 @@ export default function DOM() {
         setResponseDisplayed(true);
         
         setResponseDisplayed(true);
+        setCommandRecognized(true);
 
       }
 
@@ -445,6 +485,9 @@ export default function DOM() {
         setResponseDisplayed(true);
         
         setResponseDisplayed(true);
+
+        setCommandRecognized(true);
+
 
       }
 
@@ -473,9 +516,6 @@ export default function DOM() {
         setResponseDisplayed(true);
         
         setResponseDisplayed(true);
-
-        
-
         
       },
     },
@@ -484,9 +524,9 @@ export default function DOM() {
       callback: () => {
         resetTranscript(); // Reset the transcript when a command is executed
         setYearButtonVisible(true);
-          displayText('Please select below which level do you want to enroll')
+          displayText('Please choose from the options below to indicate the enrollment category you prefer')
           const textDisplay = `
-          Please select below which level do you want to enroll.
+          Please choose from the options below to indicate the enrollment category you prefer.
           `;
           displayOtherText(textDisplay);
 
@@ -504,6 +544,9 @@ export default function DOM() {
         setSelectedYearResponse(false);
 
         setResponseDisplayed(true); // Set responseDisplayed to true
+        
+        setCommandRecognized(true);
+
 
 
 
@@ -553,6 +596,9 @@ export default function DOM() {
 
         displayDefaultMap(false);
 
+        setCommandRecognized(true);
+
+
         
     const textDisplayContainer = document.querySelector('.textOther');
     while (textDisplayContainer.firstChild) {
@@ -565,9 +611,9 @@ export default function DOM() {
       command: ['About pup', '* about *', '* about', 'about *', '* about pup *', 'about pup *', '* about pup', 'about'],
       callback: () => {
         resetTranscript(); // Reset the transcript when a command is executed
-        displayText('Here is all you want to know about P U P Lopez');
+        displayText('Here are some information about P U P Lopez. Please select below which one do you want to see.');
         const textDisplay = `
-        Here is all you want to know about P U P Lopez.
+        Here are some information about P U P Lopez. Please select below which one do you want to see.
         `;
         displayOtherText(textDisplay);
         setResetButtonVisible(true); // Show the reset button after a command is executed
@@ -588,6 +634,7 @@ export default function DOM() {
 
         displayDefaultMap(false);
 
+        setCommandRecognized(true);
         
     const textDisplayContainer = document.querySelector('.textOther');
     while (textDisplayContainer.firstChild) {
@@ -599,13 +646,13 @@ export default function DOM() {
     },
       
     {
-      command: ['* programs', 'programs *', '* program', 'program *', 'program', 'programs', 'course *', '* course ', '* course *', '* programs *'],
+      command: ['* programs', 'programs *', '* program', 'program *', 'program', 'programs', 'course *', '* course ', '* course *', 'course', 'courses', 'courses *', '* courses', '* programs *'],
       callback: () => {
         resetTranscript(); // Reset the transcript when a command is executed
         setProgramsButton(true);
-        displayText('The P U P Lopez offers a lots of programs its either Diploma or Bachelors Degree.');
+        displayText('The P U P Lopez offers a lots of programs its either Diploma or Bachelors Degree. Please select below which category do you want to see.');
         const textDisplay = `
-        The PUP Lopez offers a lots of programs its either Diploma or Bachelors Degree.
+        The P U P Lopez offers a lots of programs its either Diploma or Bachelors Degree. Please select below which category do you want to see.
         `;
         displayOtherText(textDisplay);
         setResetButtonVisible(true); // Show the reset button after a command is executed
@@ -624,6 +671,7 @@ export default function DOM() {
 
         displayDefaultMap(false);
 
+        setCommandRecognized(true);
         
     const textDisplayContainer = document.querySelector('.textOther');
     while (textDisplayContainer.firstChild) {
@@ -632,14 +680,15 @@ export default function DOM() {
         
       },
     },
-   
+   // Also command for asking the locations
     ...locationCommands,
   
 ];
 
+// Function for searchInput command
 const sendTextToCommands = (text) => {
   const command = commands.find((cmd) => {
-    if (typeof cmd.command === 'string') {
+    if (typeof cmd.command === 'string') { // statement for command if its in lowercase and string
       return text.toLowerCase().includes(cmd.command.toLowerCase());
     } else if (Array.isArray(cmd.command)) {
       return cmd.command.some((phrase) =>
@@ -649,22 +698,14 @@ const sendTextToCommands = (text) => {
     return false;
   });
 
+  // statement for calling back the command response 
   if (command) {
     command.callback();
-    setCommandRecognized(true); // Set commandRecognized to true
   } else {
-    const errorMessage = 'Command not recognized'; // Set the error message
-    setErrorMessage(errorMessage);
-
-    // Use the Web Speech API to speak the error message
-    const speechSynthesis = window.speechSynthesis;
-    if (speechSynthesis) {
-      const speechMessage = new SpeechSynthesisUtterance(errorMessage);
-      speechSynthesis.speak(speechMessage);
-    }
-
-    const textDisplay = `Command not recognized`;
+    displayText('Sorry I currently do not have information about that.');
+    const textDisplay = `Sorry I currently do not have information about that.`
     displayOtherText(textDisplay);
+    
     setDownloadButtonVisible(false); // Display a message for unrecognized commands
     setResetButtonVisible(true);
     setAboutResponse(false);
@@ -675,26 +716,26 @@ const sendTextToCommands = (text) => {
     setSelectedProgram(false);
     setSelectedYearResponse(false);
     setYearButtonVisible(false);
+    setCommandRecognized(true);
     
   }
 };
-
-
-
-
-
-
+  // Function for the transcript and resetting it and use speechRecognition when commanding or asking
   const { transcript, resetTranscript } = useSpeechRecognition({ commands });
 
+  // Function for listening to saying
   const startListening = () => {
     SpeechRecognition.startListening();
     setSpeechActive(true);
   };
 
+  // Function for stop commanding
   const stopListening = () => {
     SpeechRecognition.stopListening();
     setSpeechActive(false);
   };
+
+  // Function for handling the textInput 
   const handleTextInputClick = (e) => {
     const targetClassName = e.target.classList;
 
@@ -704,7 +745,7 @@ const sendTextToCommands = (text) => {
     }
   };
 
-
+  // Displaying in the website
   return (
     <div className="dom-page">
       <div className='left-icon'>
@@ -779,7 +820,7 @@ const sendTextToCommands = (text) => {
       <div className='download-button2'>
       {downloadButtonVisible && (
         <button onClick={generatePDF}> 
-<FontAwesomeIcon  icon={faFileArrowDown}  size="xl" style={{"--fa-primary-color": "#fab005", "--fa-secondary-color": "#ffffff",}} />  Download</button>
+<FontAwesomeIcon  icon={faFileArrowDown}  size="xl" style={{"--fa-primary-color": "#fab005", "--fa-secondary-color": "#ffffff",}} /> </button>
       )}
       </div>
 
