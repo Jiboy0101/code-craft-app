@@ -36,7 +36,7 @@ function About({ onAboutClick }) {
         PUP Vision
       </button>
       <button
-        onClick={() => { onAboutClick('hymn'); speakText('Here is the P U P Hymn by S. Calabig, S. Roldan, and R. Amaranto', 'hymn'); }}
+        onClick={() => { onAboutClick('hymn'); speakText('Here is the P U P Hymn write by Calabig, Roldan and Amaranto', 'hymn'); }}
         className={activeTab === 'hymn' ? 'active' : ''}
       >
         PUP Hymn

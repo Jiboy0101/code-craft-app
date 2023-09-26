@@ -10,6 +10,7 @@ body {
   margin: 0; /* Remove default margin to prevent horizontal scroll on small screens */
   font-family: Arial, sans-serif; /* Choose an appropriate font for better readability */
   position: sticky;
+  overflow: hidden;
 }
 
 .head{
@@ -109,12 +110,22 @@ margin-bottom: 5px;
 }
 
 .container{
-  max-width: 800px;
+  max-width: 500px;
   height: 500px;
   margin-left: auto;
   margin-right: auto;
   overflow: auto;
   background-color: transparent;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+
+  &::-webkit-scrollbar {
+      width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+      background-color: transparent;
+  }
 }
 
 .display-text {
@@ -136,7 +147,7 @@ margin-bottom: 5px;
 
 .download-button{
   position: sticky;
-  z-index: 99;
+  z-index: 50;
 }
 .download-button2 button{
   position: relative;
@@ -175,6 +186,7 @@ margin-bottom: 5px;
   white-space:  pre-line;
   justify-content: justify;
   height:max-content;
+  
 
 }
 
@@ -183,6 +195,7 @@ margin-bottom: 5px;
   font-size:15px;
   margin-top: 20px;
   z-index: -1;
+  
 
 }
 
@@ -230,41 +243,50 @@ margin-bottom: 5px;
   margin-left: 20px;
 }
 
-.text-input{
+.text-input {
   position: fixed;
-  bottom: 60px; /* Adjust the distance from the bottom */
+  bottom: 3px; /* Adjust the distance from the bottom */
   right: 15px; /* Adjust the distance from the right */
   transform: translateY(-50%);
-  margin-right: 5px; /* Add margin to adjust the distance from the right edge */
-  z-index: 1;
+  z-index: 99;
+}
+.center-input {
+  position: fixed;
+  bottom: 10px;
+  transform: translateX(-106%);
+  padding-bottom:10px;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: stretch;
 }
 
-.center-input{
-  position: f;
-  bottom: -30px;
-  transform: translateX(-50%);
-  text-align: center;
-  justify-content: center;
-
+.keyBoard{
+  position: relative;
+  width: 90px;
+  bottom: 10px;
 }
 
-.center-icon {
-  margin-top: -20px;
-  margin-left: 230px;
+.send{
+  top: 10px;
+  margin-left: 10px;
+  position: relative;
 }
 
+.closed-back{
+  top: 10px;
+  position: relative;
+  margin-right: 10px;
+}
 
 
  input{
-  width :300px;
+  width :260px;
   height: 50px;
-  background-color: #ffffffb1;
+  background-color: #ffffffdd;
   border-radius: 10px;
   border-color:#f1c500;
-  color: white;
+  color: black;
   font-size: large;
-  margin-left: auto;
-  margin-right: auto;
   
 }
 
@@ -322,22 +344,6 @@ margin-bottom: 5px;
   color: white;
 }
 
-.plane{
-  width: 30px;
-  height :30px;
-  margin-left: 5px;
-  justify-content: center;
-  align-items: center;
-
-
-}
-
-.find{
-  position: relative;
-  margin-right: 10px;
-  width: 30px;
-  height: 30px;
-}
 
 .close{
   position: relative;

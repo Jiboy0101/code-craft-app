@@ -14,13 +14,18 @@ import About from './components/displayAbout';
 import locationsData from './fileJSON/locations.json'; // Import the JSON data
 import pupMap from './pictures/map.jpg';
 
-
-function TextInputApp({ onSendText, microphoneHidden}) {
+function TextInputApp({ onSendText, microphoneHidden, toggleMicrophone, setMicrophoneHidden }) {
   const [showInput, setShowInput] = useState(false);
-  const [inputText, setInputText] = useState(''); 
+  const [inputText, setInputText] = useState('');
 
-  const toggleInput = () => {
-    setShowInput(!showInput);
+  const handleShowInput = () => {
+    setShowInput(true);
+    setMicrophoneHidden(true); // Hide the microphone button when input is shown
+  };
+
+  const handleCloseButtonClick = () => {
+    setShowInput(false);
+    setMicrophoneHidden(false); // Show the microphone button
   };
 
   const handleInputChange = (e) => {
@@ -28,43 +33,63 @@ function TextInputApp({ onSendText, microphoneHidden}) {
   };
 
   const handleSendText = () => {
-    onSendText(inputText); // Call the callback function with the input text
+    onSendText(inputText);
     setInputText('');
   };
-  
 
   return (
-    <div className='searchB'>
-      <FontAwesomeIcon
-      className="faMagnifyingGlass" // Add this class
-        onClick={toggleInput}
-        icon={faKeyboard}
-            size="xl"
-            style={{ color: "#ffc800" }}
-      />
+    <div>
+      {!showInput && ( // Conditionally render the faKeyboard icon when showInput is false
+        <FontAwesomeIcon
+          className="keyBoard"
+          onClick={handleShowInput}
+          icon={faKeyboard}
+          size="xl"
+          style={{ color: '#ffc800' }}
+        />
+      )}
       {showInput && (
         <div className="center-input">
+          <div className='closed-back'>
+            <FontAwesomeIcon
+              onClick={handleCloseButtonClick}
+              icon={faMicrophone}
+              size="2xl"
+              style={{ color: '#ffc800' }}
+            />
+          </div>
           <input
             type="text"
-            placeholder="Enter text..."
+            placeholder="Type a keyword..."
             value={inputText}
             onChange={handleInputChange}
           />
           <div className="center-icon">
-            <FontAwesomeIcon
-              onClick={handleSendText}
-              icon={faPaperPlane}
-              size="xl"
-              style={{ color: '#ffc800' }}
-            />
-            
+            <div className='send'>
+              <FontAwesomeIcon
+                onClick={handleSendText}
+                icon={faPaperPlane}
+                size="2xl"
+                style={{ color: '#ffc800' }}
+              />
+            </div>
           </div>
         </div>
+      )}
+      {microphoneHidden && !showInput && (
+        <FontAwesomeIcon
+          onClick={() => toggleMicrophone(false)}
+          icon={faMicrophone}
+          size="sm"
+          style={{
+            "--fa-primary-color": "#ffffff",
+            "--fa-secondary-color": "#ffffff",
+          }}
+        />
       )}
     </div>
   );
 }
-
 
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -194,7 +219,6 @@ export default function DOM() {
     let lastY = 0; 
     const imgElement = document.createElement('img');
     imgElement.src = defaultMapURL;
-    imgElement.alt = 'Default Map';
     imgElement.style.maxWidth = '100%';
     if (width) {
       imgElement.style.width = `${width}px`;
@@ -272,7 +296,7 @@ export default function DOM() {
     const docDefinition = {
       content: [
         { text: '"ISKA" Virtual Assistant', style: 'header', alignment: 'center'},
-        { text: displayTextOnScreen || selectedYearResponse || programsResponse || aboutResponse, alignment: 'justify'},
+        { text: displayTextOnScreen || selectedYearResponse || programsResponse || aboutResponse || displayImage, alignment: 'justify'},
       ],
       styles: {
         header: {
@@ -365,8 +389,20 @@ export default function DOM() {
         resetTranscript();
         displayDefaultMap(defaultMapURL, 320, 470);
         displayText('These is the map of P U P lopez quezon branch')
+        const textDisplay = `These is the map of P U P lopez quezon branch`;
+        displayOtherText(textDisplay);
         setResetButtonVisible(true);
         setDownloadButtonVisible(false);
+        setProgramsButton(false);
+
+        setAboutResponse(false);
+        setAboutVisible(false);
+
+        setSelectedYearResponse(false);
+        setYearButtonVisible(false);
+
+        setResponseDisplayed(true);
+        
 
         setResponseDisplayed(true); // Set responseDisplayed to true
 
@@ -397,6 +433,8 @@ export default function DOM() {
         setSelectedYearResponse(false);
 
         setResponseDisplayed(true); // Set responseDisplayed to true
+
+        displayDefaultMap(false);
 
 
 
@@ -439,6 +477,8 @@ export default function DOM() {
 
         setResponseDisplayed(true); // Set responseDisplayed to true
 
+        displayDefaultMap(false);
+
       },
     },
     {
@@ -465,6 +505,8 @@ export default function DOM() {
         setAboutResponse(false);
 
         setResponseDisplayed(true); // Set responseDisplayed to true
+
+        displayDefaultMap(false);
 
 
         
@@ -493,26 +535,13 @@ export default function DOM() {
 
         setSelectedProgram(false);
 
-        setResponseDisplayed(true); // Set responseDisplayed to true       
+        setResponseDisplayed(true); // Set responseDisplayed to true
+
+        displayDefaultMap(false);
         
       },
     },
-    {
-      command: ['show * map *', '* display image', 'show picture *', 'display picture *', 'show * image *'],
-      callback: () => {
-        resetTranscript(); // Reset the transcript when a command is executed
-        displayImage('iska-logo.png'); // Function to display the image with the specified filename
-        const textDisplay = 'Here is an image:';
-        displayOtherText(textDisplay);
-        setResetButtonVisible(true); // Show the reset button after a command is executed
-        setYearButtonVisible(false);
-        setSelectedYearResponse(false);
-        setDisplayTextOnScreen(false);
-        setProgramsButton(false);
-        setSelectedProgram(false);
-        setAboutResponse(false);
-      },
-    },
+   
     ...locationCommands,
   
 ];
@@ -551,10 +580,9 @@ const sendTextToCommands = (text) => {
     SpeechRecognition.stopListening();
     setSpeechActive(false);
   };
-
   const handleTextInputClick = (e) => {
     const targetClassName = e.target.classList;
-  
+
     // Check if the magnifying glass icon was clicked
     if (targetClassName.contains('faMagnifyingGlass')) {
       setMicrophoneHidden(!microphoneHidden); // Toggle the value of microphoneHidden
@@ -620,7 +648,7 @@ const sendTextToCommands = (text) => {
         <div>
         <div className="otherResponse">
         {(selectedYearResponse || programsResponse || aboutResponse) && (
-          <p className="displayResponse">{selectedYearResponse}{programsResponse}{aboutResponse}{displayImage}</p>         
+          <p className="displayResponse">{selectedYearResponse}{programsResponse}{aboutResponse}</p>         
         )}
       </div>  
         </div>
@@ -656,12 +684,15 @@ const sendTextToCommands = (text) => {
       ) : (
       <FontAwesomeIcon className='start' onClick={startListening} icon={faMicrophone} size="sm" style={{"--fa-primary-color": "#ffffff", "--fa-secondary-color": "#ffffff",}} />
       )
-      ) :null}
-
-<div className="text-input" onClick={handleTextInputClick}>
-  <TextInputApp  onSendText={handleTextInput} microphoneHidden={microphoneHidden}/> {/* Pass microphoneHidden as a prop */}
-</div>
-      </footer>
+      ) : null}
+      <div className="text-input" onClick={handleTextInputClick}>
+      <TextInputApp
+        onSendText={handleTextInput}
+        microphoneHidden={microphoneHidden}
+        setMicrophoneHidden={setMicrophoneHidden} // Pass the setMicrophoneHidden function as a prop
+     />
+    </div>
+    </footer>
      
     </div>
   );
