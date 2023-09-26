@@ -1,7 +1,7 @@
 *{
   margin: 0;
   padding: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 body {
   background-color: #7E0001;
@@ -9,7 +9,6 @@ body {
   background-repeat: no-repeat;
   margin: 0; /* Remove default margin to prevent horizontal scroll on small screens */
   font-family: Arial, sans-serif; /* Choose an appropriate font for better readability */
-  position: sticky;
   overflow: hidden;
 }
 
@@ -43,17 +42,6 @@ body {
   padding: 50px;
 }
 
-.App {
-  text-align: center;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-
 button {
   background-color: darkgoldenrod;
   border-radius: 20px;
@@ -82,6 +70,7 @@ button {
   padding: auto;
   bottom: 0;
   background-color: #7E0001;
+  z-index: 300;
 }
 
 .dom-page  {
@@ -93,6 +82,14 @@ button {
 
 .app-name {
   margin-top: 10px;
+  font-family: 'Krona One';
+  font-size: 40px;
+}
+
+span{
+  color: rgb(236, 166, 4);
+  font-size: 40px;
+  font-family: 'Krona One';
 }
 
 /* App.css */
@@ -110,6 +107,7 @@ margin-bottom: 5px;
 }
 
 .container{
+  z-index: -10;
   max-width: 500px;
   height: 500px;
   margin-left: auto;
@@ -152,41 +150,38 @@ margin-bottom: 5px;
 .download-button2 button{
   position: relative;
   padding: 5px;
-  bottom: 35px;
+  bottom: 40px;
   color: rgb(85, 3, 3);
   background: linear-gradient(to bottom, #4e7c12, #b7e0a4); /* Gradient color */
-  z-index: 200;
+  z-index: 150;
   
 
 }
 .desc{
-  color: rgb(236, 166, 4);
-  display: block;
-  
+  position: relative;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+font-size: 20px;
+
 }
 
 .desc-hidden {
   display: none;
 }
 
-.otherText{
-  padding: 30px;
-}
 
 .textOther{
-  justify-content: center;
+  justify-items: justify;
   text-align: center;
   align-items: center;
-  padding: 5px;
-  background-color: #7E0001;
-  
+  padding: 20px;
+  font-size: 18px;
 }
 
 .displayResponse{
   white-space:  pre-line;
   justify-content: justify;
   height:max-content;
-  
+  line-height: 1.5; /* Adjust this value to control the line spacing */
 
 }
 
@@ -234,6 +229,7 @@ margin-bottom: 5px;
   right: 0;
   transform: translateY(-50%);
   margin-right: 13px; /* Add margin to adjust the distance from the right edge */
+  height: 40px;
 }
 
 
@@ -248,7 +244,7 @@ margin-bottom: 5px;
   bottom: 3px; /* Adjust the distance from the bottom */
   right: 15px; /* Adjust the distance from the right */
   transform: translateY(-50%);
-  z-index: 99;
+  z-index: 200;
 }
 .center-input {
   position: fixed;
@@ -258,18 +254,23 @@ margin-bottom: 5px;
   display: inline-flex;
   flex-direction: row;
   align-items: stretch;
+  z-index: 200;
+
 }
 
 .keyBoard{
   position: relative;
   width: 90px;
   bottom: 10px;
+  z-index: 200;
 }
 
 .send{
   top: 10px;
   margin-left: 10px;
   position: relative;
+  z-index: 200;
+
 }
 
 .closed-back{

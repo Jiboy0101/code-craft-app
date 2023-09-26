@@ -1,5 +1,6 @@
 .menu {
     cursor: pointer;
+    height: 30px;
 }
 
 .common-frame {
@@ -136,7 +137,7 @@ button:hover .icon {
 
 .image-container {
     position: relative;
-    height: 500px;
+    height: 410px;
     width: 300px;
     overflow: scroll;
     cursor:grab;

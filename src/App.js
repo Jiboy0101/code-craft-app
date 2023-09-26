@@ -1,4 +1,4 @@
-import React, { useState, } from 'react';
+import React, { useState, useEffect } from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import './App.css';
 import iska from './pictures/iska-logo.png';
@@ -13,6 +13,7 @@ import Program from './components/displayProgram';
 import About from './components/displayAbout';
 import locationsData from './fileJSON/locations.json'; // Import the JSON data
 import pupMap from './pictures/map.jpg';
+import "@fontsource/krona-one"; 
 
 function TextInputApp({ onSendText, microphoneHidden, toggleMicrophone, setMicrophoneHidden }) {
   const [showInput, setShowInput] = useState(false);
@@ -44,7 +45,7 @@ function TextInputApp({ onSendText, microphoneHidden, toggleMicrophone, setMicro
           className="keyBoard"
           onClick={handleShowInput}
           icon={faKeyboard}
-          size="xl"
+          size="2xl"
           style={{ color: '#ffc800' }}
         />
       )}
@@ -123,6 +124,22 @@ export default function DOM() {
   const [responseDisplayed, setResponseDisplayed] = useState(false);
 
   const [microphoneHidden, setMicrophoneHidden] = useState(false);
+
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const [commandRecognized, setCommandRecognized] = useState(false);
+
+
+  useEffect(() => {
+    if (errorMessage) {
+      speakErrorMessage(errorMessage);
+    }
+  }, [errorMessage]);
+  
+  const speakErrorMessage = (error) => {
+    const errorMessageUtterance = new SpeechSynthesisUtterance(error);
+    window.speechSynthesis.speak(errorMessageUtterance);
+  };
 
   
 
@@ -384,12 +401,11 @@ export default function DOM() {
 
   const commands = [
     {
-      command: ['* map *', 'map *', '* map', 'map', 'university map', 'map of the university', 'show university map'],
-      callback: () => {
+      command: ['hi', 'hello'],
+      callback:() => {
         resetTranscript();
-        displayDefaultMap(defaultMapURL, 320, 470);
-        displayText('These is the map of P U P lopez quezon branch')
-        const textDisplay = `These is the map of P U P lopez quezon branch`;
+        displayText("Hello, I'm iska, how can I help you?")
+        const textDisplay = `Hi, I'm ISKA, how can I help you?`;
         displayOtherText(textDisplay);
         setResetButtonVisible(true);
         setDownloadButtonVisible(false);
@@ -403,9 +419,64 @@ export default function DOM() {
 
         setResponseDisplayed(true);
         
+        setResponseDisplayed(true);
 
-        setResponseDisplayed(true); // Set responseDisplayed to true
+      }
 
+    },
+
+    {
+      command: ['what are you'],
+      callback: () => {
+        resetTranscript();
+        displayText('I am a P U P Virtual Assistant developed by the team of CodeCraft a 4th year B S I T student.');
+        const textDisplay = `I am a PUP Virtual Assistant developed by the team of CodeCraft a 4th year BSIT student.`;
+        displayOtherText(textDisplay);
+        setResetButtonVisible(true);
+        setDownloadButtonVisible(false);
+        setProgramsButton(false);
+
+        setAboutResponse(false);
+        setAboutVisible(false);
+
+        setSelectedYearResponse(false);
+        setYearButtonVisible(false);
+
+        setResponseDisplayed(true);
+        
+        setResponseDisplayed(true);
+
+      }
+
+    },
+
+    {
+      command: ['* map *', 'map *', '* map', 'map', 'university map', 'map of the university', 'show university map'],
+      callback: () => {
+        resetTranscript();
+        displayText('These is the map of P U P lopez quezon branch')
+        const textDisplay = `These is the map of PUP Lopez Quezon branch`;
+        displayOtherText(textDisplay);
+        setResetButtonVisible(true);
+        setDownloadButtonVisible(false);
+        setProgramsButton(false);
+        
+        displayDefaultMap(defaultMapURL, 320, 470);
+
+
+        setAboutResponse(false);
+        setAboutVisible(false);
+
+        setSelectedYearResponse(false);
+        setYearButtonVisible(false);
+
+        setResponseDisplayed(true);
+        
+        setResponseDisplayed(true);
+
+        
+
+        
       },
     },
     {
@@ -434,9 +505,12 @@ export default function DOM() {
 
         setResponseDisplayed(true); // Set responseDisplayed to true
 
-        displayDefaultMap(false);
 
 
+        const textDisplayContainer = document.querySelector('.textOther');
+        while (textDisplayContainer.firstChild) {
+          textDisplayContainer.removeChild(textDisplayContainer.firstChild);
+        }
 
         
       },
@@ -479,6 +553,12 @@ export default function DOM() {
 
         displayDefaultMap(false);
 
+        
+    const textDisplayContainer = document.querySelector('.textOther');
+    while (textDisplayContainer.firstChild) {
+      textDisplayContainer.removeChild(textDisplayContainer.firstChild);
+    }
+
       },
     },
     {
@@ -508,6 +588,11 @@ export default function DOM() {
 
         displayDefaultMap(false);
 
+        
+    const textDisplayContainer = document.querySelector('.textOther');
+    while (textDisplayContainer.firstChild) {
+      textDisplayContainer.removeChild(textDisplayContainer.firstChild);
+    }
 
         
       },
@@ -538,6 +623,12 @@ export default function DOM() {
         setResponseDisplayed(true); // Set responseDisplayed to true
 
         displayDefaultMap(false);
+
+        
+    const textDisplayContainer = document.querySelector('.textOther');
+    while (textDisplayContainer.firstChild) {
+      textDisplayContainer.removeChild(textDisplayContainer.firstChild);
+    }
         
       },
     },
@@ -560,11 +651,35 @@ const sendTextToCommands = (text) => {
 
   if (command) {
     command.callback();
+    setCommandRecognized(true); // Set commandRecognized to true
   } else {
-    displayText('Command not recognized');
+    const errorMessage = 'Command not recognized'; // Set the error message
+    setErrorMessage(errorMessage);
+
+    // Use the Web Speech API to speak the error message
+    const speechSynthesis = window.speechSynthesis;
+    if (speechSynthesis) {
+      const speechMessage = new SpeechSynthesisUtterance(errorMessage);
+      speechSynthesis.speak(speechMessage);
+    }
+
+    const textDisplay = `Command not recognized`;
+    displayOtherText(textDisplay);
     setDownloadButtonVisible(false); // Display a message for unrecognized commands
+    setResetButtonVisible(true);
+    setAboutResponse(false);
+    setAboutVisible(false);
+    setDisplayTextOnScreen(false);
+    setProgramsButton(false);
+    setResponseDisplayed(false);
+    setSelectedProgram(false);
+    setSelectedYearResponse(false);
+    setYearButtonVisible(false);
+    
   }
 };
+
+
 
 
 
@@ -621,14 +736,14 @@ const sendTextToCommands = (text) => {
       )}
     <header className='head'>
     <img src={iska} alt="PUP Logo" className="logo" />
-      <h1 className='app-name'>ISKA</h1>
+      <h1 className='app-name'>IS<span>KA</span></h1>
       <p className={responseDisplayed ? 'desc-hidden' : 'desc'}>
   Hi! I'm ISKA, PUP Virtual Assistant, how can I help you?
 </p>
-      <div className='textOther'>
-      <div className='otherText'>{otherText}</div>
 
-      </div>
+<div className='textOther'>
+  { commandRecognized && ((otherText))}</div>
+
     </header>
       
 
