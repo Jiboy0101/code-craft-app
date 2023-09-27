@@ -221,7 +221,6 @@ function PopupFrame({ content, onClose }) {
             <div>
               {}
               <p>In using the voice command, clear voice is required to ensure that ISKA will respond accurately with the request.</p> 
-              <p>The “Hey ISKA” phrase is needed in every command.</p>
               <p>Keywords can be used in the type command for a more efficient usage.</p>
               <p>ISKA’s voice varies from different android devices.</p>
               <p>ISKA will only respond to limited commands, a phrase “Sorry, I currently do not have any information about that” is displayed if questions/ queries asked are not available in the application.</p>

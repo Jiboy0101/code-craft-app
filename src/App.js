@@ -458,7 +458,7 @@ const handleYearButtonClick = (year) => {
   // All the command user can ask for ISKA 
   const commands = [
     {
-      command: ['hi', 'hello', 'hey'],
+      command: ['hi', 'hello', 'hey', '* hello *', '* hello', 'hello *'],
       callback:() => {
         resetTranscript();
         displayText("Hello, I'm iska, how can I help you?")
@@ -487,8 +487,8 @@ const handleYearButtonClick = (year) => {
       command: ['what are you', 'who are you'],
       callback: () => {
         resetTranscript();
-        displayText('Hi, I am ISKA, a P U P Lopez Virtual Assistant developed by the team Code Craft a 4th year B S I T students.');
-        const textDisplay = `Hi, I am ISKA, a P U P Lopez Virtual Assistant developed by the team Code Craft a 4th year B S I T students.`;
+        displayText('Hi, I am iska, a P U P Lopez Virtual Assistant developed by the team Code Craft a 4th year B S I T students.');
+        const textDisplay = `Hi, I am ISKA, a PUP Lopez Virtual Assistant developed by the team Code Craft a 4th year BSIT students.`;
         displayOtherText(textDisplay);
         setResetButtonVisible(true);
         setDownloadButtonVisible(false);
