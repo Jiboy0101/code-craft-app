@@ -19,6 +19,7 @@ import Menu from './Menu/Menu';
 // Get the response to a command
 import Responses from './fileJSON/dataResponse.json'; 
 import locationsData from './fileJSON/locations.json'; 
+import processesData from './fileJSON/processes.json'; 
 
 // calling the button when commanding 
 import YearButtons from './display/displayEnroll';
@@ -57,6 +58,7 @@ function TextInputApp({ onSendText, microphoneHidden, toggleMicrophone, setMicro
   const handleSendText = () => {
     onSendText(inputText);
     setInputText('');
+    
   };
 
 
@@ -168,6 +170,8 @@ const [microphoneHidden, setMicrophoneHidden] = useState(false);
 
 // State for tracking if a command is recognized
 const [commandRecognized, setCommandRecognized] = useState(false);
+
+const [recognizedProcessText, setRecognizedProcessText] = useState(' ');
 
 
 
@@ -359,6 +363,7 @@ const [commandRecognized, setCommandRecognized] = useState(false);
 
   // calling the response data from json file 
   const locations = locationsData;
+  const processes = processesData;
 
 
   const handleTextInput = (text) => {
@@ -411,6 +416,7 @@ const handleYearButtonClick = (year) => {
     setAboutResponse(false);
     setAboutVisible(false);
     setResponseDisplayed(false);
+    setRecognizedProcessText(false);
 
     const textDisplayContainer = document.querySelector('.textOther');
     while (textDisplayContainer.firstChild) {
@@ -426,7 +432,8 @@ const handleYearButtonClick = (year) => {
 
     // Function for command location in map event
   const locationCommands = locations.map((location) => ({
-    command: [`* ${location.name}`],
+    command: [`* ${location.name}`, `where is the ${location.name}`, `where is ${location.name}`, `where's the ${location.name}`, `where's ${location.name}`,
+     `find ${location.name}`, `find the ${location.name}`, `locate the ${location.name}`, `locate ${location.name}`, `find ${location.name}`, `find the ${location.name}`, `room number ${location.name}`, `find room number${location.name}`, `find the room number${location.name}`, `where is the${location.name}`, `where is room number${location.name}`, `locate the room number${location.name}`, `locate room number${location.name}`, `where is room${location.name}`, `where's room${location.name}`, `room${location.name}`],
     callback: () => {
       resetTranscript();
       displayText(`Showing map for the ${location.name}. The get to the ${location.name}, here are the directions to follow. All the directions that I will give will start from the main gate. ${location.directions}`);
@@ -436,11 +443,22 @@ const handleYearButtonClick = (year) => {
     },
   }));
 
+  const processesCommands = processes.map((get) => ({
+    command: [`* ${get.name} *`, `${get.name} *`, `* ${get.name}`],
+    callback: () => {
+      resetTranscript();
+      const recognitionText = [`${get.text}`]; // Access the "text" property from the JSON data
+      displayText(`${get.response}`);
+      setRecognizedProcessText(recognitionText);
+      setResetButtonVisible(true);
+      setDownloadButtonVisible(true);
+    },
+  }));
   
   // All the command user can ask for ISKA 
   const commands = [
     {
-      command: ['hi', 'hello'],
+      command: ['hi', 'hello', 'hey'],
       callback:() => {
         resetTranscript();
         displayText("Hello, I'm iska, how can I help you?")
@@ -466,11 +484,11 @@ const handleYearButtonClick = (year) => {
     },
 
     {
-      command: ['what are you'],
+      command: ['what are you', 'who are you'],
       callback: () => {
         resetTranscript();
-        displayText('I am a P U P Virtual Assistant developed by the team of CodeCraft a 4th year B S I T student.');
-        const textDisplay = `I am a PUP Virtual Assistant developed by the team of CodeCraft a 4th year BSIT student.`;
+        displayText('Hi, I am ISKA, a P U P Lopez Virtual Assistant developed by the team Code Craft a 4th year B S I T students.');
+        const textDisplay = `Hi, I am ISKA, a P U P Lopez Virtual Assistant developed by the team Code Craft a 4th year B S I T students.`;
         displayOtherText(textDisplay);
         setResetButtonVisible(true);
         setDownloadButtonVisible(false);
@@ -682,6 +700,7 @@ const handleYearButtonClick = (year) => {
     },
    // Also command for asking the locations
     ...locationCommands,
+    ...processesCommands,
   
 ];
 
@@ -716,7 +735,6 @@ const sendTextToCommands = (text) => {
     setSelectedProgram(false);
     setSelectedYearResponse(false);
     setYearButtonVisible(false);
-    setCommandRecognized(true);
     
   }
 };
@@ -768,10 +786,17 @@ const sendTextToCommands = (text) => {
         <div className="question-list">
           {/* Add your list of questions here */}
           <h6 className='note'>Try to ask these suggestions (Note: This list is not clickable)</h6>
-          <p>Available Programs</p>
-          <p>About the PUP</p>
-          <p>How to enroll</p>
-          <p>What can you do?</p>
+          <p>- What are the available programs</p>
+          <p>- Tell me about PUP</p>
+          <p>- How to enroll</p>
+          <p>- How to add subjects</p>
+          <p>- How to change subjects</p>
+          <p>- How to become academic achiever</p>
+          <p>- How to apply for graduation</p>
+          <p>- Where is the Nantes Building</p>
+          <p>- Where is the Admission Office</p>
+          <p>- Show university map</p>
+          <p>- What can you do</p>
           {/* Add more questions as needed */}
         </div>
       )}
@@ -814,7 +839,15 @@ const sendTextToCommands = (text) => {
             <p className="display-text-content">{displayTextOnScreen}</p>
           )}
         </div>
+
+        <div className="recognized-Text">
+            {recognizedProcessText && (
+              <p className="recognized-text-content">{recognizedProcessText}</p>
+            )}
       </div>
+      </div>
+
+      
       
       <div className='download-button'>
       <div className='download-button2'>

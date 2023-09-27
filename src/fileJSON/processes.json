@@ -1,0 +1,77 @@
+[
+    {
+        "name": "add",
+        "response": "here is the process on how to add or change subject, you need to apply for change of enrollment, using ace form.",
+        "text": [ 
+        "APPLICATION FOR CHANGE OF ENROLLMENT (ACE)\n",
+
+        "STEPS TO FOLLOW\n",
+        
+        "1. GO TO https://www.pup.edu.ph/downloads/files/aceform2013bcadd.pdf",
+        "2. Print the Downloadable Form",
+        
+        "INSTRUCTIONS:",
+        "1.Fill-out all blank spaces provided in this form with appropriate information; write N/A if not applicable.",
+        "2.Write the details of subject to add in the ADD the Branch/Campus Academic Head may sign in lieu of the professor in order to avoid delay in processing of adjustment.",
+        "3. Proceed to your Branch/Campus Academic Head check if the necessary changes were done and correct.:",
+        "4. Go to the Accounting Student Services (of your Branch/Campus",
+        "5. Pay the assessed fee at the SIS Window in the Branch/Campus Cashier’s Office.",
+        "6. Photocopy this form and official receipt and a personal copy"
+    ]
+    },
+    {
+        "name": "change",
+        "response": "here is the process on how to add or change subject, you need to apply for change of enrollment, using ace form.",
+        "text": [ 
+        "APPLICATION FOR CHANGE OF ENROLLMENT (ACE)\n",
+
+        "STEPS TO FOLLOW\n",
+        
+        "1. GO TO https://www.pup.edu.ph/downloads/files/aceform2013bcadd.pdf",
+        "2. Print the Downloadable Form",
+        
+        "INSTRUCTIONS:",
+        "1.Fill-out all blank spaces provided in this form with appropriate information; write N/A if not applicable.",
+        "2.Write the details of subject to add in the ADD the Branch/Campus Academic Head may sign in lieu of the professor in order to avoid delay in processing of adjustment.",
+        "3. Proceed to your Branch/Campus Academic Head check if the necessary changes were done and correct.:",
+        "4. Go to the Accounting Student Services (of your Branch/Campus",
+        "5. Pay the assessed fee at the SIS Window in the Branch/Campus Cashier’s Office.",
+        "6. Photocopy this form and official receipt and a personal copy"
+    ]
+    },
+    {
+        "name": "graduation",
+        "response": "here is the process on how you can apply for graduation, follow this steps, congrats in advance.",
+        "text": [ 
+        "HOW TO APPLY FOR GRADUATION\n",
+
+        "STEPS TO FOLLOW\n",
+        
+        "1. In the SIS Module Account, click GRADES then click CURRICULUM EVALUATION if you are qualified to apply for graduation you will see at the right part of the page <APPLICATION FOR GRADUATION>.",
+        "2. Click the <APPLICATION FOR GRADUATION> to see the Application Form. (Note : Be sure that the given data is correct before you click <Sure> and then <Submit>.)",
+        "3. Fill up the Application for Graduation Form. SAVE and then SUBMIT.",
+        "4. Print a copy of the Application for Graduation Form and pay the application fee of Php at the PUP Cashiers Office.",
+        "5. Submit the copy of the Application for Graduation Form and Official Receipt to the Registrar Office.",
+        "6. After submission monitor the status of your application in your SIS Account by clicking the GRADES section of your account from time to time.      "
+    ]
+    },
+    {
+        "name": "Achiever",
+        "response": "here are the requirements on how to become academic achiever. Interested applicants must have a GWA of at least 1.5 for President’s Listers while Dean’s Listers must have GWA of at least 1.75. No grade shall be below 2.5 and no INC, F, D grade.",
+        "text": [ 
+        "Interested applicants must have a GWA of at least 1.5 for President’s Listers",
+        "while Dean’s Listers must have GWA of at least 1.75.",
+        "No grade shall be below 2.5 and no INC, F, D grade."
+    ]
+    },
+    {
+        "name": "lister",
+        "response": "here are the requirements on how to become academic achiever. Interested applicants must have a GWA of at least 1.5 for President’s Listers while Dean’s Listers must have GWA of at least 1.75. No grade shall be below 2.5 and no INC, F, D grade.",
+        "text": [ 
+        "Interested applicants must have a GWA of at least 1.5 for President’s Listers",
+        "while Dean’s Listers must have GWA of at least 1.75.",
+        "No grade shall be below 2.5 and no INC, F, D grade."
+    ]
+    }
+
+]
