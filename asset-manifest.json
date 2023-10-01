@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/code-craft-app/static/css/main.75c88076.css",
-    "main.js": "/code-craft-app/static/js/main.eabc0a68.js",
+    "main.js": "/code-craft-app/static/js/main.1ab869cc.js",
     "static/media/map.jpg": "/code-craft-app/static/media/map.3a569680ea5bdf9a2322.jpg",
     "static/media/iska-logo.png": "/code-craft-app/static/media/iska-logo.0b23486e2144e26ea815.png",
     "static/media/krona-one-latin-400-normal.woff": "/code-craft-app/static/media/krona-one-latin-400-normal.fd47e8be9d5868e2354f.woff",
@@ -10,10 +10,10 @@
     "static/media/krona-one-latin-ext-400-normal.woff2": "/code-craft-app/static/media/krona-one-latin-ext-400-normal.01120cafa274a6b13dba.woff2",
     "index.html": "/code-craft-app/index.html",
     "main.75c88076.css.map": "/code-craft-app/static/css/main.75c88076.css.map",
-    "main.eabc0a68.js.map": "/code-craft-app/static/js/main.eabc0a68.js.map"
+    "main.1ab869cc.js.map": "/code-craft-app/static/js/main.1ab869cc.js.map"
   },
   "entrypoints": [
     "static/css/main.75c88076.css",
-    "static/js/main.eabc0a68.js"
+    "static/js/main.1ab869cc.js"
   ]
 }
