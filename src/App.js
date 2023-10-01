@@ -516,8 +516,6 @@ const handleYearButtonClick = (year) => {
       callback: () => {
         resetTranscript();
         displayText('These is the map of P U P lopez quezon branch')
-        const textDisplay = `These is the map of PUP Lopez Quezon branch`;
-        displayOtherText(textDisplay);
         setResetButtonVisible(true);
         setDownloadButtonVisible(false);
         setProgramsButton(false);

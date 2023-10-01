@@ -13,8 +13,8 @@
       "sizes": "192x192"
     },
     {
-      "src": "iska.ico",
-      "type": "image/x-icon",
+      "src": "iska-logo.png",
+      "type": "image/png",
       "sizes": "512x512"
     }
   ],
