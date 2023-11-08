@@ -14,7 +14,7 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 
 // Get and call the Menu.js 
-import Menu from './Menu/Menu'; 
+import Menu from './Menu/Menu';
 
 // Get the response to a command
 import Responses from './fileJSON/dataResponse.json'; 
@@ -33,6 +33,9 @@ import pupMap from './pictures/map.jpg';
 import "@fontsource/krona-one"; 
 
 import gifImage from './components/iska-ai.gif'; // Adjust the path to your GIF file
+
+import LocateMap from './components/mapList';
+
 
 // Function for the searchInput 
 function TextInputApp({ onSendText, microphoneHidden, toggleMicrophone, setMicrophoneHidden }) {
@@ -180,6 +183,8 @@ const [recognizedProcessText, setRecognizedProcessText] = useState(' ');
 
 const [isQuestionIcon, setIsQuestionIcon] = useState(true);
 
+const [mapButton, setmapVisible] = useState(false);
+const [mapResponse, setMapResponse] = useState('');
 
 
 
@@ -404,6 +409,13 @@ const handleYearButtonClick = (year) => {
 
   };
 
+  const handleMapButtonClick = (mapp) => {
+    const maps = Responses[mapp];
+
+    setMapResponse(maps);
+    setDownloadButtonVisible(false);
+  }
+
   // Function to display the text and speak it
   const displayText = (text) => {
     let message = new SpeechSynthesisUtterance(text);
@@ -425,6 +437,8 @@ const handleYearButtonClick = (year) => {
     setAboutVisible(false);
     setResponseDisplayed(false);
     setRecognizedProcessText(false);
+    setMapResponse(false);
+    setmapVisible(false);
 
     const textDisplayContainer = document.querySelector('.textOther');
     while (textDisplayContainer.firstChild) {
@@ -471,8 +485,8 @@ const handleYearButtonClick = (year) => {
       command: ['hi', 'hello', 'hey', '* hello *', '* hello', 'hello *'],
       callback:() => {
         resetTranscript();
-        displayText("Hello, I'm iska, how can I help you?")
-        const textDisplay = `Hello, I'm ISKA, how can I help you?`;
+        displayText("Hello, I'm iska, how can I assist you?")
+        const textDisplay = `Hello, I'm ISKA, how can I assist you?`;
         displayOtherText(textDisplay);
         setResetButtonVisible(true);
         setDownloadButtonVisible(false);
@@ -488,6 +502,9 @@ const handleYearButtonClick = (year) => {
         
         setResponseDisplayed(true);
         setCommandRecognized(true);
+
+        setmapVisible(false);
+
 
       }
 
@@ -516,6 +533,8 @@ const handleYearButtonClick = (year) => {
 
         setCommandRecognized(true);
 
+        setmapVisible(false);
+
 
       }
 
@@ -543,6 +562,8 @@ const handleYearButtonClick = (year) => {
         
         setResponseDisplayed(true);
         
+        setmapVisible(false);
+
       },
     },
     {
@@ -573,6 +594,7 @@ const handleYearButtonClick = (year) => {
         
         setCommandRecognized(true);
 
+        setmapVisible(false);
 
 
 
@@ -624,6 +646,9 @@ const handleYearButtonClick = (year) => {
 
         setCommandRecognized(true);
 
+        setmapVisible(false);
+
+
 
         
     const textDisplayContainer = document.querySelector('.textOther');
@@ -661,6 +686,9 @@ const handleYearButtonClick = (year) => {
         displayDefaultMap(false);
 
         setCommandRecognized(true);
+
+        setmapVisible(false);
+
         
     const textDisplayContainer = document.querySelector('.textOther');
     while (textDisplayContainer.firstChild) {
@@ -698,6 +726,8 @@ const handleYearButtonClick = (year) => {
         displayDefaultMap(false);
 
         setCommandRecognized(true);
+
+        setmapVisible(false);
         
     const textDisplayContainer = document.querySelector('.textOther');
     while (textDisplayContainer.firstChild) {
@@ -705,6 +735,40 @@ const handleYearButtonClick = (year) => {
     }
         
       },
+    },
+
+    {
+      command: ['* where', 'where *', '* where *', 'where', 'locate *', '* locate', '* locate *', 'locate'],
+      callback:() => {
+        resetTranscript(); // Reset the transcript when a command is executed
+        displayText('Please select your nearest area in campus, so that I can assist you.');
+        const textDisplay = `
+        Please select your nearest area in campus, so that I can assist you.
+        `;
+        displayOtherText(textDisplay);
+        setResetButtonVisible(true); // Show the reset button after a command is executed
+
+        setProgramsButton(false);
+
+        setYearButtonVisible(false);
+        setSelectedYearResponse(false);
+
+        setDisplayTextOnScreen(false);
+
+        setAboutVisible(false);
+        setAboutResponse(false);
+
+        setSelectedProgram(false);
+
+        setResponseDisplayed(true); // Set responseDisplayed to true
+
+        displayDefaultMap(false);
+
+        setCommandRecognized(true);
+
+        setmapVisible(true);
+        setMapResponse(false);
+      }
     },
    // Also command for asking the locations
     ...locationCommands,
@@ -834,20 +898,18 @@ const sendTextToCommands = (text) => {
           { aboutButtons && (
             <About onAboutClick={handleAboutButtonClick} />
           )}
+          {mapButton && (
+            <LocateMap onMapButtonClick = {handleMapButtonClick} />
+          )}
         </div>
 
         <div>
         <div className="otherResponse">
         {(selectedYearResponse || programsResponse || aboutResponse) && (
-          <p className="displayResponse">{selectedYearResponse}{programsResponse}{aboutResponse}</p>         
+          <p className="displayResponse">{selectedYearResponse}{programsResponse}{aboutResponse}{mapResponse}</p>         
         )}
+        <p>{displayTextOnScreen}</p>
       </div>  
-        </div>
-        
-        <div className="display-text">
-          {displayTextOnScreen && (
-            <p className="display-text-content">{displayTextOnScreen}</p>
-          )}
         </div>
 
         <div className="recognized-Text">

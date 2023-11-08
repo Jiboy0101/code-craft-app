@@ -5,20 +5,6 @@
   box-sizing: border-box;
 }
 
-/* Media query for screens smaller than 768px */
-@media (max-width: 768px) {
-  .header {
-    font-size: 20px;
-  }
-}
-
-/* Media query for screens smaller than 480px */
-@media (max-width: 480px) {
-  .header {
-    font-size: 18px;
-  }
-}
-
 body{
   background-color: #7E0001;
   background-size: cover;
@@ -116,22 +102,29 @@ color: white;
   justify-items: justify;
   text-align: center;
   align-items: center;
-  padding: 10px;
+  top: 20vh;
+  padding: 2px;
   font-size: 18px;
   color: white;
+  overflow: hidden;
+  position: fixed;
+  background-color: #7E0001;
 }
 
 .container{
   white-space: pre-line;
   color: white;
-  overflow: auto;
+  overflow-y: scroll;
   padding: 5px;
   line-height: 1.5; /* Adjust this value to control the line spacing */
 
 }
 
-.display-text{
-  background-color: rgb(14, 183, 183);
+
+.display-text {
+  padding: 20px;
+  border-radius: 5px;
+  position:relative;
 }
 
 .otherResponse{
@@ -167,14 +160,20 @@ color: white;
   width: 100%;
   overflow: hidden;
 }
-
-input{
+input {
   padding: 10px;
-  width: 42vh;
-  margin-left: 10px;
-  margin-right: 10px;
+  width: 100%; /* Use the full width of the parent container */
+  margin: 10px; /* You can use shorthand property for margin */
   border-radius: 10px;
-  border-color: #f1c500
+  border-color: #f1c500;
+}
+
+/* Media Query for screens with a maximum width of 768px (typical mobile screens) */
+@media (max-width: 768px) {
+  input {
+    width: 35vh; /* Adjust the width to take up 90% of the parent container */
+    margin: 5px; /* Reduce the margin for smaller screens */
+  }
 }
 
 .hide-this{

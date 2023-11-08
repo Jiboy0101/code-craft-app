@@ -1,0 +1,42 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.place{
+    position: relative;
+    top: 5vh;
+}
+
+.mapGif{
+    align-items: center;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    top: 10vh;
+    height: 100%;
+}
+
+.mapss{
+    width: 90%;
+    height: 100%;
+    position: relative;
+    overflow: -moz-hidden-unscrollable;
+    z-index: -1;
+}
+
+.go-back{
+    position: relative;
+    z-index: 10;
+    top: -56vh;
+    left: 3vh;
+}
+.go-back button{
+    background-color:darkgoldenrod;
+    border-radius: 10px;
+    padding: 5px;
+    width: fit-content;
+
+}

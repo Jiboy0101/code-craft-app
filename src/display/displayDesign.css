@@ -2,7 +2,9 @@
 .choices-button{
     justify-content: center;
     display: flex;
-    margin-top: 10px;
+    margin-top: 70px;
+    overflow: hidden;
+    position: relative;
 }
 .choices-button button{
     border-radius: 10px;
