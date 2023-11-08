@@ -1,22 +1,8 @@
-*{
+* 
+{
   margin: 0;
   padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
-}
-body {
-  background-color: #7E0001;
-  background-size: cover;
-  background-repeat: no-repeat;
-  margin: 0; /* Remove default margin to prevent horizontal scroll on small screens */
-  font-family: Arial, sans-serif; /* Choose an appropriate font for better readability */
-  overflow: hidden;
-}
-
-.head{
-  top: -60px;
-  position: sticky;
-  z-index: 0;
-  background-color: #7E0001;
+  box-sizing: border-box;
 }
 
 /* Media query for screens smaller than 768px */
@@ -33,87 +19,9 @@ body {
   }
 }
 
-.logo {
-  width: 90px; /* Make the logo responsive */
-  height: 90px; /* Maintain aspect ratio */
-  position: relative;
-  display: block; /* Center the logo horizontally */
-  margin: -70px auto; /* Adjust margin for centering */
-  padding: 50px;
-}
-
-button {
-  background-color: darkgoldenrod;
-  border-radius: 20px;
-}
-
-.start{
-  position: relative;
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(to bottom, #c40606, #f1c500); /* Gradient color */
-  padding: 20px 20px;
-  border-radius: 100px;
-}
-
-.stop{
-  position: relative;
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(to bottom, #c40606, #f1c500); /* Gradient color */
-  padding: 20px 20px;
-  border-radius: 100px;
-}
-
-.microphone{
-  position: sticky;
-  padding: auto;
-  bottom: 0;
+body{
   background-color: #7E0001;
-  z-index: 300;
-}
-
-.dom-page  {
-  text-align: center;
-  padding: 10px;
-  color: white;
-  z-index: -1;
-}
-
-.app-name {
-  margin-top: 10px;
-  font-family: 'Krona One';
-  font-size: 40px;
-}
-
-.app-name span{
-  color: rgb(236, 166, 4);
-  font-size: 40px;
-  font-family: 'Krona One';
-}
-
-/* App.css */
-
-.transcript-text {
-  font-size: 18px;
-  color: #ffffff;
-  margin-top: 10px; /* Adjust spacing */
-  position:relative;
-}
-
-.transcript{
-
-margin-bottom: 5px;
-}
-
-.container{
-  z-index: -10;
-  max-width: 500px;
-  height: 500px;
-  margin-left: auto;
-  margin-right: auto;
-  overflow: auto;
-  background-color: transparent;
+  background-size: cover;
   scrollbar-width:none;
   scrollbar-color: transparent transparent;
 
@@ -126,76 +34,16 @@ margin-bottom: 5px;
   }
 }
 
-.display-text {
-  margin-top: 10px;
-  padding: 20px;
-  border-radius: 5px;
-  position:relative;
-}
-
-.display-text-content {
-  font-size: 16px;
-  color: #ffffff;
-  margin: 0;
-  overflow:auto;
-  white-space: pre-line;
-  text-align:justify;
-  line-height: 1.5; /* Adjust this value to control the line spacing */
-}
-
-.download-button{
-  z-index: 50;
+header{
   background-color: #7E0001;
-}
-.download-button2 button{
-  position: fixed;
-  top: 10%;
-  width: fit-content;
-  background: linear-gradient(to bottom, #c40606, #f1c500); /* Gradient color */
-  z-index: 150;
-  transform: translateY(-50%);
-  right: 10px;
-
-  
-
-}
-.desc{
-  position: relative;
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-font-size: 20px;
-
-}
-
-.desc-hidden {
-  display: none;
-}
-
-
-.textOther{
-  justify-items: justify;
+  justify-content: space-between;
+  display: flex;
   text-align: center;
-  align-items: center;
-  padding: 20px;
-  font-size: 18px;
+  top: 0;
+  position: sticky;
+  z-index: 15;
+  padding: 10px;
 }
-
-.displayResponse{
-  white-space:  pre-line;
-  justify-content: justify;
-  height:max-content;
-  line-height: 1.5; /* Adjust this value to control the line spacing */
-
-}
-
-.otherResponse{
-  text-align: left;
-  font-size:15px;
-  margin-top: 20px;
-  z-index: -1;
-  
-
-}
-
 
 .question-list {
   border: 5px solid darkgoldenrod;
@@ -212,179 +60,155 @@ font-size: 20px;
   z-index: 155;
 }
 
-.note {
-  color: #7E0001;
+img{
+  width: 15vh;
+  height: 15vh;;
+}
+.otherResponse{
+  height: 65vh;
+  width: 100%;
+  z-index: 10;
 }
 
-
-.reset-button {
-  position:fixed;
-  margin-left: 50px; /* Add margin to adjust the distance from the right edge */
-  margin-top: 8px;
-  z-index: 9;
-
-}
-
-.questions {
-  position: fixed;
-  margin-top: 15px;
-  right: 0;
-  transform: translateY(-50%);
-  margin-right: 13px; /* Add margin to adjust the distance from the right edge */
-  height: 40px;
-}
-
-
-.year-button button{
-  background-color: darkgoldenrod;
-  display: inline;
-  margin-left: 20px;
-}
-
-.text-input {
-  position: fixed;
-  bottom: 3px; /* Adjust the distance from the bottom */
-  right: 15px; /* Adjust the distance from the right */
-  transform: translateY(-50%);
-  z-index: 200;
-}
-.center-input {
-  position: fixed;
-  bottom: 5px;
-  transform: translateX(-106%);
-  padding-bottom:10px;
-  display: inline-flex;
-  flex-direction: row;
-  align-items: stretch;
-  z-index: 200;
-  background-color: #7E0001;
-  left: 25px;
-  padding-top: 10px;
-
-}
-
-.keyBoard{
+h1{
   position: relative;
-  bottom: 10px;
-  z-index: 200;
-  transform: translateY(-50%);
-  left: 0;
-
+  align-items: center;
+  text-align: center;
 }
 
-.send{
-  top: 10px;
-  margin-left: 10px;
+.app-neym{
   position: relative;
-  z-index: 200;
-
+  margin-top: -4vh;
 }
 
-.closed-back{
-  top: 10px;
-  position: relative;
-  margin-right: 10px;
-  
-}
-
-
- input{
-  width :285px;
-  height: 50px;
-  background-color: #ffffffdd;
-  border-radius: 10px;
-  border-color:#f1c500;
-  color: black;
-  font-size: large;
-  
-}
-
-.placeholder-color::placeholder{
+.app-name {
+  font-family: 'Krona One';
+  font-size: 40px;
   color: white;
 }
 
+.app-name span{
+  color: rgb(236, 166, 4);
+  font-family: 'Krona One';
+}
 
-.menu{
-  position: fixed;
-  top: 4%;
-  left: 0;
-  transform: translateY(-50%);
-  margin-left: 20px; 
-  z-index: 9;
+.desc{
+  position: relative;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+font-size: 15px;
+color: white;
 
 }
 
-.menu-content{
-  width: 300px;
-  height: 300px;
-  background-color: #7E0001;
-  top: 50%;
-  bottom: 50%;
+.desc-hidden {
+  display: none;
+}
+
+.ai img{
+  position: relative;
+  top: 15vh;
+  width: 100%;
+  height: 35vh;
+  filter: sepia(90%) hue-rotate(-10deg) brightness(1.2)
+}
+
+.textOther{
+  justify-items: justify;
   text-align: center;
-  
+  align-items: center;
+  padding: 10px;
+  font-size: 18px;
+  color: white;
 }
-/* Style the modal overlay */
-.ReactModal__Overlay {
-  background: none; /* No background, fully transparent */
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+
+.container{
+  white-space: pre-line;
+  color: white;
+  overflow: auto;
+  padding: 5px;
+  line-height: 1.5; /* Adjust this value to control the line spacing */
+
+}
+
+.display-text{
+  background-color: rgb(14, 183, 183);
+}
+
+.otherResponse{
+  text-align: left;
+  font-size:15px;
+  margin-top: 20px;
+  z-index: -1;
+}
+
+.bottom{
+  background-color: #7E0001;
+  padding: 10px;
   bottom: 0;
+  position: sticky;
+  overflow: hidden;
+}
+
+.microphone{
+  background-color: #7E0001;
+  position: sticky;
+  bottom: 0; /* Stick it to the bottom of the viewport */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+
+}
+
+.center-input{
   display: flex;
   align-items: center;
-  justify-content: center;
-  z-index: 1000; /* Ensure the modal is above everything else */
-}
-
-/* Style the modal content */
-.ReactModal__Content {
-  background-color: #7E0001;
-  border: 1px solid #ccc;
-  padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  z-index: 1001; /* Ensure the modal content is above the overlay */
-}
-
-.link-web{
-  color: rgb(255, 255, 255);
-}
-.linkkk{
-  color: white;
-}
-
-
-.close{
   position: relative;
-  top: -65px;
-  right: -58%;
-  transform: translateY(-50%);
-  margin-right: 45px; /* Add margin to adjust the distance from the right edge */
-  color: white;
+  width: 100%;
+  overflow: hidden;
 }
 
-.left-icon{
-  position: absolute;
-  z-index: 10;
-  display: flex;
-  margin-left: 85%;
-}
-
-
-.suggestion{
-display: inline-block;
-flex-direction: row;
-position: relative;
-height: 90px;
-}
-
-.suggestion button{
-  background: linear-gradient(to bottom, #c40606, #f1c500); /* Gradient color */
-  margin-left: 10px;
+input{
   padding: 10px;
-  width: 100px;
-  height: 50px;
-
+  width: 42vh;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 10px;
+  border-color: #f1c500
 }
 
+.hide-this{
+  visibility: hidden;
+}
 
+.start{
+  color: white;
+  bottom: 0;
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  background: linear-gradient(to bottom, #c40606, #f1c500); /* Gradient color */
+  padding: 20px ;
+  border-radius: 100px;
+}
+
+.stop{
+  color: white;
+  bottom: 0;
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  background: linear-gradient(to bottom, #c40606, #f1c500); /* Gradient color */
+  padding: 20px 20px;
+  border-radius: 100px;
+}
+
+.transcript{
+  color: white;
+  position:relative;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  z-index: 25;
+  
+}

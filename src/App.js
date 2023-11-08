@@ -7,7 +7,7 @@ import './App.css';
 import iska from './pictures/iska-logo.png';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMicrophone, faHome, faCircleQuestion, faFileArrowDown, faKeyboard, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faMicrophone, faHome, faCircleQuestion, faFileArrowDown, faKeyboard, faPaperPlane, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 
 import pdfMake from 'pdfmake/build/pdfmake';
@@ -31,6 +31,8 @@ import pupMap from './pictures/map.jpg';
 
 // Install a font for ISKA name
 import "@fontsource/krona-one"; 
+
+import gifImage from './components/iska-ai.gif'; // Adjust the path to your GIF file
 
 // Function for the searchInput 
 function TextInputApp({ onSendText, microphoneHidden, toggleMicrophone, setMicrophoneHidden }) {
@@ -64,17 +66,18 @@ function TextInputApp({ onSendText, microphoneHidden, toggleMicrophone, setMicro
 
   // Returning and displaying the searchInput 
   return (
-    <div>
+    <div className='input'>
       {!showInput && ( // Conditionally render the faKeyboard icon when showInput is false
         <FontAwesomeIcon
           className="keyBoard"
           onClick={handleShowInput} // Showing searchInput
           icon={faKeyboard}
-          size="2xl"
+          size="xl"
           style={{ color: '#ffc800' }}
         />
       )}
-      {showInput && (
+      <div>
+        {showInput && (
         <div className="center-input">
           <div className='closed-back'>
             <FontAwesomeIcon
@@ -102,6 +105,8 @@ function TextInputApp({ onSendText, microphoneHidden, toggleMicrophone, setMicro
           </div>
         </div>
       )}
+      </div>
+      
       {microphoneHidden && !showInput && ( // hide the microphone and show the searchInput
         <FontAwesomeIcon
           onClick={() => toggleMicrophone(false)}
@@ -172,6 +177,9 @@ const [microphoneHidden, setMicrophoneHidden] = useState(false);
 const [commandRecognized, setCommandRecognized] = useState(false);
 
 const [recognizedProcessText, setRecognizedProcessText] = useState(' ');
+
+const [isQuestionIcon, setIsQuestionIcon] = useState(true);
+
 
 
 
@@ -427,6 +435,8 @@ const handleYearButtonClick = (year) => {
     // Function for toggleQuestions button event
   const toggleQuestions = () => {
     setShowQuestions(!showQuestions); // Toggle the visibility of question list
+    setIsQuestionIcon(!isQuestionIcon);
+
   };
 
 
@@ -763,22 +773,32 @@ const sendTextToCommands = (text) => {
 
   // Displaying in the website
   return (
-    <div className="dom-page">
-      <div className='left-icon'>
+    <div className="App">
+      <header className='header'>
+      <div className='left-icons'>
       <Menu/>
-      </div>
-
-      
-      <div className='icon-button'>
-        <div className="reset-button">
+      <div className="reset-button">
           {resetButtonVisible && (
             <FontAwesomeIcon onClick={resetDisplay} icon={faHome} size="xl" style={{color: "#ffc800",}}/>
           )}
-          
-            <FontAwesomeIcon className='questions' icon={faCircleQuestion} size="2xl" style={{color: "#ffc800",}} onClick={toggleQuestions} />
-          
         </div>
       </div>
+      <div className='logo-name'>
+    <img src={iska} alt="PUP Logo" className="logo" />
+    <div className='app-neym'>
+    <h1 className='app-name'>
+        IS<span>KA</span></h1>
+    </div>
+      <p className={responseDisplayed ? 'desc-hidden' : 'desc'}>
+  Hi! I'm ISKA, PUP Virtual Assistant, how can I help you?
+  <div className='ai'>
+      <img src={gifImage} alt="Your GIF" />
+    </div>
+</p>
+      </div>
+      <div className='right-icon'>
+
+      <FontAwesomeIcon className='questions' icon={isQuestionIcon ? faCircleQuestion : faTimes} size="2xl" style={{color: "#ffc800",}} onClick={toggleQuestions} />
 
       {showQuestions && (
         <div className="question-list">
@@ -798,19 +818,11 @@ const sendTextToCommands = (text) => {
           {/* Add more questions as needed */}
         </div>
       )}
-    <header className='head'>
-    <img src={iska} alt="PUP Logo" className="logo" />
-      <h1 className='app-name'>IS<span>KA</span></h1>
-      <p className={responseDisplayed ? 'desc-hidden' : 'desc'}>
-  Hi! I'm ISKA, PUP Virtual Assistant, how can I help you?
-</p>
+      </div>
+      </header>
 
 <div className='textOther'>
   { commandRecognized && ((otherText))}</div>
-
-    </header>
-      
-
       <div className='container'>
         <div className='buttons'>
           {yearbutton && (
@@ -845,33 +857,21 @@ const sendTextToCommands = (text) => {
       </div>
       </div>
 
-      
-      
+      <div className='download-container'>
       <div className='download-button'>
-      <div className='download-button2'>
       {downloadButtonVisible && (
         <button onClick={generatePDF}> 
 <FontAwesomeIcon  icon={faFileArrowDown}  size="xl" style={{"--fa-primary-color": "#fab005", "--fa-secondary-color": "#ffffff",}} /> </button>
       )}
       </div>
 
-        
       </div>
-
-
-
-      <footer className="microphone">
-      <Menu/>
+      
+      <div className='bottom'>
       <div className='transcript'>
       <p className="transcript-text" autoCorrect="off" spellCheck="true">{transcript}</p>
       </div>
-      {!microphoneHidden ? (
-      speechActive ? (
-      <FontAwesomeIcon className='stop' onClick={stopListening} icon={faMicrophone} beat size="sm" style={{"--fa-primary-color": "#ffae00", "--fa-secondary-color": "#ffffff",}} />
-      ) : (
-      <FontAwesomeIcon className='start' onClick={startListening} icon={faMicrophone} size="sm" style={{"--fa-primary-color": "#ffffff", "--fa-secondary-color": "#ffffff",}} />
-      )
-      ) : null}
+      <div className="microphone">
       <div className="text-input" onClick={handleTextInputClick}>
       <TextInputApp
         onSendText={handleTextInput}
@@ -879,7 +879,28 @@ const sendTextToCommands = (text) => {
         setMicrophoneHidden={setMicrophoneHidden} // Pass the setMicrophoneHidden function as a prop
      />
     </div>
-    </footer>
+    <div className='mic'>
+    {!microphoneHidden ? (
+      speechActive ? (
+      <FontAwesomeIcon className='stop' onClick={stopListening} icon={faMicrophone} beat style={{"--fa-primary-color": "#ffae00", "--fa-secondary-color": "#ffffff",}} />
+      ) : (
+      <FontAwesomeIcon className='start' onClick={startListening} icon={faMicrophone}  style={{"--fa-primary-color": "#ffffff", "--fa-secondary-color": "#ffffff",}} />
+      )
+      ) : null}
+    </div>
+      
+      
+      <div className='hide-this'>
+      <FontAwesomeIcon
+          className="keyBoard"
+          icon={faKeyboard}
+          size="xl"
+          style={{ color: '#ffc800' }}
+        />
+      </div>
+    </div>
+      </div>
+      
      
     </div>
   );
