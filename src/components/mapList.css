@@ -1,42 +1,78 @@
-*
-{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-.place{
+
+
+.place {
     position: relative;
-    top: 5vh;
+    width: 100%;
+    top: 2vh;
 }
 
-.mapGif{
-    align-items: center;
-    position: relative;
+.place p{
+    position:absolute;
+    padding: 10px;
+    color:#fff;
+    left: 8%;
+    top: 17vh;
+    z-index: 10;
+    text-align: center;
+    width: 85%;
+    background-color: rgba(0, 0, 0, 0.492);
+}
+
+.place img{
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    top: 10vh;
-    height: 100%;
+    flex-wrap: wrap;
+    list-style-type: none;
+    width: 89%;
+    margin: auto auto ;
+    height: auto;
+    position: relative;
+    padding: 10px;
+    scrollbar-width:none;
+  scrollbar-color: transparent transparent;
+
+  &::-webkit-scrollbar {
+      width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+      background-color: transparent;
+  }
+    
+}
+
+
+.mapGif{
+    top: 1vh;
+    padding: 10px;
+    position: relative;
+    width: 50vh;
+    height: max-content;
+    overflow:-moz-hidden-unscrollable;
+    margin-left: auto;
+    margin-right: auto;
+
 }
 
 .mapss{
-    width: 90%;
+    padding: 10px;
+    width: 100%;
     height: 100%;
     position: relative;
     overflow: -moz-hidden-unscrollable;
-    z-index: -1;
+    
 }
 
 .go-back{
     position: relative;
-    z-index: 10;
-    top: -56vh;
-    left: 3vh;
+    top: -68vh;
+    left: 2vh;
+    overflow: hidden;
+
 }
 .go-back button{
     background-color:darkgoldenrod;
     border-radius: 10px;
     padding: 5px;
-    width: fit-content;
-
+    width: 10vh;
+    z-index: 9000;
 }
