@@ -209,8 +209,15 @@ input {
   }
 }
 
-.hide-this{
-  visibility: hidden;
+.vr{
+  position:absolute;
+  padding: 10px;
+  left: 1vh;
+  right: 1vh;
+  display: block;
+  width: 100%;
+  height: 100%;
+  z-index: 50;
 }
 
 .start{

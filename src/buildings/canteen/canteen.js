@@ -23,6 +23,20 @@ class Canteen extends Component {
       displayGif: gif,
       showButtons: false,
     });
+
+    // Hide elements with the textOther classname
+    const hideTextOther = document.querySelectorAll('.textOther');
+    hideTextOther.forEach((element) => {
+      element.style.display = 'none';
+    });
+
+    const hideReset = document.querySelectorAll('.reset-button');
+    hideReset.forEach((element) => {
+      element.style.display = 'none';
+    });
+
+    
+    
   };
 
   // Function to show all the buttons
@@ -31,6 +45,17 @@ class Canteen extends Component {
       displayGif: null,
       showButtons: true,
     });
+
+     // Show elements with the textOther classname
+     const showTextOther = document.querySelectorAll('.textOther');
+     showTextOther.forEach((element) => {
+       element.style.display = ''; // Set to an empty string to use the default display value
+     });
+
+     const showReset = document.querySelectorAll('.reset-button');
+     showReset.forEach((element) => {
+       element.style.display = '';
+     });
   };
 
   render() {

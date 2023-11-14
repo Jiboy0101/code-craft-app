@@ -6,9 +6,9 @@ import gif2 from '../../places/gate.gif'; // Replace with the actual path to you
 import gif3 from '../../components/iska-ai.gif';
 import gif4 from '../../components/iska-ai.gif';
 import gif5 from '../../components/iska-ai.gif';
-import placePic from '../../pictures/placePic/pylon2022.jpg'
+import placePic from '../../pictures/placePic/pylon2022.jpg';
 
-class Canteen extends Component {
+class Engineer extends Component {
   constructor() {
     super();
     this.state = {
@@ -23,15 +23,18 @@ class Canteen extends Component {
       displayGif: gif,
       showButtons: false,
     });
-
      // Hide elements with the textOther classname
      const elementsToHide = document.querySelectorAll('.textOther');
      elementsToHide.forEach((element) => {
        element.style.display = 'none';
      });
-     const hideReset = document.querySelectorAll('.reset-button');
-     hideReset.forEach((element) => {
-       element.style.display = 'none';
+      const hideReset = document.querySelectorAll('.reset-button');
+    hideReset.forEach((element) => {
+      element.style.display = 'none';
+    });
+    const showReset = document.querySelectorAll('.reset-button');
+     showReset.forEach((element) => {
+       element.style.display = '';
      });
   };
 
@@ -41,16 +44,11 @@ class Canteen extends Component {
       displayGif: null,
       showButtons: true,
     });
-
     // Show elements with the textOther classname
     const elementsToShow = document.querySelectorAll('.textOther');
     elementsToShow.forEach((element) => {
       element.style.display = ''; // Set to an empty string to use the default display value
     });
-    const showReset = document.querySelectorAll('.reset-button');
-     showReset.forEach((element) => {
-       element.style.display = '';
-     });
   };
 
   render() {
@@ -111,4 +109,4 @@ class Canteen extends Component {
         }
       }    
 
-export default Canteen;
+export default Engineer;

@@ -7,7 +7,7 @@ import './App.css';
 import iska from './pictures/iska-logo.png';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMicrophone, faHome, faCircleQuestion, faFileArrowDown, faKeyboard, faPaperPlane, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faMicrophone, faHome, faCircleQuestion, faFileArrowDown, faKeyboard, faPaperPlane, faTimes, faKiss } from '@fortawesome/free-solid-svg-icons';
 
 
 import pdfMake from 'pdfmake/build/pdfmake';
@@ -30,7 +30,15 @@ import "@fontsource/krona-one";
 
 import gifImage from './components/iska-ai.gif'; // Adjust the path to your GIF file
 
-import LocateMap from './buildings/canteen/canteen';
+
+//BUILDINGS 
+import Canteen from './buildings/canteen/canteen';
+import Science from './buildings/science/science';
+import Engineer from './buildings/engineering/engineer';
+
+import Vr from './VRtour';
+
+
 
 
 // Function for the searchInput 
@@ -129,56 +137,51 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 export default function DOM() {
  // State for controlling speech activation
 const [speechActive, setSpeechActive] = useState(false);
-
 // State for displaying text on the screen
 const [displayTextOnScreen, setDisplayTextOnScreen] = useState('');
-
 // State for controlling the visibility of the reset button
 const [resetButtonVisible, setResetButtonVisible] = useState(false);
-
 // State for controlling the visibility of the download button
 const [downloadButtonVisible, setDownloadButtonVisible] = useState(false);
-
 // State to control the visibility of the question list
 const [showQuestions, setShowQuestions] = useState(false);
 
+const [showVirtual, setVirtual] = useState(false);
+
 // State for controlling the visibility of the year button
 const [yearbutton, setYearButtonVisible] = useState(false);
-
 // State for holding the selected year response
 const [selectedYearResponse, setSelectedYearResponse] = useState('');
-
 // State for displaying other text
 const [otherText, displayOtherText] = useState('');
-
 // State for controlling the visibility of programs button
 const [programsButton, setProgramsButton] = useState(false);
-
 // State for holding the selected program response
 const [programsResponse, setSelectedProgram] = useState('');
-
 // State for controlling the visibility of about buttons
 const [aboutButtons, setAboutVisible]= useState(false);
-
 // State for holding the about response
 const [aboutResponse, setAboutResponse] = useState('');
-
 // State for tracking if a response is displayed
 const [responseDisplayed, setResponseDisplayed] = useState(false);
-
 // State for controlling the visibility of the microphone
 const [microphoneHidden, setMicrophoneHidden] = useState(false);
-
 // State for tracking if a command is recognized
 const [commandRecognized, setCommandRecognized] = useState(false);
-
 const [recognizedProcessText, setRecognizedProcessText] = useState(' ');
-
 const [isQuestionIcon, setIsQuestionIcon] = useState(true);
 
-//canteen
-const [mapButton, setmapVisible] = useState(false);
-const [mapResponse, setMapResponse] = useState('');
+//CANTEEN
+const [canteenButton, setCanteenVisible] = useState(false);
+const [canteenResponse, setCanteenResponse] = useState('');
+//SCIENCE
+const [scienceButton, setScienceVisible] = useState(false);
+const [scienceResponse, setScienceResponse] = useState('');
+//ENGINEER
+const [engineerButton, setEngineerVisible] = useState(false);
+const [engineerResponse, setEngineerResponse] = useState('');
+
+
 
 
 
@@ -238,10 +241,24 @@ const handleYearButtonClick = (year) => {
 
   };
 
-  const handleMapButtonClick = (mapp) => {
-    const maps = Responses[mapp];
+  const handleCanteenButtonClick = (canteen) => {
+    const canteenn = Responses[canteen];
 
-    setMapResponse(maps);
+    setCanteenResponse(canteenn);
+    setDownloadButtonVisible(false);
+  }
+
+  const handleScienceButtonClick = (science) => {
+    const sciencee = Responses[science];
+
+    setScienceResponse(sciencee);
+    setDownloadButtonVisible(false);
+  }
+
+  const handleEngineerButtonClick = (engineer) => {
+    const engineerr = Responses[engineer];
+
+    setEngineerResponse(engineerr);
     setDownloadButtonVisible(false);
   }
 
@@ -266,8 +283,10 @@ const handleYearButtonClick = (year) => {
     setAboutVisible(false);
     setResponseDisplayed(false);
     setRecognizedProcessText(false);
-    setMapResponse(false);
-    setmapVisible(false);
+    setCanteenResponse(false);
+    setCanteenVisible(false);
+    setScienceVisible(false);
+    setScienceResponse(false);
 
     const textDisplayContainer = document.querySelector('.textOther');
     while (textDisplayContainer.firstChild) {
@@ -279,8 +298,12 @@ const handleYearButtonClick = (year) => {
   const toggleQuestions = () => {
     setShowQuestions(!showQuestions); // Toggle the visibility of question list
     setIsQuestionIcon(!isQuestionIcon);
-
   };
+
+  const toggleVirtualtour = () => {
+    setVirtual(!showVirtual);
+  
+  }
 
 
   
@@ -321,7 +344,7 @@ const handleYearButtonClick = (year) => {
         setResponseDisplayed(true);
         setCommandRecognized(true);
 
-        setmapVisible(false);
+        setCanteenVisible(false);
 
 
       }
@@ -351,7 +374,7 @@ const handleYearButtonClick = (year) => {
 
         setCommandRecognized(true);
 
-        setmapVisible(false);
+        setCanteenVisible(false);
 
 
       }
@@ -378,7 +401,7 @@ const handleYearButtonClick = (year) => {
         
         setResponseDisplayed(true);
         
-        setmapVisible(false);
+        setCanteenVisible(false);
 
       },
     },
@@ -410,7 +433,7 @@ const handleYearButtonClick = (year) => {
         
         setCommandRecognized(true);
 
-        setmapVisible(false);
+        setCanteenVisible(false);
 
 
 
@@ -460,7 +483,7 @@ const handleYearButtonClick = (year) => {
 
         setCommandRecognized(true);
 
-        setmapVisible(false);
+        setCanteenVisible(false);
 
         
     const textDisplayContainer = document.querySelector('.textOther');
@@ -497,7 +520,7 @@ const handleYearButtonClick = (year) => {
 
         setCommandRecognized(true);
 
-        setmapVisible(false);
+        setCanteenVisible(false);
 
         
     const textDisplayContainer = document.querySelector('.textOther');
@@ -535,7 +558,7 @@ const handleYearButtonClick = (year) => {
 
         setCommandRecognized(true);
 
-        setmapVisible(false);
+        setCanteenVisible(false);
         
     const textDisplayContainer = document.querySelector('.textOther');
     while (textDisplayContainer.firstChild) {
@@ -546,12 +569,12 @@ const handleYearButtonClick = (year) => {
     },
 
     {
-      command: ['* canteen', 'canteen *', '* canteen *', 'canteen', 'canteen *', '* canteen', '* canteen *', 'canteen'],
+      command: ['* canteen', '* canteen *', 'canteen', 'canteen *'],
       callback:() => {
         resetTranscript(); // Reset the transcript when a command is executed
-        displayText('Please select your nearest area in campus, so that I can assist you.');
+        displayText('Please select your nearest area in campus, so that I can assist you to show the way to Canteen');
         const textDisplay = `
-        Please select your nearest area in campus, so that I can assist you.
+        Please select your nearest area in campus, so that I can assist you to show the way to Canteen
         `;
         displayOtherText(textDisplay);
         setResetButtonVisible(true); // Show the reset button after a command is executed
@@ -572,8 +595,83 @@ const handleYearButtonClick = (year) => {
 
         setCommandRecognized(true);
 
-        setmapVisible(true);
-        setMapResponse(false);
+        setCanteenVisible(true);
+        setCanteenResponse(false);
+      }
+    },
+
+    {
+      command: ['* science ', 'science *', '* science *', 'science'],
+      callback: () => {
+        resetTranscript(); // Reset the transcript when a command is executed
+        displayText('Please select your nearest area in campus, so that I can assist you to show the way to Science Building');
+        const textDisplay = `
+        Please select your nearest area in campus, so that I can assist you to show the way to Science Building
+        `;
+        displayOtherText(textDisplay);
+        setResetButtonVisible(true); // Show the reset button after a command is executed
+
+        setProgramsButton(false);
+
+        setYearButtonVisible(false);
+        setSelectedYearResponse(false);
+
+        setDisplayTextOnScreen(false);
+
+        setAboutVisible(false);
+        setAboutResponse(false);
+
+        setSelectedProgram(false);
+
+        setResponseDisplayed(true); // Set responseDisplayed to true
+
+        setCommandRecognized(true);
+
+        //CANTEEN
+        setCanteenVisible(false);
+        setCanteenResponse(false);
+
+        setScienceVisible(true);
+        setScienceResponse(false);
+      }
+    },
+    {
+      command: ['* engineer', 'engineer *', '* engineer *', 'engineer', '* engineering', 'engineering *', '* engineering *', 'engineering', 'architecture', '* architecture', 'architecture *', '* arhitecture *'],
+      callback: () => {
+        resetTranscript(); // Reset the transcript when a command is executed
+        displayText('Please select your nearest area in campus, so that I can assist you to show the way to Engineering and Architecture Building');
+        const textDisplay = `
+        Please select your nearest area in campus, so that I can assist you to show the way to Engineering and Architect Building
+        `;
+        displayOtherText(textDisplay);
+        setResetButtonVisible(true); // Show the reset button after a command is executed
+
+        setProgramsButton(false);
+
+        setYearButtonVisible(false);
+        setSelectedYearResponse(false);
+
+        setDisplayTextOnScreen(false);
+
+        setAboutVisible(false);
+        setAboutResponse(false);
+
+        setSelectedProgram(false);
+
+        setResponseDisplayed(true); // Set responseDisplayed to true
+
+        setCommandRecognized(true);
+
+        //CANTEEN
+        setCanteenVisible(false);
+        setCanteenResponse(false);
+        //SCIENCE
+        setScienceVisible(false);
+        setScienceResponse(false);
+        //ENGINEER
+        setEngineerVisible(true);
+        setEngineerResponse(false);
+
       }
     },
    // Also command for asking the locations
@@ -668,7 +766,15 @@ const sendTextToCommands = (text) => {
       <div className='right-icon'>
 
       <FontAwesomeIcon className='questions' icon={isQuestionIcon ? faCircleQuestion : faTimes} size="2xl" style={{color: "#ffc800",}} onClick={toggleQuestions} />
+      <FontAwesomeIcon className='virtual' icon={faKiss} size="2xl" onClick={toggleVirtualtour} />
 
+      {showVirtual && (
+        <div className='vr'>
+        <Vr />
+        </div>
+      )
+
+      }
       {showQuestions && (
         <div className="question-list">
           {/* Add your list of questions here */}
@@ -691,7 +797,8 @@ const sendTextToCommands = (text) => {
       </header>
 
 <div className='textOther'>
-  { commandRecognized && ((otherText))}</div>
+  { commandRecognized && ((otherText))}
+  </div>
       <div className='container'>
         <div className='buttons'>
           {yearbutton && (
@@ -703,15 +810,21 @@ const sendTextToCommands = (text) => {
           { aboutButtons && (
             <About onAboutClick={handleAboutButtonClick} />
           )}
-          {mapButton && (
-            <LocateMap onMapButtonClick = {handleMapButtonClick} />
+          {canteenButton && (
+            <Canteen onCanteenButtonClick = {handleCanteenButtonClick} />
+          )}
+          {scienceButton && (
+            <Science onScienceButtonClick = {handleScienceButtonClick} />
+          )}
+          {engineerButton && (
+            <Engineer onEngineerButtonClick = {handleEngineerButtonClick} />
           )}
         </div>
 
         <div>
         <div className="otherResponse">
         {(selectedYearResponse || programsResponse || aboutResponse) && (
-          <p className="displayResponse">{selectedYearResponse}{programsResponse}{aboutResponse}{mapResponse}</p>         
+          <p className="displayResponse">{selectedYearResponse}{programsResponse}{aboutResponse}{canteenResponse}{scienceResponse}{engineerResponse}</p>         
         )}
         <p>{displayTextOnScreen}</p>
       </div>  
