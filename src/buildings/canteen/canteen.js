@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import './mapList.css';
+import '../building.css';
 // Import your GIFs
-import gif1 from '../places/gate.gif';
-import gif2 from '../places/gate.gif'; // Replace with the actual path to your image
-import gif3 from '../components/iska-ai.gif';
-import gif4 from '../components/iska-ai.gif';
-import gif5 from '../components/iska-ai.gif';
-import placePic from '../pictures/placePic/pylon2022.jpg';
+import gif1 from '../../places/gate.gif';
+import gif2 from '../../places/gate.gif'; // Replace with the actual path to your image
+import gif3 from '../../components/iska-ai.gif';
+import gif4 from '../../components/iska-ai.gif';
+import gif5 from '../../components/iska-ai.gif';
+import placePic from '../../pictures/placePic/pylon2022.jpg'
 
-class GifButtonComponent extends Component {
+class Canteen extends Component {
   constructor() {
     super();
     this.state = {
@@ -50,19 +50,23 @@ class GifButtonComponent extends Component {
         {showButtons ? (
           <ul className='place'>
             <li>
+            <p className='text'>Main Gate</p>
               <img src={placePic} alt='Main Gate' onClick={() => { this.handleButtonClick(gif1); speakText('In the main gate, follow this direction and you will see the Science building'); }}/>
-                            <p>Main Gate</p>
             </li>
             <li>
+            <p className='text'>Canteen</p>
               <img src={placePic} alt='CANTEEN' onClick={() => this.handleButtonClick(gif2)}/>
             </li>
             <li>
+            <p className='text'>Gynasium</p>
               <img src={placePic} alt='GYMNASIUM' onClick={() => this.handleButtonClick(gif3)}/>
             </li>
             <li>
+            <p className='text'>Science Building</p>
               <img src={placePic} alt='ADMISSION OFFICE' onClick={() => this.handleButtonClick(gif4)}/>
             </li>
             <li>
+            <p className='text'>Engineer Building</p>
               <img src={placePic} alt='ENGINEERING BUILDING' onClick={() => this.handleButtonClick(gif5)}/>
             </li>
             <li>
@@ -87,4 +91,4 @@ class GifButtonComponent extends Component {
         }
       }    
 
-export default GifButtonComponent;
+export default Canteen;

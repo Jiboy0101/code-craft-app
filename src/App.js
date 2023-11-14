@@ -18,7 +18,6 @@ import Menu from './Menu/Menu';
 
 // Get the response to a command
 import Responses from './fileJSON/dataResponse.json'; 
-import locationsData from './fileJSON/locations.json'; 
 import processesData from './fileJSON/processes.json'; 
 
 // calling the button when commanding 
@@ -26,15 +25,12 @@ import YearButtons from './display/displayEnroll';
 import Program from './display/displayProgram';
 import About from './display/displayAbout';
 
-// insert the Map of PUP Lopez
-import pupMap from './pictures/map.jpg';
-
 // Install a font for ISKA name
 import "@fontsource/krona-one"; 
 
 import gifImage from './components/iska-ai.gif'; // Adjust the path to your GIF file
 
-import LocateMap from './components/mapList';
+import LocateMap from './buildings/canteen/canteen';
 
 
 // Function for the searchInput 
@@ -128,9 +124,6 @@ function TextInputApp({ onSendText, microphoneHidden, toggleMicrophone, setMicro
 // Set the virtual file system for pdfMake
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-// Set the default map URL to pupMap
-const defaultMapURL = pupMap;
-
 
 
 export default function DOM() {
@@ -183,176 +176,12 @@ const [recognizedProcessText, setRecognizedProcessText] = useState(' ');
 
 const [isQuestionIcon, setIsQuestionIcon] = useState(true);
 
+//canteen
 const [mapButton, setmapVisible] = useState(false);
 const [mapResponse, setMapResponse] = useState('');
 
 
 
-  // desgning and make to zoom and pich  the image map of PUP Lopez
-  const displayImage = (imageURL, width, height) => {
-    let zoomLevel = 1;
-    let initialDistance = 0;
-    let initialScale = 1;
-    let lastScale = 1;
-    let panning = false;
-    let lastX = 0;
-    let lastY = 0; 
-    const imgElement = document.createElement('img');
-    imgElement.src = imageURL;
-    imgElement.alt = 'Locations Map';
-    imgElement.style.maxWidth = '100%';
-    if (width) {
-      imgElement.style.width = `${width}px`;
-    }
-    if (height) {
-      imgElement.style.height = `${height}px`;
-    }
-    const applyZoom = () => {
-      const scale = Math.max(0.1, Math.min(3, initialScale * zoomLevel));
-      imgElement.style.transform = `scale(${scale}) translate(${lastX}px, ${lastY}px)`;
-    };
-
-    // Set the zoom of the image  
-    const handleZoom = (event) => {
-      if (event.touches && event.touches.length === 2) {
-        const touch1 = event.touches[0];
-        const touch2 = event.touches[1];
-        const distance = Math.hypot(touch1.clientX - touch2.clientX, touch1.clientY - touch2.clientY);
-  
-        const scaleFactor = distance / initialDistance;
-        zoomLevel = lastScale * scaleFactor;
-        applyZoom();
-      }
-    };
-    // Set the pan move of the image
-    const handlePanMove = (event) => {
-      if (panning && event.touches.length === 2) {
-        const currentX = (event.touches[0].clientX + event.touches[1].clientX) / 2 - imgElement.getBoundingClientRect().left;
-        const currentY = (event.touches[0].clientY + event.touches[1].clientY) / 2 - imgElement.getBoundingClientRect().top;
-        lastX += currentX - lastX;
-        lastY += currentY - lastY;
-        applyZoom();
-      }
-    };
-  
-    const handlePanEnd = () => {
-      panning = false;
-      lastScale = zoomLevel;
-    };
-  
-    imgElement.addEventListener('gesturestart', (event) => {
-      event.preventDefault();
-    });
-  
-    imgElement.addEventListener('touchstart', (event) => {
-      if (event.touches.length === 2) {
-        initialDistance = Math.hypot(
-          event.touches[0].clientX - event.touches[1].clientX,
-          event.touches[0].clientY - event.touches[1].clientY
-        );
-        initialScale = lastScale;
-      }
-    });
-  
-    imgElement.addEventListener('touchmove', (event) => {
-      if (event.touches.length === 2) {
-        handleZoom(event);
-      } else if (panning) {
-        handlePanMove(event);
-      }
-    });
-  
-    imgElement.addEventListener('touchend', handlePanEnd);
-    imgElement.addEventListener('touchcancel', handlePanEnd);
-  
-    const textDisplayContainer = document.querySelector('.textOther');
-    while (textDisplayContainer.firstChild) {
-      textDisplayContainer.removeChild(textDisplayContainer.firstChild);
-    }
-    textDisplayContainer.appendChild(imgElement);
-  };
-
-  // Set and displaying the Map in the screen
-  const displayDefaultMap = (defaultMapURL, width, height) => {
-    let zoomLevel = 1;
-    let initialDistance = 0;
-    let initialScale = 1;
-    let lastScale = 1;
-    let panning = false;
-    let lastX = 0;
-    let lastY = 0; 
-    const imgElement = document.createElement('img');
-    imgElement.src = defaultMapURL;
-    imgElement.style.maxWidth = '100%';
-    if (width) {
-      imgElement.style.width = `${width}px`;
-    }
-    if (height) {
-      imgElement.style.height = `${height}px`;
-    }
-    const applyZoom = () => {
-      const scale = Math.max(0.1, Math.min(3, initialScale * zoomLevel));
-      imgElement.style.transform = `scale(${scale}) translate(${lastX}px, ${lastY}px)`;
-    };
-  
-    const handleZoom = (event) => {
-      if (event.touches && event.touches.length === 2) {
-        const touch1 = event.touches[0];
-        const touch2 = event.touches[1];
-        const distance = Math.hypot(touch1.clientX - touch2.clientX, touch1.clientY - touch2.clientY);
-  
-        const scaleFactor = distance / initialDistance;
-        zoomLevel = lastScale * scaleFactor;
-        applyZoom();
-      }
-    };
-  
-    const handlePanMove = (event) => {
-      if (panning && event.touches.length === 2) {
-        const currentX = (event.touches[0].clientX + event.touches[1].clientX) / 2 - imgElement.getBoundingClientRect().left;
-        const currentY = (event.touches[0].clientY + event.touches[1].clientY) / 2 - imgElement.getBoundingClientRect().top;
-        lastX += currentX - lastX;
-        lastY += currentY - lastY;
-        applyZoom();
-      }
-    };
-  
-    const handlePanEnd = () => {
-      panning = false;
-      lastScale = zoomLevel;
-    };
-  
-    imgElement.addEventListener('gesturestart', (event) => {
-      event.preventDefault();
-    });
-  
-    imgElement.addEventListener('touchstart', (event) => {
-      if (event.touches.length === 2) {
-        initialDistance = Math.hypot(
-          event.touches[0].clientX - event.touches[1].clientX,
-          event.touches[0].clientY - event.touches[1].clientY
-        );
-        initialScale = lastScale;
-      }
-    });
-  
-    imgElement.addEventListener('touchmove', (event) => {
-      if (event.touches.length === 2) {
-        handleZoom(event);
-      } else if (panning) {
-        handlePanMove(event);
-      }
-    });
-  
-    imgElement.addEventListener('touchend', handlePanEnd);
-    imgElement.addEventListener('touchcancel', handlePanEnd);
-  
-    const textDisplayContainer = document.querySelector('.textOther');
-    while (textDisplayContainer.firstChild) {
-      textDisplayContainer.removeChild(textDisplayContainer.firstChild);
-    }
-    textDisplayContainer.appendChild(imgElement);
-  };
 
 
   // function for generating the pdf file when download button is click
@@ -360,7 +189,7 @@ const [mapResponse, setMapResponse] = useState('');
     const docDefinition = {
       content: [
         { text: '"ISKA" Virtual Assistant', style: 'header', alignment: 'center'},
-        { text: displayTextOnScreen || selectedYearResponse || programsResponse || aboutResponse || displayImage, alignment: 'justify'},
+        { text: displayTextOnScreen || selectedYearResponse || programsResponse || aboutResponse, alignment: 'justify'},
       ],
       styles: {
         header: {
@@ -375,7 +204,7 @@ const [mapResponse, setMapResponse] = useState('');
   };
 
   // calling the response data from json file 
-  const locations = locationsData;
+
   const processes = processesData;
 
 
@@ -454,18 +283,7 @@ const handleYearButtonClick = (year) => {
   };
 
 
-    // Function for command location in map event
-  const locationCommands = locations.map((location) => ({
-    command: [`* ${location.name}`, `where is the ${location.name}`, `where is ${location.name}`, `where's the ${location.name}`, `where's ${location.name}`,
-     `find ${location.name}`, `find the ${location.name}`, `locate the ${location.name}`, `locate ${location.name}`, `find ${location.name}`, `find the ${location.name}`, `room number ${location.name}`, `find room number${location.name}`, `find the room number${location.name}`, `where is the${location.name}`, `where is room number${location.name}`, `locate the room number${location.name}`, `locate room number${location.name}`, `where is room${location.name}`, `where's room${location.name}`, `room${location.name}`],
-    callback: () => {
-      resetTranscript();
-      displayText(`Showing map for the ${location.name}. The get to the ${location.name}, here are the directions to follow. All the directions that I will give will start from the main gate. ${location.directions}`);
-      displayImage(pupMap, 320, 470);
-      setResetButtonVisible(true);
-      setDownloadButtonVisible(false);
-    },
-  }));
+  
 
   const processesCommands = processes.map((get) => ({
     command: [`* ${get.name} *`, `${get.name} *`, `* ${get.name}`],
@@ -548,8 +366,6 @@ const handleYearButtonClick = (year) => {
         setResetButtonVisible(true);
         setDownloadButtonVisible(false);
         setProgramsButton(false);
-        
-        displayDefaultMap(defaultMapURL, 320, 470);
 
 
         setAboutResponse(false);
@@ -642,13 +458,9 @@ const handleYearButtonClick = (year) => {
 
         setResponseDisplayed(true); // Set responseDisplayed to true
 
-        displayDefaultMap(false);
-
         setCommandRecognized(true);
 
         setmapVisible(false);
-
-
 
         
     const textDisplayContainer = document.querySelector('.textOther');
@@ -682,8 +494,6 @@ const handleYearButtonClick = (year) => {
         setAboutResponse(false);
 
         setResponseDisplayed(true); // Set responseDisplayed to true
-
-        displayDefaultMap(false);
 
         setCommandRecognized(true);
 
@@ -723,8 +533,6 @@ const handleYearButtonClick = (year) => {
 
         setResponseDisplayed(true); // Set responseDisplayed to true
 
-        displayDefaultMap(false);
-
         setCommandRecognized(true);
 
         setmapVisible(false);
@@ -738,7 +546,7 @@ const handleYearButtonClick = (year) => {
     },
 
     {
-      command: ['* where', 'where *', '* where *', 'where', 'locate *', '* locate', '* locate *', 'locate'],
+      command: ['* canteen', 'canteen *', '* canteen *', 'canteen', 'canteen *', '* canteen', '* canteen *', 'canteen'],
       callback:() => {
         resetTranscript(); // Reset the transcript when a command is executed
         displayText('Please select your nearest area in campus, so that I can assist you.');
@@ -762,8 +570,6 @@ const handleYearButtonClick = (year) => {
 
         setResponseDisplayed(true); // Set responseDisplayed to true
 
-        displayDefaultMap(false);
-
         setCommandRecognized(true);
 
         setmapVisible(true);
@@ -771,7 +577,6 @@ const handleYearButtonClick = (year) => {
       }
     },
    // Also command for asking the locations
-    ...locationCommands,
     ...processesCommands,
   
 ];
