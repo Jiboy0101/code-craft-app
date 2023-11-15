@@ -28,7 +28,7 @@ import About from './display/displayAbout';
 // Install a font for ISKA name
 import "@fontsource/krona-one"; 
 
-import gifImage from './components/iska-ai.gif'; // Adjust the path to your GIF file
+import avatar from './pictures/avatar.gif'; // Adjust the path to your GIF file
 
 
 //BUILDINGS 
@@ -761,7 +761,7 @@ const sendTextToCommands = (text) => {
       <p className={responseDisplayed ? 'desc-hidden' : 'desc'}>
   Hi! I'm ISKA, PUP Virtual Assistant, how can I help you?
   <div className='ai'>
-      <img src={gifImage} alt="Your GIF" />
+      <img src={avatar} alt="Your GIF" />
     </div>
 </p>
       </div>
