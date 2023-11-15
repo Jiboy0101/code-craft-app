@@ -32,6 +32,7 @@
     margin: auto auto ;
     position: relative;
     padding: 5px;
+    border: 3px gold solid;
     scrollbar-width:none;
   scrollbar-color: transparent transparent;
 
