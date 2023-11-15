@@ -7,7 +7,7 @@ import './App.css';
 import iska from './pictures/iska-logo.png';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMicrophone, faHome, faCircleQuestion, faFileArrowDown, faKeyboard, faPaperPlane, faTimes, faKiss } from '@fortawesome/free-solid-svg-icons';
+import { faMicrophone, faHome, faCircleQuestion, faFileArrowDown, faKeyboard, faPaperPlane, faTimes, faVideo } from '@fortawesome/free-solid-svg-icons';
 
 
 import pdfMake from 'pdfmake/build/pdfmake';
@@ -287,6 +287,8 @@ const handleYearButtonClick = (year) => {
     setCanteenVisible(false);
     setScienceVisible(false);
     setScienceResponse(false);
+    setEngineerVisible(false);
+    setEngineerResponse(false);
 
     const textDisplayContainer = document.querySelector('.textOther');
     while (textDisplayContainer.firstChild) {
@@ -766,15 +768,8 @@ const sendTextToCommands = (text) => {
       <div className='right-icon'>
 
       <FontAwesomeIcon className='questions' icon={isQuestionIcon ? faCircleQuestion : faTimes} size="2xl" style={{color: "#ffc800",}} onClick={toggleQuestions} />
-      <FontAwesomeIcon className='virtual' icon={faKiss} size="2xl" onClick={toggleVirtualtour} />
+      <FontAwesomeIcon className='virtual' icon={faVideo} size="xl" onClick={toggleVirtualtour} style={{color: "ffc800"}}/>
 
-      {showVirtual && (
-        <div className='vr'>
-        <Vr />
-        </div>
-      )
-
-      }
       {showQuestions && (
         <div className="question-list">
           {/* Add your list of questions here */}
@@ -800,6 +795,14 @@ const sendTextToCommands = (text) => {
   { commandRecognized && ((otherText))}
   </div>
       <div className='container'>
+        <div className='vr-box'>
+        {showVirtual && (
+        <div className='vr'>
+        <Vr />
+        </div>
+      )}
+        </div>
+     
         <div className='buttons'>
           {yearbutton && (
             <YearButtons onYearButtonClick={handleYearButtonClick}  />
@@ -820,14 +823,15 @@ const sendTextToCommands = (text) => {
             <Engineer onEngineerButtonClick = {handleEngineerButtonClick} />
           )}
         </div>
-
+      
         <div>
         <div className="otherResponse">
         {(selectedYearResponse || programsResponse || aboutResponse) && (
           <p className="displayResponse">{selectedYearResponse}{programsResponse}{aboutResponse}{canteenResponse}{scienceResponse}{engineerResponse}</p>         
         )}
         <p>{displayTextOnScreen}</p>
-      </div>  
+      </div>
+      
         </div>
 
         <div className="recognized-Text">

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../building.css';
 // Import your GIFs
-import gif1 from '../../places/gate.gif';
+import engineer from '../../places/gate/Gate to Engineering.gif';
 import gif2 from '../../places/gate.gif'; // Replace with the actual path to your image
 import gif3 from '../../components/iska-ai.gif';
 import gif4 from '../../components/iska-ai.gif';
@@ -24,18 +24,21 @@ class Engineer extends Component {
       showButtons: false,
     });
      // Hide elements with the textOther classname
-     const elementsToHide = document.querySelectorAll('.textOther');
-     elementsToHide.forEach((element) => {
-       element.style.display = 'none';
-     });
-      const hideReset = document.querySelectorAll('.reset-button');
+     const hideTextOther = document.querySelectorAll('.textOther');
+    hideTextOther.forEach((element) => {
+      element.style.display = 'none';
+    });
+
+    const hideReset = document.querySelectorAll('.reset-button');
     hideReset.forEach((element) => {
       element.style.display = 'none';
     });
-    const showReset = document.querySelectorAll('.reset-button');
-     showReset.forEach((element) => {
-       element.style.display = '';
-     });
+
+    const hideMicrophone = document.querySelectorAll('.bottom');
+    hideMicrophone.forEach((element) => {
+      element.style.display = 'none';
+    });
+    
   };
 
   // Function to show all the buttons
@@ -45,9 +48,19 @@ class Engineer extends Component {
       showButtons: true,
     });
     // Show elements with the textOther classname
-    const elementsToShow = document.querySelectorAll('.textOther');
-    elementsToShow.forEach((element) => {
+    const showTextOther = document.querySelectorAll('.textOther');
+    showTextOther.forEach((element) => {
       element.style.display = ''; // Set to an empty string to use the default display value
+    });
+
+    const showMicrophone = document.querySelectorAll('.bottom');
+    showMicrophone.forEach((element) => {
+      element.style.display = ''; // Set to an empty string to use the default display value
+    });
+
+    const showReset = document.querySelectorAll('.reset-button');
+    showReset.forEach((element) => {
+      element.style.display = '';
     });
   };
 
@@ -69,7 +82,7 @@ class Engineer extends Component {
           <ul className='place'>
             <li>
             <p className='text'>Main Gate</p>
-              <img src={placePic} alt='Main Gate' onClick={() => { this.handleButtonClick(gif1); speakText('In the main gate, follow this direction and you will see the Science building'); }}/>
+              <img src={placePic} alt='Main Gate' onClick={() => { this.handleButtonClick(engineer); speakText('In the main gate, follow this direction and you will see the Engineering and Architecture building'); }}/>
             </li>
             <li>
             <p className='text'>Canteen</p>
@@ -88,7 +101,7 @@ class Engineer extends Component {
               <img src={placePic} alt='ENGINEERING BUILDING' onClick={() => this.handleButtonClick(gif5)}/>
             </li>
             <li>
-              <img src={placePic} alt='SCIENCE BUILDING' onClick={() => this.handleButtonClick(gif1)}/>
+              <img src={placePic} alt='SCIENCE BUILDING' onClick={() => this.handleButtonClick(gif2)}/>
             </li>
           </ul>
         ) : null}
